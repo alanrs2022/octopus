@@ -41,3 +41,14 @@ CREATE TABLE `user_table` (
   CONSTRAINT `user_status_id` FOREIGN KEY (`user_status_id`) REFERENCES `status_table` (`user_status_id`),
   CONSTRAINT `user_type_id` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`user_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `user_log_history_table` (
+  `login_id` int NOT NULL,
+  `user_id` bigint NOT NULL,
+  `device_type` varchar(20) NOT NULL,
+  `ip_address` varchar(255) NOT NULL,
+  `created_date` date NOT NULL,
+  PRIMARY KEY (`login_id`),
+  KEY `user_id_idx` (`user_id`),
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user_table` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
