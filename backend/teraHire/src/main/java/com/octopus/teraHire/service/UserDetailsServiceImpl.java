@@ -1,10 +1,9 @@
 package com.octopus.teraHire.service;
 
 import com.octopus.teraHire.exception.UserNotFound;
-import com.octopus.teraHire.model.AuthUser;
 import com.octopus.teraHire.model.User;
 import com.octopus.teraHire.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
+
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

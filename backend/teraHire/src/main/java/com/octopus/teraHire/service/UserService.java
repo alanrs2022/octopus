@@ -1,6 +1,6 @@
 package com.octopus.teraHire.service;
 
-import com.octopus.teraHire.dbutil.DBUtil;
+
 import com.octopus.teraHire.exception.ResourceNotFoundException;
 import com.octopus.teraHire.exception.UserExistsException;
 import com.octopus.teraHire.model.User;
@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class UserService implements UserInterface{
@@ -30,10 +30,10 @@ public class UserService implements UserInterface{
         this.userRepository = userRepository;
     }
 
-    public UserService() throws SQLException{
-
-        connection = DBUtil.getConnection();
-    }
+//    public UserService() throws SQLException{
+//
+//        connection = DBUtil.getConnection();
+//    }
 
     //checking existing email
     public boolean isUserEmailExists(String emailId){
