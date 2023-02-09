@@ -1,11 +1,14 @@
 package com.octopus.teraHire.model;
 
 
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_table")
@@ -14,14 +17,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
+
     @Column(name = "username")
     private String username;
     @Column(name = "email")
-    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE)
-    @NotNull(message = "Email should not be null")
     private String email;
     @Column(name = "password")
-
     private String password;
     @Column(name = "first_name")
     private String firstName;
@@ -43,7 +44,14 @@ public class User {
     public User() {
     }
 
-    public User(long id, String username, String email, String password, String firstName, String lastName, String phoneNumber,int statusId,int userTypeId, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    @Override
+    public String toString() {
+        return "Users{" +
+                "email='" + email + '\'' +
+                ",password='" + password + '\'' +
+                '}';
+    }
+    public User(long id, String username, String email, String password, String firstName, String lastName, String phoneNumber,int statusId,int userTypeId) {
         Id = id;
         this.username = username;
         this.email = email;
@@ -53,8 +61,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.statusId = statusId;
         this.userTypeId = userTypeId;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
+
     }
 
     public long getId() {
@@ -87,6 +94,7 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+
     }
 
     public String getFirstName() {

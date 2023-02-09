@@ -1,71 +1,76 @@
 package com.octopus.teraHire.controller;
 
 
-import com.octopus.teraHire.model.AuthUser;
+import com.octopus.teraHire.exception.ResourceNotFoundException;
 import com.octopus.teraHire.model.User;
-import com.octopus.teraHire.service.UserDetailsServiceImpl;
+import com.octopus.teraHire.repository.UserRepository;
 import com.octopus.teraHire.service.UserService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin("http://localhost:4200/")
 @RequestMapping("/api/user")
-@SecurityRequirement(name = "user-authenticate")
+
 public class UserController {
 
-
+    @Autowired
     private UserService userService;
-    private UserDetailsServiceImpl userDetailsService;
-   // private AuthenticationManager authenticationManager;
-
-    public UserController(UserService userService,UserDetailsServiceImpl userDetailsService){
+    public UserController(UserService userService){
         this.userService = userService;
-        this.userDetailsService = userDetailsService;
     }
 
-    @CrossOrigin("http://localhost:4200/")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("user/{email}/{password}")
+
+    public int UserLogin(@PathVariable("email") String email1, @PathVariable("password") String password1){
+
+        int flag = userService.loginValidation(email1,password1);
+        if(flag == 0){
+            return 0;
+        }
+        else {
+            return flag;
+        }
+    }
+
     @PostMapping("/new")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> addNewUser(@RequestBody @Valid User user){
         return userService.addNewUser(user);
     }
 
-    @PutMapping("/update/{id}")
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping("/updateNewUser/{id}")
     public ResponseEntity<User> updateNewUser(@PathVariable long id,@RequestBody User userDetails){
         return userService.updateNewUser(id,userDetails);
     }
 
-    @CrossOrigin("http://localhost:4200/")
     @GetMapping(value = "/users")
-    @PreAuthorize("hasRole('ROLE_USER')")
     public List<User> getUserList(){
-
         return userService.getUserList();
-
     }
 
-    @DeleteMapping (value="delete/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Object> deleteUser(@PathVariable long id){
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value = "/getUsers/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable long id)
+    {return userService.getUserById(id);}
 
-            return userService.deleteUserById(id);
-
+    @DeleteMapping (value="deleteUser/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable long id){
+        return userService.deleteUserById(id);
 
     }
-
-
-
+//    @PostMapping("/authenticateUser")
+//    public String authenticateUser(@RequestBody User user){
+//        return userService.authenticateUser(user);
+//    }
 
 }
+
+
