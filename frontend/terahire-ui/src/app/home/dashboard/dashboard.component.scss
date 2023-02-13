@@ -1,0 +1,25 @@
+#dashboard{
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#welcome-card{
+    background-color: #78BE20;
+    color: white;
+}
+
+.heading{
+    padding: 5px;
+}
+#div-one{
+    width: 60%;
+    padding: 10px;
+    height: 100vh;
+   
+}
+#div-two{
+    width: 40%;
+    height: 100vh;
+}

@@ -1,0 +1,29 @@
+.mat-table {
+    overflow-x: hidden !important;
+  
+  
+  }
+  
+  // td {
+  //   min-width: 130px;
+  //   margin: 5px !important;
+  // }
+  
+  .mat-header-cell {
+    min-width: 130px;
+    max-width: max-content;
+  }
+  
+  .mat-elevation-z8 {
+    overflow-x: scroll !important;
+    width: 100%;
+  }
+  
+  table {
+    width: 100%;
+    overflow-x: hidden !important;
+  }
+//   ::-webkit-scrollbar{
+
+//  color: #95f179;
+// }

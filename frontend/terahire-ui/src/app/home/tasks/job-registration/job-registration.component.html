@@ -1,0 +1,193 @@
+<title>Job Registration</title>
+<section class="vh-100 gradient-custom">
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center ">
+           
+            <div class="col">
+                <!-- <div class="card shadow-2-strong card-registration" style="border-radius: 10px;">
+                    <div class="card-body"> -->
+
+                        <form [formGroup]="jobRegisterForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                    
+                            <div class="col">    <h3 >Job Registration</h3><br></div>
+                                <div class="col">
+                                    <div class="text-center">
+                                        <div class="mt-4 pt-2">
+                                            <input class="loginbtn" type="submit" value="Create Job" />
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                </div>
+                            </div>
+                            <!-- Title  -->
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" formControlName="title"
+                                            placeholder="Job title"
+                                            [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                                        <label for="floatingInput">Title</label>
+                                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                            <div *ngIf="f.title.errors.required">*Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Owner  -->
+
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" formControlName="owner"
+                                            placeholder="Job Owner"
+                                            [ngClass]="{ 'is-invalid': submitted && f.owner.errors }">
+                                        <label for="floatingInput">Owner</label>
+                                        <div *ngIf="submitted && f.owner.errors" class="invalid-feedback">
+                                            <div *ngIf="f.owner.errors.required">*Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <!-- Stage -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="number" min='1' class="form-control" formControlName="stage"
+                                            placeholder="name@example.com"
+                                            [ngClass]="{ 'is-invalid': submitted && f.stage.errors }">
+                                        <label for="floatingInput">Stage(s)</label>
+                                        <div *ngIf="submitted && f.stage.errors" class="invalid-feedback">
+                                            <div *ngIf="f.stage.errors.required">*Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating mb-3">
+                                        <select class="form-control" formControlName="status"
+                                            [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+
+                                            <option value="0" selected="selected"></option>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                        </select>
+                                        <label for="floatingInput">Status</label>
+                                        <div *ngIf="submitted && f.status.errors" class="invalid-feedback"><br>
+                                            <div *ngIf="f.status.errors.required">*Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- vacancy -->
+                            <div class="row">
+
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" formControlName="vacancy"
+                                            placeholder="name@example.com"
+                                            [ngClass]="{ 'is-invalid': submitted && f.vacancy.errors }">
+                                        <label for="floatingInput">Vacancy</label>
+                                        <div *ngIf="submitted && f.vacancy.errors" class="invalid-feedback">
+                                            <div *ngIf="f.vacancy.errors.required">*Required</div>
+                                            <div *ngIf="f.vacancy.errors.vacancy">vacancy is Invalid</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="number" min="0" class="form-control" formControlName="activeCandidates"
+                                            placeholder="activeCandidates"
+                                            [ngClass]="{ 'is-invalid': submitted && f.activeCandidates.errors }">
+                                        <label for="floatingInput">Active Candidates</label>
+                                        <div *ngIf="submitted && f.activeCandidates.errors" class="invalid-feedback">
+                                            <div *ngIf="f.activeCandidates.errors.required">*Required</div>
+                                            <!-- <div *ngIf="f.activeCandidates.errors">activeCandidates is Invalid</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- DOB  -->
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="number" min="0" class="form-control" formControlName="droppedCandidates"
+                                            placeholder="droppedCandidates"
+                                            [ngClass]="{ 'is-invalid': submitted && f.droppedCandidates.errors }">
+                                        <label for="floatingInput">Dropped Candidates</label>
+                                        <div *ngIf="submitted && f.droppedCandidates.errors" class="invalid-feedback">
+                                            <div *ngIf="f.droppedCandidates.errors.required">*Required</div>
+                                            <!-- <div *ngIf="f.droppedCandidates.errors">droppedCandidates is Invalid</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating mb-3">
+                                        <textarea type="string" min="0" class="form-control" formControlName="summary"
+                                            placeholder="summary"
+                                            [ngClass]="{ 'is-invalid': submitted && f.summary.errors }">
+                                            </textarea>
+                                        <label for="floatingInput">Summary</label>
+                                        <div *ngIf="submitted && f.summary.errors" class="invalid-feedback">
+                                            <div *ngIf="f.summary.errors.required">*Required</div>
+                                            <!-- <div *ngIf="f.summary.errors">summary is Invalid</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+    
+                            </div> 
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="string" min="0" class="form-control" formControlName="teamID"
+                                            placeholder="teamID"
+                                            [ngClass]="{ 'is-invalid': submitted && f.teamID.errors }">
+                                        <label for="floatingInput">Team ID</label>
+                                        <div *ngIf="submitted && f.teamID.errors" class="invalid-feedback">
+                                            <div *ngIf="f.teamID.errors.required">*Required</div>
+                                            <!-- <div *ngIf="f.teamID.errors">teamID is Invalid</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-floating mb-3">
+                                        <input type="number" min="100" class="form-control" formControlName="scoreCard"
+                                            placeholder="scoreCard"
+                                            [ngClass]="{ 'is-invalid': submitted && f.scoreCard.errors }">
+                                        <label for="floatingInput">Score Card</label>
+                                        <div *ngIf="submitted && f.scoreCard.errors" class="invalid-feedback">
+                                            <div *ngIf="f.scoreCard.errors.required">*Required</div>
+                                            <!-- <div *ngIf="f.scoreCard.errors">scoreCard is Invalid</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+    
+                            </div>
+
+
+                            <!-- Button -->
+                           
+
+                        </form>
+                    <!-- </div> -->
+                <!-- </div> -->
+            </div>
+        </div>
+      
+    </div>
+</section>

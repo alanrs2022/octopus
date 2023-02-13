@@ -1,0 +1,64 @@
+<!-- <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button> -->
+
+    <div class="form-group">
+      <label for="title"><b>Title:</b></label>
+      <input type="text"  [(ngModel)]="UpdatedJobTitle" value="{{EditJobData.title}}"
+        class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="owner"><b>Owner:</b></label>
+        <input type="text"  [(ngModel)]="UpdatedJobOwner" value="{{EditJobData.owner}}"
+          class="form-control" placeholder="">
+      </div>
+
+      <div class="form-group">
+        <label for="stage"><b>Stages:</b></label>
+        <input type="text" [(ngModel)]="UpdatedJobStage" value="{{EditJobData.stage}}"
+          class="form-control" placeholder="">
+      </div>
+      <br>
+    
+      <div class="form-group">
+        <label for="stage"><b>Status:</b></label>
+        <select type="text" [(ngModel)]="UpdatedJobStatus" value="{{EditJobData.status}}">
+            <option value="Active">ACTIVE</option>
+            <option value="Inactive">INACTIVE</option>
+          </select>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="stage"><b>Active Candidates:</b></label>
+        <input id="drops" type="number"  min = "0" [(ngModel)]="UpdatedJobActiveCandidates" value="{{EditJobData.activeCandidates}}"
+          class="form-control" placeholder="">
+      </div>
+
+      <div class="form-group">
+        <label for="stage"><b>Dropped Candidate:</b></label>
+        <input type="number"  min = '0'  [(ngModel)]="UpdatedJobDroppedCandidates" value="{{EditJobData.droppedCandidates}}"
+          class="form-control" placeholder="">
+      </div>
+
+      <div class="form-group">
+        <label for="stage"><b>Summary:</b></label>
+        <textarea type="text"  [(ngModel)]="UpdatedJobSummary" value="{{EditJobData.summary}}"
+          class="form-control" placeholder="">{{EditJobData.summary}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="stage"><b>Team ID:</b></label>
+        <input type="text"    [(ngModel)]="UpdatedJobTeamID" value="{{EditJobData.teamID}}"
+          class="form-control" placeholder="">
+      </div>
+
+      <div class="form-group">
+        <label for="stage"><b>Total Score:</b></label>
+        <input type="number"  min = "100" [(ngModel)]="UpdatedJobScoreCard" value="{{EditJobData.scoreCard}}"
+          class="form-control" placeholder="">
+      </div>
+      <br>
+      <div>
+        <button class="btn btn-primary" (click)="UpdateJobDetails()">Update & Save</button> 
+      </div>
