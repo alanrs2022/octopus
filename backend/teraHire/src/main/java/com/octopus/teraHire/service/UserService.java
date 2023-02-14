@@ -10,13 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -53,19 +56,15 @@ public class UserService implements UserInterface{
     @Override
     public ResponseEntity addNewUser(User user) {
 
-        //password hashing
-        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-        String encryptedPwd = bcrypt.encode(user.getPassword());
-        user.setPassword(encryptedPwd);
+            if(!isUserEmailExists(user.getEmail())){
+                user.setCreatedDate(getDate());
+                user.setModifiedDate(getDate());
+                user.setPassword(encryptPassword(user.getPassword()));
+                return new ResponseEntity(getJson(userRepository.save(user),HttpStatus.OK), HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(getJson("This email already in use.",HttpStatus.FOUND),HttpStatus.FOUND);
+            }
 
-        if (!isUserEmailExists(user.getEmail())) {
-            user.setCreatedDate(getDate());
-            user.setModifiedDate(getDate());
-            return new ResponseEntity<User>(userRepository.save(user), HttpStatus.OK);
-        } else {
-
-            return new ResponseEntity<>(new UserExistsException("User already exists").getLocalizedMessage(), HttpStatus.FOUND);
-        }
     }
 
     //UpdateUsers
@@ -75,8 +74,9 @@ public class UserService implements UserInterface{
         if(userRepository.existsById(id)){
             updateNewUser.setFirstName((userDetails.getFirstName()));
             updateNewUser.setLastName((userDetails.getLastName()));
-            updateNewUser.setUsername((userDetails.getUsername()));
+            //updateNewUser.setUsername((userDetails.getUsername()));
             updateNewUser.setPhoneNumber((userDetails.getPhoneNumber()));
+            updateNewUser.setUserTypeId(userDetails.getUserTypeId());
             updateNewUser.setModifiedDate(getDate());
 
            return new ResponseEntity<>(userRepository.save(updateNewUser),HttpStatus.OK);
@@ -84,15 +84,26 @@ public class UserService implements UserInterface{
             return new ResponseEntity<>(new ResourceNotFoundException("user does not exist with this id:" + id).getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
+
+    private String encryptPassword(String password){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder.encode(password);
+    }
+    Object getJson(Object message,HttpStatus status){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("message", message);
+        map.put("status", status);
+        return map;
+    }
     //DeleteUser
     @Override
     public ResponseEntity deleteUserById(long id){
-        if(userRepository.existsById(id)){
+        try{
             userRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<>(new ResourceNotFoundException("user not exist with id: " + id).getMessage(),HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(getJson("Successfully Deleted",HttpStatus.OK),HttpStatus.OK);
+        }catch (HttpServerErrorException e){
+            return new ResponseEntity(getJson("Something went wrong.",HttpStatus.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -105,30 +116,6 @@ public class UserService implements UserInterface{
     @Override
     public ResponseEntity getUserById(long id){
         return new ResponseEntity(userRepository.findById(id),HttpStatus.OK);
-    }
-
-    @Override
-    public int loginValidation(String email, String password) {
-
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM user_table WHERE email = '"+email+"' ");
-            ResultSet rs = statement.executeQuery();
-
-            while (rs.next()){
-                if(rs.getString(6).equals(email) && rs.getString(3).equals(password)){
-                    flag = 1;
-                }
-                else {
-                    System.out.println("Invalid Email/password");
-                    flag = 0;
-                }
-            }
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return flag;
     }
 
 }

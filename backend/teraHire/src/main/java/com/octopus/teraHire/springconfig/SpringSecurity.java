@@ -1,4 +1,4 @@
-package com.octopus.teraHire.springsecurity;
+package com.octopus.teraHire.springconfig;
 
 import com.octopus.teraHire.service.UserDetailsServiceImpl;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;

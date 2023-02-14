@@ -55,7 +55,7 @@ public class JobService implements JobInterface{
             updatedJobDetails.setStatus((job.getStatus()));
             updatedJobDetails.setActiveCandidates((job.getActiveCandidates()));
             updatedJobDetails.setDroppedCandidates((job.getDroppedCandidates()));
-            updatedJobDetails.setTotalNoOfCandidates((job.getTotalNoOfCandidates()));
+            updatedJobDetails.setVacancy((job.getVacancy()));
             updatedJobDetails.setSummary((job.getSummary()));
             updatedJobDetails.setTeamID((job.getTeamID()));
             updatedJobDetails.setScoreCard((job.getScoreCard()));

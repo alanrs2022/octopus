@@ -14,8 +14,4 @@ public interface UserInterface {
 
     ResponseEntity<User> getUserById(long id);
 
-
-
-    public int loginValidation(String email, String password);
-
 }

@@ -22,26 +22,30 @@ public class JobController {
     public JobController(JobService jobService) {
         this.jobService = jobService;
     }
-    @GetMapping("auth/list")
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_IN','ROLE_USER','ROLE_HM','ROLE_HR')")
+    @GetMapping("/list")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_IN','ROLE_USER','ROLE_HM','ROLE_HR')")
     public List<Job> getallJobs(){
         return jobService.getJobList();
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_HM')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HM')")
     @PostMapping("/new")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Job> addNewJob(@RequestBody @Valid Job job){
         return jobService.addNewJob(job);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_IN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_IN')")
     @PutMapping("/update/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody Job job){
         return jobService.updateJob(id,job);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_HM')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HM')")
     @DeleteMapping(value = "delete/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity deleteJob(@PathVariable Long id){
         return jobService.deleteJobById(id);
     }

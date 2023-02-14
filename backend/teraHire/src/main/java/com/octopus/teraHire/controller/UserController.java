@@ -43,14 +43,14 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_USER)")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> updateNewUser(@PathVariable long id,@RequestBody User userDetails){
         return userService.updateNewUser(id,userDetails);
     }
 
     @CrossOrigin("http://localhost:4200/")
-    @GetMapping(value = "/users")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping(value = "/list")
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     public List<User> getUserList(){
 
         return userService.getUserList();

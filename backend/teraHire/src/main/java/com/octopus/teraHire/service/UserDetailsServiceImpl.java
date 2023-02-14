@@ -44,6 +44,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         if(user.getUserTypeId() == 201){
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }else if(user.getUserTypeId() == 202){
+            authorities.add(new SimpleGrantedAuthority("ROLE_HR"));
+        }else if(user.getUserTypeId() == 203){
+            authorities.add(new SimpleGrantedAuthority("ROLE_HM"));
+        }
+        else if(user.getUserTypeId() == 204){
+            authorities.add(new SimpleGrantedAuthority("ROLE_IN"));
         }
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return authorities;

@@ -21,26 +21,26 @@ public class CandidateController {
         this.candidateService=candidateService;
     }
     //AddCandidate
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_HR')")
-    @PostMapping("/newCandidate")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
+    @PostMapping("/new")
     public ResponseEntity<Candidate> addCandidate(@RequestBody @Valid Candidate candidate){
         return candidateService.addCandidate(candidate);
     }
     //UpdateCandidate
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_IN')")
-    @PutMapping("/updateCandidate/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_IN')")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Candidate> updateCandidate(@PathVariable long id,@RequestBody Candidate candidateDetails){
         return candidateService.updateCandidate(id,candidateDetails);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_HM','ROLE_IN','ROLE_HR')")
-    @GetMapping(value = "/viewCandidates")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HM','ROLE_IN','ROLE_HR')")
+    @GetMapping(value = "/list")
     public List<Candidate> getCandidateList(){
         return candidateService.getCandidateList();
     }
 
-    @DeleteMapping (value="deleteCandidate/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_HR')")
+    @DeleteMapping (value="delete/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
     public ResponseEntity<User> deleteCandidate(@PathVariable long id){
         return candidateService.deleteCandidateById(id);
 

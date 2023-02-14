@@ -21,8 +21,8 @@ public class Job {
     private int activeCandidates;
     @Column(name="dropped_candidates")
     private int droppedCandidates;
-    @Column(name="total_candidates")
-    private int TotalNoOfCandidates;
+    @Column(name="vacancy")
+    private int vacancy;
     @Column(name="summary")
     private String summary;
     @Column(name="team_id")
@@ -44,7 +44,7 @@ public class Job {
         this.status = status;
         this.activeCandidates = activeCandidates;
         this.droppedCandidates = droppedCandidates;
-        this.TotalNoOfCandidates = totalNoOfCandidates;
+        this.vacancy = totalNoOfCandidates;
         this.summary = summary;
         this.teamID = teamID;
         this.scoreCard = scoreCard;
@@ -106,12 +106,12 @@ public class Job {
         this.droppedCandidates = droppedCandidates;
     }
 
-    public int getTotalNoOfCandidates() {
-        return TotalNoOfCandidates;
+    public int getVacancy() {
+        return vacancy;
     }
 
-    public void setTotalNoOfCandidates(int totalNoOfCandidates) {
-        TotalNoOfCandidates = totalNoOfCandidates;
+    public void setVacancy(int totalNoOfCandidates) {
+        vacancy = totalNoOfCandidates;
     }
 
     public String getSummary() {
