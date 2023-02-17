@@ -1,6 +1,8 @@
 package com.octopus.teraHire.model;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -8,6 +10,7 @@ import javax.persistence.*;
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "job_id")
     private long Id;
     @Column(name="title")
     private String title;
@@ -29,12 +32,11 @@ public class Job {
     private String teamID;
     @Column(name="score_card")
     private int scoreCard;
-    private long uq=1000;
-    /*@ManyToOne*/
-    /*private Candidate candidate;*/
+    @OneToOne(mappedBy = "job")
+    private Event event;
 
-    public Job() {
-    }
+
+    public Job() {}
 
     public Job(long id, String title, String owner, String stage, String status, int activeCandidates, int droppedCandidates, int totalNoOfCandidates, String summary, String teamID, int scoreCard) {
         this.Id = id;

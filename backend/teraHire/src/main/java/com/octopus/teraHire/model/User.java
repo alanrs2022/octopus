@@ -40,6 +40,9 @@ public class User {
     private int userTypeId;
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
+    @ManyToOne
+    @JoinColumn(name ="fk_team_members" )
+    private Event event;
 
     public User() {
     }
@@ -61,7 +64,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.statusId = statusId;
         this.userTypeId = userTypeId;
-
     }
 
     public long getId() {

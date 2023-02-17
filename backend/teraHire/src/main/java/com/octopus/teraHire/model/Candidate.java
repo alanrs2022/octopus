@@ -1,9 +1,15 @@
 package com.octopus.teraHire.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.security.PrivateKey;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 
 @Entity()
 @Table(name = "candidate_table")
@@ -11,11 +17,11 @@ public class Candidate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long Id;
 
     @Column(name = "full_name")
     private String fullName;
-
     @Column(name = "email")
     private String email;
 
@@ -67,8 +73,23 @@ public class Candidate {
     @Column(name = "status")
     private String status;
 
+   /* @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "Candidate_Event_table",
+            joinColumns = {
+            @JoinColumn(name = "candidate_id",referencedColumnName = "Id")
+            },
+    inverseJoinColumns ={
+            @JoinColumn(name = "event_id",referencedColumnName = "id")
+    })
+    @JsonManagedReference
+    private Set<Event> events= new HashSet<>();*/
+    @ManyToOne
+    @JoinColumn(name ="fk_candidate_id" )
+    private Event event;
 
-    protected Candidate(){}
+
+    public Candidate() {}
+
     public Candidate(long id, String fullName, String email, String phoneNumber, String gender, String dob, String address, String country, String city, int zipcode, String nationality, int yearOfExperience, String currentCompany, String currentPosition, String currentCTC, String expectedCTC, String skills, String sociaLink, String status) {
         Id = id;
         this.fullName = fullName;
@@ -87,9 +108,11 @@ public class Candidate {
         this.currentCTC = currentCTC;
         this.expectedCTC = expectedCTC;
         this.skills = skills;
-        this.sociaLink=sociaLink;
-        this.status=status;
+        this.sociaLink = sociaLink;
+        this.status = status;
+
     }
+
 
     public long getId() {
         return Id;
@@ -242,4 +265,20 @@ public class Candidate {
     public void setStatus(String status) {
         this.status = status;
     }
+/*   public void addEvent(Event event){
+        this.events.add(event);
+       event.getCandidates().add(this);
+   }
+   public void removeEvent(long eventID){
+        Event event=this.events.stream().filter(t->t.getId()==eventID).findFirst().orElse(null);
+        if(event!=null){
+            this.events.remove((event));
+            event.getCandidates().remove(this);
+        }
+   }*/
+
+
+
+
+
 }

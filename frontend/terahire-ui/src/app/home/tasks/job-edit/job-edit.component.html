@@ -49,8 +49,13 @@
 
       <div class="form-group">
         <label for="stage"><b>Team ID:</b></label>
-        <input type="text"    [(ngModel)]="UpdatedJobTeamID" value="{{EditJobData.teamID}}"
-          class="form-control" placeholder="">
+        <select type="text" [(ngModel)]="UpdatedJobTeamID" value="{{EditJobData.teamID}}">
+          
+            <option value="Foster Moore">Fooster Moore</option>
+            <option value="CMS">CMS</option>
+            <option value="VAS">VAS</option>
+            <option value="Teranet IT">IT</option>
+          </select>
       </div>
 
       <div class="form-group">
