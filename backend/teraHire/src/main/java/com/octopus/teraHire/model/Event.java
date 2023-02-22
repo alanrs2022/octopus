@@ -20,9 +20,9 @@ public class Event {
     private long id;
 
     @Column(name = "start_date")
-    LocalDateTime start;
+    String start;
     @Column(name = "end_date")
-    LocalDateTime end;
+    String end;
     @Column(name = "created_date")
     LocalDateTime created;
     @Column(name = "modified_date")
@@ -50,7 +50,7 @@ public class Event {
 
     public Event(){}
 
-    public Event(long id, LocalDateTime start, LocalDateTime end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, Set<Candidate> candidates, Set<User> users) {
+    public Event(long id, String start, String end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, Set<Candidate> candidates, Set<User> users) {
         this.id = id;
         this.start = start;
         this.end = end;
@@ -72,19 +72,19 @@ public class Event {
         this.id = id;
     }
 
-    public LocalDateTime getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public LocalDateTime getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(LocalDateTime end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 

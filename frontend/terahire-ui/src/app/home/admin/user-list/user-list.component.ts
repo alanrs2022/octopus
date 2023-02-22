@@ -96,8 +96,8 @@ export class UserListComponent {
 
     }
     // let basicInstance = mdb.Alert.getInstance(document.getElementById(this.alertsuccess.nativeElement));
-    this.userService.updateUser(updateData).subscribe(result=>{
-      console.log(result);
+    this.userService.updateUser(updateData).subscribe(data=>{
+      console.log(data);
      
       this.getAllUser();
       this.openSnackBar("Successfully Updated")
@@ -131,7 +131,7 @@ export class UserListComponent {
   // get All users []
   getAllUser(){
    // this.openSnackBar("Updating...")
-    this.userService.getAllUsers.subscribe(data =>{
+    this.userService.getAllUsers().subscribe(data =>{
       console.log(data)
      this.dataSource.data = data;
      this.loaded =true

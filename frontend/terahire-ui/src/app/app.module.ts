@@ -10,12 +10,10 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { EventGeneratorComponent } from './event-generator/event-generator.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {  MatSelectModule } from '@angular/material/select';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { BasicAuthInterceptor } from './_helpers/basic-auth.interceptor';
+import { MatOptionModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BasicAuthInterceptor } from './_helpers/basic-auth.interceptor';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -39,15 +37,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         HttpClientModule,
         BrowserAnimationsModule,
         NoopAnimationsModule,
-
         MatFormFieldModule,
         MatSelectModule,
         MatOptionModule,
         MatSnackBarModule,
-        MatProgressSpinnerModule
-
-
-        MatSnackBarModule,
+        MatProgressSpinnerModule,
         MatProgressSpinnerModule
 
     ]
