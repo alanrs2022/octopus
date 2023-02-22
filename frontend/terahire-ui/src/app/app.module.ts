@@ -13,6 +13,9 @@ import {  MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BasicAuthInterceptor } from './_helpers/basic-auth.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { BasicAuthInterceptor } from './_helpers/basic-auth.interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -36,9 +39,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         HttpClientModule,
         BrowserAnimationsModule,
         NoopAnimationsModule,
+
         MatFormFieldModule,
         MatSelectModule,
         MatOptionModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule
+
+
         MatSnackBarModule,
         MatProgressSpinnerModule
 
