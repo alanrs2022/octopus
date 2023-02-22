@@ -1,7 +1,6 @@
 package com.octopus.teraHire.controller;
 
 import com.octopus.teraHire.model.Candidate;
-import com.octopus.teraHire.model.Job;
 import com.octopus.teraHire.model.User;
 import com.octopus.teraHire.service.CandidateService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -46,9 +45,5 @@ public class CandidateController {
         return candidateService.deleteCandidateById(id);
 
     }
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HM','ROLE_IN','ROLE_HR')")
-    @GetMapping(value = "/getappliedjobs/{id}")
-    public List<Job> getappliedJob(@PathVariable long id)
-    {return candidateService.getjoblist(id);}
 }
 

@@ -43,22 +43,29 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity<User> updateNewUser(@PathVariable long id,@RequestBody User userDetails){
         return userService.updateNewUser(id,userDetails);
     }
 
     @CrossOrigin("http://localhost:4200/")
     @GetMapping(value = "/list")
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<User> getUserList(){
 
         return userService.getUserList();
 
     }
+    @PreAuthorize("haAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<User> getUserById(@PathVariable long id)
     {return userService.getUserById(id);}
+
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+    @GetMapping(value = "/email/{email}")
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email)
+    {return userService.getUserByEmail(email);}
 
     @DeleteMapping (value="delete/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

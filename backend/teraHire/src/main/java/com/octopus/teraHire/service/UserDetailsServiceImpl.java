@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,6 +30,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
 
+
+
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -36,6 +41,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         if(user == null){
             throw new UserNotFound("Email "+ username +" not found.");
+        }else{
+
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),getGrantedAuthority(user));
     }
@@ -54,5 +61,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         return authorities;
+    }
+
+    private String decryptPassword(String password){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        return bCryptPasswordEncoder.encode(password);
     }
 }

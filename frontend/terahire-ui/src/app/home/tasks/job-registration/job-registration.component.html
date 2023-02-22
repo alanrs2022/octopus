@@ -152,19 +152,13 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-floating mb-3">
-                                        <select class="form-control" formControlName="teamID"
+                                        <input type="string" min="0" class="form-control" formControlName="teamID"
+                                            placeholder="teamID"
                                             [ngClass]="{ 'is-invalid': submitted && f.teamID.errors }">
-
-                                            <option value="0" selected="selected"></option>
-                                            <option value="Foster Moore">Fooster Moore</option>
-                                            <option value="CMS">CMS</option>
-                                            <option value="VAS">VAS</option>
-                                            <option value="Teranet IT">IT</option>
-
-                                        </select>
                                         <label for="floatingInput">Team ID</label>
-                                        <div *ngIf="submitted && f.teamID.errors" class="invalid-feedback"><br>
+                                        <div *ngIf="submitted && f.teamID.errors" class="invalid-feedback">
                                             <div *ngIf="f.teamID.errors.required">*Required</div>
+                                            <!-- <div *ngIf="f.teamID.errors">teamID is Invalid</div> -->
                                         </div>
                                     </div>
                                 </div>

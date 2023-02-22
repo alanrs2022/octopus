@@ -3,7 +3,6 @@ package com.octopus.teraHire.service;
 import com.octopus.teraHire.exception.ResourceNotFoundException;
 import com.octopus.teraHire.exception.UserExistsException;
 import com.octopus.teraHire.model.Candidate;
-import com.octopus.teraHire.model.Job;
 import com.octopus.teraHire.model.User;
 import com.octopus.teraHire.repository.CandidateRepository;
 import com.octopus.teraHire.repository.UserRepository;
@@ -80,13 +79,5 @@ public class CandidateService implements CandidateInterface{
         else {
             return new ResponseEntity<>(new ResourceNotFoundException("user not exist with id: " + id).getMessage(),HttpStatus.NOT_FOUND);
         }
-    }
-    @Override
-    public List<Job> getjoblist(long candidate_id){
-        if(candidateRepository.existsById(candidate_id)){
-            Candidate candidate=candidateRepository.getReferenceById(candidate_id);
-            return candidate.getAppliedJobs();
-        }
-        else {return null;}
     }
 }

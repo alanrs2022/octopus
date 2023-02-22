@@ -6,7 +6,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { UserRegistrationComponent } from './admin/user-registration/user-registration.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from '../service/user.service';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -31,6 +31,7 @@ import { CandidateUpdateComponent } from './tasks/candidate-update/candidate-upd
 import { MatIconModule } from '@angular/material/icon';
 import { CandidateComponent } from './tasks/candidate/candidate.component';
 import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
+import { BasicAuthInterceptor } from '../_helpers/basic-auth.interceptor';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -61,20 +62,9 @@ import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
     MatSnackBarModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    
-    
-   
-    
-
-    
-  
-    
-   
-    
-    
   ],
   providers:[
-    UserService
+    UserService,
   ]
  
 })

@@ -40,20 +40,11 @@ public class User {
     private int userTypeId;
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
-    @ManyToOne
-    @JoinColumn(name ="fk_team_members" )
-    private Event event;
 
     public User() {
     }
 
-    @Override
-    public String toString() {
-        return "Users{" +
-                "email='" + email + '\'' +
-                ",password='" + password + '\'' +
-                '}';
-    }
+
     public User(long id, String username, String email, String password, String firstName, String lastName, String phoneNumber,int statusId,int userTypeId) {
         Id = id;
         this.username = username;
@@ -64,6 +55,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.statusId = statusId;
         this.userTypeId = userTypeId;
+
     }
 
     public long getId() {

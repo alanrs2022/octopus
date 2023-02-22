@@ -1,4 +1,4 @@
-<div >
+<div *ngIf="loaded">
   
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
@@ -130,7 +130,7 @@
         <span *ngIf="editById[i]">
           <button type="button" class="btn btn-danger px-3" (click)="editThis(i)"><i class="bi bi-x-circle" aria-hidden="true" title="cancel"></i></button> 
           &nbsp;
-          <button type="button" class="btn btn-success px-3" (click)="updateChanges(i)"><i class="bi bi-check-circle" aria-hidden="true" title="save" ></i></button>
+          <button type="button" class="btn btn-success px-3" (click)="updateChanges(element)"><i class="bi bi-check-circle" aria-hidden="true" title="save" ></i></button>
          
         
         </span>
@@ -147,10 +147,10 @@
  
   
 </div>
+
+</div>
 <mat-paginator [pageSizeOptions]="[5,10,15]"
 [showFirstLastButtons]="true" [pageSize]="pageSize" 
 aria-label="Select page of periodic elements" (page)="handlePage($event)">
 </mat-paginator>
-</div>
-<!-- 
-<mat-spinner [mode]="'indeterminate'" value="50" ></mat-spinner> -->
+<!-- <mat-spinner mode="indeterminate" style="margin:0 auto;" [diameter]="30"></mat-spinner> -->

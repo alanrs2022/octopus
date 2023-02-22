@@ -1,7 +1,6 @@
 package com.octopus.teraHire.service;
 
 import com.octopus.teraHire.model.Candidate;
-import com.octopus.teraHire.model.Job;
 import com.octopus.teraHire.model.User;
 import org.springframework.http.ResponseEntity;
 
@@ -12,8 +11,6 @@ public interface CandidateInterface {
     ResponseEntity<Candidate> updateCandidate(long id, Candidate candidateDetails);
     List<Candidate> getCandidateList();
     ResponseEntity deleteCandidateById(long id);
-
-    List<Job> getjoblist(long candidate_id);
 
 
 

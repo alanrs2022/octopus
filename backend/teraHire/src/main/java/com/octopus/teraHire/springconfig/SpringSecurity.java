@@ -61,6 +61,8 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().httpBasic().authenticationEntryPoint(authenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+
     }
 
 

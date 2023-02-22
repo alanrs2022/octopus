@@ -5,7 +5,6 @@ import com.octopus.teraHire.exception.UserExistsException;
 import com.octopus.teraHire.model.Job;
 import com.octopus.teraHire.repository.JobRepository;
 import com.octopus.teraHire.repository.UserRepository;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -65,12 +64,6 @@ public class JobService implements JobInterface{
         else{
             return new ResponseEntity<>(new ResourceNotFoundException("Job does not exist with id:"+id).getMessage(),HttpStatus.NOT_FOUND);
         }
-    }
-
-
-    @Override
-    public List<Job> getTopJobs()  {
-        return jobRepository.findByOrderByCreatedDateDesc();
     }
 
 

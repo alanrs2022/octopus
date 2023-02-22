@@ -1,12 +1,15 @@
 
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormGroupName, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { matSelectAnimations } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { matSortAnimations } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { elementAt } from 'rxjs';
 import { user } from 'src/app/models/user.model';
 import { UserService } from 'src/app/service/user.service';
 import { DialogDeleteComponent } from '../../dialog-delete/dialog-delete.component';
@@ -21,7 +24,7 @@ export class UserListComponent {
   formBuilder: any;
   public pageSize = 5;
   loaded:boolean = false;
-  constructor(private userService:UserService,public dialog:MatDialog,private snackBar:MatSnackBar){}
+  constructor(private httpClient:HttpClient,private userService:UserService,public dialog:MatDialog,private snackBar:MatSnackBar){}
   displayedColumns: string[] = ['No','Id' ,'username' , 'firstName', 'lastName','phoneNumber', 'email','role','status','actions'];
   //ELEMENT_DATA:user[]=[]
   dataSource = new MatTableDataSource<user>();
@@ -48,8 +51,9 @@ export class UserListComponent {
   }
 
   ngOnInit(){
+    
     this.getAllUser();
- 
+
    
   }
   openSnackBar(message:string){
@@ -64,16 +68,19 @@ export class UserListComponent {
   }
 
   editThis(index:number){
+   
     if(this.editById[index]){
+      this.editById = []
       this.editById[index] = false;
     }else{
+      this.editById = []
       this.editById[index] = true;
     }
   }
 
   // update user
-  updateChanges(id:number){
-    let data = this.dataSource.data[id];
+  updateChanges(element:user){
+    let data = element;
     let updateData:user ={
       id:data.id,
       firstName:this.firstname.nativeElement.value,
@@ -94,11 +101,13 @@ export class UserListComponent {
      
       this.getAllUser();
       this.openSnackBar("Successfully Updated")
+      
     },error=>{
+      
       this.openSnackBar("Update Failed!!")
     })
+    this.editById = [];
     
-    this.editById[id] = false;
     
     
   }
@@ -122,12 +131,17 @@ export class UserListComponent {
   // get All users []
   getAllUser(){
    // this.openSnackBar("Updating...")
-    this.userService.getAllUsers().subscribe(data =>{
+    this.userService.getAllUsers.subscribe(data =>{
+      console.log(data)
      this.dataSource.data = data;
      this.loaded =true
     },error=>{
+      console.log(error)
       this.openSnackBar("Something went wrong!!")
     })
+
+    
+    
     
   }
 }
