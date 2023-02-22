@@ -14,4 +14,8 @@ public interface UserInterface {
 
     ResponseEntity<User> getUserById(long id);
 
+    ResponseEntity getUserByEmail(String email);
+
+    ResponseEntity authUser(String username,String password);
+
 }

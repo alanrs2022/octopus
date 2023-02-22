@@ -15,7 +15,7 @@ export class CandidateService {
   header:HttpHeaders = new HttpHeaders(
     {
       'Content-Type': 'application/json',
-      'Authorization': `Basic ` + btoa('alanrs@gmail.com:alan@123'),
+      'Authorization': `Basic ` + btoa('alanrs@gmail.com:Alanrs@1234'),
     }
   );
   getCandidateList(): Observable<Candidate[]> {

@@ -17,9 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -28,9 +26,11 @@ public class UserService implements UserInterface{
     int flag = 0;
     @Autowired
     private UserRepository userRepository;
+    private UserDetailsServiceImpl userDetailsService;
     private UserExistsException userExistsException;
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository,UserDetailsServiceImpl userDetailsService){
         this.userRepository = userRepository;
+        this.userDetailsService = userDetailsService;
     }
 
 //    public UserService() throws SQLException{
@@ -60,9 +60,9 @@ public class UserService implements UserInterface{
                 user.setCreatedDate(getDate());
                 user.setModifiedDate(getDate());
                 user.setPassword(encryptPassword(user.getPassword()));
-                return new ResponseEntity(getJson(userRepository.save(user),HttpStatus.OK), HttpStatus.OK);
+                return new ResponseEntity(getJson(userRepository.save(user),"Successfully created"), HttpStatus.OK);
             }else{
-                return new ResponseEntity<>(getJson("This email already in use.",HttpStatus.FOUND),HttpStatus.FOUND);
+                return new ResponseEntity<>(getJson("This email already in use.","Found error"),HttpStatus.FOUND);
             }
 
     }
@@ -88,9 +88,10 @@ public class UserService implements UserInterface{
 
     private String encryptPassword(String password){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
         return bCryptPasswordEncoder.encode(password);
     }
-    Object getJson(Object message,HttpStatus status){
+    Object getJson(Object message,String status){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("message", message);
         map.put("status", status);
@@ -101,9 +102,9 @@ public class UserService implements UserInterface{
     public ResponseEntity deleteUserById(long id){
         try{
             userRepository.deleteById(id);
-            return new ResponseEntity<>(getJson("Successfully Deleted",HttpStatus.OK),HttpStatus.OK);
+            return new ResponseEntity<>(getJson("Successfully Deleted","Deleted"),HttpStatus.OK);
         }catch (HttpServerErrorException e){
-            return new ResponseEntity(getJson("Something went wrong.",HttpStatus.INTERNAL_SERVER_ERROR),HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(getJson("Something went wrong.","Server Error"),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -116,6 +117,28 @@ public class UserService implements UserInterface{
     @Override
     public ResponseEntity getUserById(long id){
         return new ResponseEntity(userRepository.findById(id),HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity getUserByEmail(String email){
+        return new ResponseEntity(userRepository.findByEmail(email),HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity authUser(String username, String password) {
+        Optional<User> user = userRepository.findByEmail(username);
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        if(user.isPresent()){
+            if(bCryptPasswordEncoder.matches(password,user.get().getPassword())){
+
+                return new ResponseEntity(getJson(userDetailsService.loadUserByUsername(user.get().getEmail()),"Login Success"),HttpStatus.OK);
+            }else{
+                return new ResponseEntity("The password you entered is incorrect. Try again.",HttpStatus.FORBIDDEN);
+            }
+        }else{
+            return new ResponseEntity("Email not found!",HttpStatus.NOT_FOUND);
+        }
     }
 
 }

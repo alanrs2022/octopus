@@ -29,20 +29,26 @@ export class DialogDeleteComponent implements OnInit {
       this.userService.deleteUser(this.data.id).subscribe(response=>{
         console.log(JSON.parse(JSON.stringify(response.body)).message)
         this.dialogRef.close()
-        this.snackBar.open("Deleted!!")
+        this.snackBar.open("Deleted!!",'',{
+          duration:3000
+        })
       })
     }else if(qn == 2){
       this.candidateService.deleteCandidate(this.data.id).subscribe(data => {
         console.log(data);
         this.dialogRef.close()
-        this.snackBar.open("Deleted!!")
+        this.snackBar.open("Deleted!!",'',{
+          duration:3000
+        })
       })
     }else if(qn == 3){
       this.jobService.deleteJob(this.data.id).subscribe({
         next:(data)=>{
         //console.log(data)
         this.dialogRef.close()
-        this.snackBar.open("Deleted!!")
+        this.snackBar.open("Deleted!!",'',{
+          duration:3000
+        })
       },error:(e)=>{
         console.log(e)
        

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 
 @RestController
@@ -50,7 +49,4 @@ public class JobController {
     public ResponseEntity deleteJob(@PathVariable Long id){
         return jobService.deleteJobById(id);
     }
-
-    @GetMapping("/gettopjob")
-    public List<Job> getTopJobs() throws ExecutionException, InterruptedException {return jobService.getTopJobs();}
 }

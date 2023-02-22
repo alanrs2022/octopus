@@ -61,9 +61,13 @@ export class JobComponent implements OnInit {
           });
         }
 
-       
+       window.location.reload()
        
     }
+
+    
+
+
 
 
 }

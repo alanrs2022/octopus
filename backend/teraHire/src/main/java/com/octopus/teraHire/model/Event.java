@@ -1,20 +1,14 @@
 package com.octopus.teraHire.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity()
 @Table(name = "event_table")
+@SecondaryTables({@SecondaryTable(name = "candidate_table"),@SecondaryTable(name = "user_table"),
+@SecondaryTable(name = "job_table")})
 /*@Setter
 @Getter*/
 /*@AllArgsConstructor
@@ -38,7 +32,7 @@ public class Event {
     @Column(name="creator")
     private long organizer_id;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="fk_job_id",referencedColumnName = "job_id")
+    @JoinColumn(name="fk_job_id",referencedColumnName = "id",table = "job_table")
     private Job job;
   /*  @Column(name = "job_id")*/
 /*    private long job_id;*/
@@ -46,17 +40,17 @@ public class Event {
 /*    @ManyToMany(mappedBy = "events",fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<Candidate> candidates = new HashSet<>();*/
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_team_members",referencedColumnName = "event_id")
+    @OneToOne(cascade = CascadeType.ALL,targetEntity = User.class)
+    @JoinColumn(name = "fk_team_members",referencedColumnName = "id", table = "user_table")
     private Set<User> team_members = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="fk_candidate_id",referencedColumnName = "event_id")
+    @OneToOne(targetEntity = Candidate.class,cascade = CascadeType.ALL)
+    @JoinColumn(name="fk_candidate_id",referencedColumnName = "id",table = "candidate_table")
     private Set<Candidate> candidates = new HashSet<>();
 
     public Event(){}
 
-    public Event(long id, LocalDateTime start, LocalDateTime end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job,Set<Candidate> candidates,Set<User> users) {
+    public Event(long id, LocalDateTime start, LocalDateTime end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, Set<Candidate> candidates, Set<User> users) {
         this.id = id;
         this.start = start;
         this.end = end;
