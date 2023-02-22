@@ -12,4 +12,5 @@ public interface JobInterface {
     ResponseEntity<Job> addNewJob(Job job);
     ResponseEntity deleteJobById(Long id);
     ResponseEntity<Job> updateJob(Long id, Job job);
+
 }

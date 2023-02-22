@@ -49,4 +49,5 @@ public class JobController {
     public ResponseEntity deleteJob(@PathVariable Long id){
         return jobService.deleteJobById(id);
     }
+
 }

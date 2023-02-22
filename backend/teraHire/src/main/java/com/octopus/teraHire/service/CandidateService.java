@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class CandidateService implements CandidateInterface{
     private CandidateRepository candidateRepository;
-    private UserExistsException userExistsException;
+    UserExistsException userExistsException;
     public CandidateService(CandidateRepository candidateRepository){
         this.candidateRepository = candidateRepository;
     }
@@ -80,4 +80,5 @@ public class CandidateService implements CandidateInterface{
             return new ResponseEntity<>(new ResourceNotFoundException("user not exist with id: " + id).getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
 }

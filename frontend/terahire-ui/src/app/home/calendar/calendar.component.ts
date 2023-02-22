@@ -1,6 +1,9 @@
 import { Element } from '@angular/compiler';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { calendar } from 'src/app/models/calendar.model';
+import { MatDialog } from '@angular/material/dialog';
+import { EventGeneratorComponent } from 'src/app/event-generator/event-generator.component';
+
 
 @Component({
   selector: 'app-calendar',
@@ -11,10 +14,16 @@ import { calendar } from 'src/app/models/calendar.model';
 })
 export class CalendarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.renderCalendar()
+  }
+  eventClicked(): void{
+    this.dialog.open(EventGeneratorComponent,{ 
+      height:'70%',
+      width:'60%'
+    })
   }
 
 
