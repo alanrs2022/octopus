@@ -19,7 +19,7 @@ export class UserService {
 
   
 
-   get getAllUsers(): Observable<any>{
+  getAllUsers(): Observable<any>{
     return this.httpClient.get(`${this.baseUrl}`+'list')
   }
 
