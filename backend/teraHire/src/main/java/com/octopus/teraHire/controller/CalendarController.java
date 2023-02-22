@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.octopus.teraHire.model.Candidate;
 import com.octopus.teraHire.model.Event;
+import com.octopus.teraHire.model.User;
 import com.octopus.teraHire.repository.EventRepository;
 import com.octopus.teraHire.service.EventService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -42,15 +43,24 @@ public class CalendarController {
         return eventRepository.findBetween(start, end);
     }*/
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
+    @CrossOrigin("http://localhost:4200/")
     @PostMapping("/new")
     public ResponseEntity<Event> addAnEvent(@RequestBody @Valid Event event){
         return eventService.createEvent(event);
     }
 
-    @DeleteMapping(value = "/delete")
+    @PutMapping(value = "/update/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
-    public ResponseEntity<Event> deleteAnEvent(@RequestBody @Valid Event event){
-        return eventService.deleteEvent(event);
+    public ResponseEntity<Event> updateEvent(@PathVariable long id, @RequestBody Event event){
+        return eventService.updateEvent(id,event);
     }
+
+
+    @DeleteMapping(value = "/delete/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
+    public ResponseEntity<Event> deleteAnEvent(@RequestBody @Valid long id){
+        return eventService.deleteEvent(id);
+    }
+
 
 }

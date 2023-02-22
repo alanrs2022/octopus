@@ -7,6 +7,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { EventGeneratorComponent } from './event-generator/event-generator.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {  MatSelectModule } from '@angular/material/select';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { BasicAuthInterceptor } from './_helpers/basic-auth.interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BasicAuthInterceptor } from './_helpers/basic-auth.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -14,11 +20,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
+
 @NgModule({
     declarations: [
         AppComponent,
-       LoginComponent
-      
+       LoginComponent,
+       EventGeneratorComponent,      
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
@@ -32,8 +39,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         HttpClientModule,
         BrowserAnimationsModule,
         NoopAnimationsModule,
+
+        MatFormFieldModule,
+        MatSelectModule,
+        MatOptionModule,
         MatSnackBarModule,
         MatProgressSpinnerModule
+
+
+        MatSnackBarModule,
+        MatProgressSpinnerModule
+
     ]
 })
 export class AppModule { }

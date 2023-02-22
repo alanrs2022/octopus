@@ -5,6 +5,10 @@ import org.springframework.http.ResponseEntity;
 
 public interface EventInterface {
     public ResponseEntity createEvent(Event event);
-    public ResponseEntity deleteEvent(Event event);
 
+    abstract ResponseEntity updateEvent(long id, Event eventdetails);
+
+    public ResponseEntity deleteEvent(long id);
+
+    public Event getEventById(long id);
 }

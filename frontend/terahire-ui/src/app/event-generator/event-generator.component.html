@@ -1,0 +1,53 @@
+
+<div class="form-group">
+    <label for="startDate"><b>Start Date:</b></label>
+    <input type="date"  [(ngModel)]="startDate" 
+      class="form-control">
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="endDate"><b>End Date:</b></label>
+    <input type="date"  [(ngModel)]="endDate" 
+      class="form-control">
+  </div>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Job</mat-label>
+    <mat-select [(ngModel)]="job">
+      <mat-option *ngFor="let job of jobList" [value]="job">{{job.title}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Type</mat-label>
+    <mat-select [(ngModel)]="type">
+      
+      <mat-option value="Resume Review">Resume Review</mat-option>
+      <mat-option value="Interview-Tech">Interview-Tech</mat-option>
+      <mat-option value="Interview-HR">Interview-HR</mat-option>
+      <mat-option value="Onboarding">Onboarding</mat-option>
+      <mat-option value="Interview">Interview</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+<br>
+    <mat-form-field appearance="fill">
+      <mat-label>Team Members</mat-label>
+      <mat-select [(ngModel)]="teamMembers" multiple>
+        <mat-option *ngFor="let member of teamList" [value]="member">{{member.firstName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Candidates</mat-label>
+      <mat-select [(ngModel)]="candidates" multiple>
+        <mat-option *ngFor="let candidate of candidatesList" [value]="candidate">{{candidate.fullName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+   
+    <div>
+      <button class="btn btn-primary" (click)="saveEventClick()">Update & Save</button> 
+    </div>

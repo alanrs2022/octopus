@@ -101,3 +101,15 @@ header .current-date{
 .calendar .days li:not(.active):hover::before{
   background: #f2f2f2;
 }
+
+.loginbtn {
+  background-color: #79BE20; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  
+}
