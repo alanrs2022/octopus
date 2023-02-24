@@ -41,6 +41,7 @@ public class User {
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
 
+
     public User() {
     }
 

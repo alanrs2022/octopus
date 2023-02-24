@@ -1,6 +1,9 @@
 package com.octopus.teraHire.model;
 
+import org.aspectj.weaver.ast.Not;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -29,25 +32,62 @@ public class Job {
     private String teamID;
     @Column(name="score_card")
     private int scoreCard;
-    private long uq=1000;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
+    @Column(name = "modified_date")
+    private LocalDateTime modifiedDate;
+
+
+
+    @OneToOne(targetEntity = Notification.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "id",table = "notification_table")
+    private Notification notification;
     /*@ManyToOne*/
     /*private Candidate candidate;*/
 
     public Job() {
     }
-
-    public Job(long id, String title, String owner, String stage, String status, int activeCandidates, int droppedCandidates, int totalNoOfCandidates, String summary, String teamID, int scoreCard) {
-        this.Id = id;
+    public Job(long id, String title, String owner, String stage, String status, int activeCandidates, int droppedCandidates, int vacancy, String summary, String teamID, int scoreCard, LocalDateTime createdDate, LocalDateTime modifiedDate, Notification notification) {
+        Id = id;
         this.title = title;
         this.owner = owner;
         this.stage = stage;
         this.status = status;
         this.activeCandidates = activeCandidates;
         this.droppedCandidates = droppedCandidates;
-        this.vacancy = totalNoOfCandidates;
+        this.vacancy = vacancy;
         this.summary = summary;
         this.teamID = teamID;
         this.scoreCard = scoreCard;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+        this.notification = notification;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public LocalDateTime getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(LocalDateTime modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
     }
 
     public long getId() {

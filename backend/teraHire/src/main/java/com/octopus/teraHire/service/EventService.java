@@ -13,21 +13,17 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class EventService implements EventInterface{
      private EventRepository eventRepository;
-    private JobRepository jobRepository;
-    private CandidateRepository candidateRepository;
-    private final UserRepository userRepository;
 
 
-    public EventService(EventRepository eventRepository, JobRepository jobRepository, CandidateRepository candidateRepository,
-                        UserRepository userRepository) {
+
+    public EventService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
-        this.jobRepository = jobRepository;
-        this.candidateRepository = candidateRepository;
-        this.userRepository = userRepository;
+
     }
     /*public boolean isEventExists(long id){
         return eventRepository.isEventExists(id);
@@ -35,30 +31,9 @@ public class EventService implements EventInterface{
   @Override
   @Transactional
     public ResponseEntity createEvent(Event event){
-        /*Event newEvent = new Event();*/
-        if(eventRepository.existsById(event.getId())){
-            return new ResponseEntity<>("Event Already Exist",HttpStatus.FOUND);
-        }
-        else {
-          /*  newEvent.setStart(event.getStart());
-            newEvent.setEnd(event.getEnd());
-            newEvent.setCreated(getDate());
-            newEvent.setModified(getDate());
-            newEvent.setType(event.getType());
-            newEvent.setOrganizer_id(event.getOrganizer_id());
-            newEvent.setJob(event.getJob());
-            Set<User> doesNotExistInUserDB= event.getTeam_members()
-                    .stream()
-                            .filter(t->!(userRepository.existsById(t.getId()))).collect(Collectors.toSet());
-            newEvent.setTeam_members(doesNotExistInUserDB);
-            Set<Candidate> doesNotExistInCandidateDB = event.getCandidate()
-                    .stream()
-                    .filter(c->!(candidateRepository.existsById(c.getId()))).collect(Collectors.toSet());
-            newEvent.setCandidate(doesNotExistInCandidateDB);*/
-            event.setCreated(getDate());
-            event.setModified(getDate());
-            return new ResponseEntity<Event>(eventRepository.save(event),HttpStatus.OK);
-        }
+      event.setCreated(getDate());
+      event.setModified(getDate());
+      return new ResponseEntity<Event>(eventRepository.save(event),HttpStatus.OK);
   }
   @Override
   public ResponseEntity updateEvent(long id, Event eventDetails){
@@ -89,6 +64,11 @@ public class EventService implements EventInterface{
     @Override
     public Event getEventById(long id) {
         return eventRepository.getReferenceById(id);
+    }
+
+    @Override
+    public ResponseEntity<List<Event>> getAllEvent() {
+        return new ResponseEntity<List<Event>>(eventRepository.findAll(),HttpStatus.OK);
     }
 
     public LocalDateTime getDate(){

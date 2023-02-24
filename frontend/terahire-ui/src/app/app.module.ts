@@ -36,7 +36,6 @@ import { BasicAuthInterceptor } from './_helpers/basic-auth.interceptor';
         FormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        NoopAnimationsModule,
         MatFormFieldModule,
         MatSelectModule,
         MatOptionModule,
