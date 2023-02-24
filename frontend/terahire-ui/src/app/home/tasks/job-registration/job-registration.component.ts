@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JobService } from 'src/app/service/job.service';
-
+import { Notification } from 'src/app/models/notification.model';
 
 
 @Component({
@@ -33,6 +33,7 @@ export class JobComponent implements OnInit {
       summary:['',Validators.required],
       teamID:['',Validators.required],
       scoreCard:['',Validators.required],
+      notification:['']
   });
   }
 
@@ -45,6 +46,17 @@ export class JobComponent implements OnInit {
 
   get f() { return this.jobRegisterForm.controls; }
 
+
+   notification:Notification={
+    title:"Job Registration",
+    body: "Job registered successfully..",
+    notificationType: 0,
+    notificationStatus:102,
+    createdDate:"",
+    modifiedDate:"any",
+    id:0,
+
+  }
     onSubmit() {
         this.submitted = true;
 
@@ -52,6 +64,7 @@ export class JobComponent implements OnInit {
         if (!this.jobRegisterForm.valid) {
             return;
         }else{
+          this.jobRegisterForm.get('notification')?.setValue(this.notification)
           this.jobService.createJob(this.jobRegisterForm.value).subscribe(data=>{
            // console.log(data);
             this.openSnackBar("Successfully created.")

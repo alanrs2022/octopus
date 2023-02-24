@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:4200/")
@@ -49,13 +50,19 @@ public class CalendarController {
         return eventService.createEvent(event);
     }
 
+
+
     @PutMapping(value = "/update/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
     public ResponseEntity<Event> updateEvent(@PathVariable long id, @RequestBody Event event){
         return eventService.updateEvent(id,event);
     }
 
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
+    @GetMapping(value = "/list")
+    public ResponseEntity<List<Event>> getEventList(){
+        return eventService.getAllEvent();
+    }
     @DeleteMapping(value = "/delete/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
     public ResponseEntity<Event> deleteAnEvent(@RequestBody @Valid long id){

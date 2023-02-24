@@ -2,10 +2,11 @@ package com.octopus.teraHire.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
-@Entity()
+@Entity
 @Table(name = "event_table")
 @SecondaryTables({@SecondaryTable(name = "candidate_table"),@SecondaryTable(name = "user_table"),
 @SecondaryTable(name = "job_table")})
@@ -16,8 +17,7 @@ import java.util.Set;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "event_id")
-    private long id;
+    private long Id;
 
     @Column(name = "start_date")
     String start;
@@ -31,8 +31,8 @@ public class Event {
     private String type;
     @Column(name="creator")
     private long organizer_id;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="fk_job_id",referencedColumnName = "id",table = "job_table")
+    @OneToOne(cascade = CascadeType.MERGE,targetEntity = Job.class)
+    @JoinColumn(name="fk_job_id",referencedColumnName = "id")
     private Job job;
   /*  @Column(name = "job_id")*/
 /*    private long job_id;*/
@@ -40,18 +40,18 @@ public class Event {
 /*    @ManyToMany(mappedBy = "events",fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<Candidate> candidates = new HashSet<>();*/
-    @OneToOne(cascade = CascadeType.ALL,targetEntity = User.class)
-    @JoinColumn(name = "fk_team_members",referencedColumnName = "id", table = "user_table")
-    private Set<User> team_members = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.MERGE,targetEntity = User.class)
+    @JoinColumn(name = "fk_team_members",referencedColumnName = "id")
+    private List<User> team_members = new ArrayList<>();
 
-    @OneToOne(targetEntity = Candidate.class,cascade = CascadeType.ALL)
-    @JoinColumn(name="fk_candidate_id",referencedColumnName = "id",table = "candidate_table")
-    private Set<Candidate> candidates = new HashSet<>();
+    @ManyToMany(targetEntity = Candidate.class,cascade = CascadeType.MERGE)
+    @JoinColumn(name="fk_candidate_id",referencedColumnName = "id")
+    private List<Candidate> candidates = new ArrayList<>();
 
     public Event(){}
 
-    public Event(long id, String start, String end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, Set<Candidate> candidates, Set<User> users) {
-        this.id = id;
+    public Event(long id, String start, String end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, List<Candidate> candidates, List<User> users) {
+        Id = id;
         this.start = start;
         this.end = end;
         this.created = created;
@@ -65,11 +65,11 @@ public class Event {
     }
 
     public long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(long id) {
-        this.id = id;
+        Id = id;
     }
 
     public String getStart() {
@@ -128,19 +128,19 @@ public class Event {
         this.job= job;
     }
 
-    public Set<Candidate> getCandidate() {
+    public List<Candidate> getCandidate() {
         return candidates;
     }
 
-    public void setCandidate(Set<Candidate> candidate) {
+    public void setCandidate(List<Candidate> candidate) {
         this.candidates = candidate;
     }
 
-    public Set<User> getTeam_members() {
+    public List<User> getTeam_members() {
         return team_members;
     }
 
-    public void setTeam_members(Set<User> team_members) {
+    public void setTeam_members(List<User> team_members) {
         this.team_members = team_members;
     }
 }
