@@ -98,12 +98,20 @@ header .current-date{
 .calendar .days  li.active::before{
   background: #78BE20;
 }
+.calendar .days  li.EventStart::before{
+  background: red;
+}
+.calendar .days  li.EventEnd::before{
+  background: yellow;
+}
+
+
 .calendar .days li:not(.active):hover::before{
   background: #f2f2f2;
 }
 
 .loginbtn {
-  background-color: #79BE20; /* Green */
+  background-color: #78BE20; /* Green */
   border: none;
   color: white;
   padding: 10px 50px;

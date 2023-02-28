@@ -20,7 +20,11 @@
           <li>Sat</li>
         </ul>
         <ul class="days" #days >
+
          <li *ngFor="let item of liTag" [innerHTML]="item.date" class="{{ item.className }}" ></li>
+
+      
+
         </ul>
       </div>
     </div>
