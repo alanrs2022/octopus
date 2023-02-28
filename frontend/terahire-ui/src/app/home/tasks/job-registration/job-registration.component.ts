@@ -19,7 +19,16 @@ export class JobComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,private jobService: JobService,private _snackBar:MatSnackBar) { }
 
- 
+  notification:Notification={
+    title:"Job Registration",
+    body: "Job registered successfully..",
+    notificationType: 0,
+    notificationStatus:102,
+    createdDate:"",
+    modifiedDate:"any",
+    id:0,
+
+  }
 
   ngOnInit(): void {
     this.jobRegisterForm = this.formBuilder.group({   
@@ -33,8 +42,9 @@ export class JobComponent implements OnInit {
       summary:['',Validators.required],
       teamID:['',Validators.required],
       scoreCard:['',Validators.required],
-      notification:['']
+      notification:['{'+this.notification+'}',Validators.required]
   });
+  console.log(this.jobRegisterForm)
   }
 
   openSnackBar(message:string){
@@ -47,34 +57,30 @@ export class JobComponent implements OnInit {
   get f() { return this.jobRegisterForm.controls; }
 
 
-   notification:Notification={
-    title:"Job Registration",
-    body: "Job registered successfully..",
-    notificationType: 0,
-    notificationStatus:102,
-    createdDate:"",
-    modifiedDate:"any",
-    id:0,
-
-  }
+  
     onSubmit() {
         this.submitted = true;
-
+        this.jobRegisterForm.get('notification')?.setValue(this.notification)
+        console.log(this.jobRegisterForm.value)
         // stop here if form is invalid
         if (!this.jobRegisterForm.valid) {
             return;
         }else{
-          this.jobRegisterForm.get('notification')?.setValue(this.notification)
+          
           this.jobService.createJob(this.jobRegisterForm.value).subscribe(data=>{
            // console.log(data);
             this.openSnackBar("Successfully created.")
+            
             this.jobRegisterForm.clearValidators();
             this.jobRegisterForm.reset();
             this.submitted = false;
+          },error=>{
+            this.openSnackBar("Failed! Try again.")
+            console.log(error)
           });
         }
 
-       window.location.reload()
+     //  window.location.reload()
        
     }
 

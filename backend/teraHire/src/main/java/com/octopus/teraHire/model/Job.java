@@ -42,7 +42,7 @@ public class Job {
 
 
     @OneToOne(targetEntity = Notification.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "id",table = "notification_table")
+    @JoinColumn(name = "notification_fk_id",referencedColumnName = "id")
     private Notification notification;
     /*@ManyToOne*/
     /*private Candidate candidate;*/

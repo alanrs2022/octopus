@@ -19,13 +19,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.renderCalendar()
   }
-  eventClicked(): void{
-    this.dialog.open(EventGeneratorComponent,{ 
-      height:'70%',
-      width:'60%'
-    })
-  }
-
+ 
 
 
 // daysTag = document.querySelector(".days");

@@ -32,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CandidateComponent } from './tasks/candidate/candidate.component';
 import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 import { BasicAuthInterceptor } from '../_helpers/basic-auth.interceptor';
+import { EventComponent } from './dashboard/event/event.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -49,7 +50,9 @@ import { BasicAuthInterceptor } from '../_helpers/basic-auth.interceptor';
     CandidateComponent,
     CandidateListComponent,
     CandidateUpdateComponent,
-    DialogDeleteComponent
+    DialogDeleteComponent,
+    CalendarComponent,
+    EventComponent
   ],
   imports: [
     CommonModule,

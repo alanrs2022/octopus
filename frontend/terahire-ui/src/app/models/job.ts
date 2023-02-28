@@ -12,7 +12,7 @@ export class Job {
     modifiedDate:string|any;
     id: number|any;
     vacancy?: number;
-    // notification!:Notification;
+    notification?:Notification;
     // constructor(  title:string,    owner:string,    stage:number,    status:string,    activeCandidates:number,    droppedCandidates:number,    summary:string,    teamID:string,    scoreCard:number,    createdDate:string|any,    modifiedDate:string,    id: number|any, vacancy?: number){
     //     this.title=title;
     //     this.owner=owner;
