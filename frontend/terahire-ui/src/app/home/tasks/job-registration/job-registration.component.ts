@@ -42,8 +42,9 @@ export class JobComponent implements OnInit {
       summary:['',Validators.required],
       teamID:['',Validators.required],
       scoreCard:['',Validators.required],
-      notification:['{'+this.notification+'}',Validators.required]
+      notification:['']
   });
+   this.jobRegisterForm.get('notification')?.setValue(this.notification)
   console.log(this.jobRegisterForm)
   }
 
@@ -60,17 +61,16 @@ export class JobComponent implements OnInit {
   
     onSubmit() {
         this.submitted = true;
-        this.jobRegisterForm.get('notification')?.setValue(this.notification)
+       // this.jobRegisterForm.get('notification')?.setValue(this.notification)
         console.log(this.jobRegisterForm.value)
         // stop here if form is invalid
-        if (!this.jobRegisterForm.valid) {
+        if (this.jobRegisterForm.invalid) {
             return;
         }else{
           
-          this.jobService.createJob(this.jobRegisterForm.value).subscribe(data=>{
-           // console.log(data);
+          this.jobService.createJob(this.jobRegisterForm.value).subscribe(response=>{
+            console.log(response);
             this.openSnackBar("Successfully created.")
-            
             this.jobRegisterForm.clearValidators();
             this.jobRegisterForm.reset();
             this.submitted = false;

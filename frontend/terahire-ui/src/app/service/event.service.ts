@@ -9,23 +9,22 @@ import { Event } from '../models/event.model';
 export class EventService {
   private baseURL="http://localhost:8080/api/calendar"
   constructor(private httpClient: HttpClient) { }
-  header:HttpHeaders = new HttpHeaders(
-    {
-      'Content-Type': 'application/json',
-      'Authorization': `Basic ` + btoa('alanrs@gmail.com:alan@123'),
-    }
-  );
+
   // getEventList(event:Event)
+
+  getEventList():Observable<any>{
+     return this.httpClient.get(this.baseURL+'/list');
+    }
   createEvent(event:Event):Observable<any>{
-    return this.httpClient.post(this.baseURL+'/new',event,{headers:this.header,observe:'response'})
+    return this.httpClient.post(this.baseURL+'/new',event,{observe:'response'})
 
   }
   deleteEvent(id:number){
-    return this.httpClient.delete(this.baseURL+`/delete`+id,{reportProgress:true,headers:this.header});
+    return this.httpClient.delete(this.baseURL+`/delete`+id,{reportProgress:true});
   }
   updateEvent(event:Event):Observable<any>
   {
-    return this.httpClient.put<any>(this.baseURL+`/update/`+event.id,event,{headers:this.header})
+    return this.httpClient.put<any>(this.baseURL+`/update/`+event.id,event,{})
   }
 
 }

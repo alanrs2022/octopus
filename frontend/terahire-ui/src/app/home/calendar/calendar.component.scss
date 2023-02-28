@@ -84,6 +84,11 @@ header .current-date{
 .calendar .days li.active{
   color: #fff;
 }
+
+
+.calendar .days li .EventEnd{
+  color: red;
+}
 .calendar .days li::before{
   position: absolute;
   content: "";
@@ -98,8 +103,28 @@ header .current-date{
 .calendar .days  li.active::before{
   background: #78BE20;
 }
+.calendar .days  li.EventStart::before{
+  background: greenyellow;
+}
+
+.calendar .days  li.EventEnd::before{
+  background: red;
+}
+
+
+
 .calendar .days li:not(.active):hover::before{
   background: #f2f2f2;
 }
 
-
+.loginbtn {
+  background-color: #78BE20; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  
+}

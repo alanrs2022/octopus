@@ -32,10 +32,8 @@ public class Job {
     private String teamID;
     @Column(name="score_card")
     private int scoreCard;
-
     @Column(name = "created_date")
     private LocalDateTime createdDate;
-
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
 

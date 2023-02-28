@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { calendar } from 'src/app/models/calendar.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EventGeneratorComponent } from 'src/app/event-generator/event-generator.component';
+import { Event } from 'src/app/models/event.model';
+import { EventService } from 'src/app/service/event.service';
 
 
 @Component({
@@ -14,10 +16,13 @@ import { EventGeneratorComponent } from 'src/app/event-generator/event-generator
 })
 export class CalendarComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private _eventService:EventService) { }
 
   ngOnInit(): void {
-    this.renderCalendar()
+   
+    this.renderCalendar();
+    this.eventListener();
+   
   }
  
 
@@ -36,6 +41,9 @@ date:Date = new Date();
 currYear = this.date.getFullYear();
 currMonth = this.date.getMonth();
 liTag:calendar[]=[];
+eventStartTag:calendar[]=[];
+eventEndTag:calendar[]=[];
+eventList:Event[]=[];
 // storing full name of all months in array
 months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
@@ -58,17 +66,22 @@ renderCalendar()  {
      //   this.liTag += ;
     }
 
+    
+
+
     for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
         // adding active class to li if the current day, month, and year matched
+       
         let isToday = i === this.date.getDate() && this.currMonth === new Date().getMonth() 
                      && this.currYear === new Date().getFullYear() ? "active" : "";
-
+        
                      let data:calendar = {
                       date: i ,
                       className: `${isToday}`
                     }
                     this.liTag.push(data)
         // this.liTag.push(`<li class="${isToday}">${i}</li>`);
+                  
     }
 
     for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
@@ -95,8 +108,29 @@ changeMonth(button:number){
     } else {
         this.date = new Date(); // pass the current date as date value
     }
+    
     this.liTag = [];
+    this.eventListener();
     this.renderCalendar(); // calling renderCalendar function
+}
+eventListener(){
+  this._eventService.getEventList().subscribe(data=>{
+    this.eventList = data;
+    this.eventList.forEach(v=>{
+      console.log(new Date(v.start).getMonth()+1)
+
+      if(new Date(v.start).getMonth() == this.currMonth ){
+        this.liTag.forEach((v2,i)=>{
+          if(new Date(v.start).getDate() == v2.date && v2.className != "inactive"){
+            this.liTag[i].className = " EventStart";
+          }else if(new Date(v.end).getDate() == v2.date && v2.className != "inactive"){
+            this.liTag[i].className = " EventEnd";
+          }
+        })
+      }
+    })
+  
+  })
 }
 
 }

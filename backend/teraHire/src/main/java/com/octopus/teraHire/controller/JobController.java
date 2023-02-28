@@ -1,7 +1,6 @@
 package com.octopus.teraHire.controller;
 
 import com.octopus.teraHire.model.Job;
-import com.octopus.teraHire.model.User;
 import com.octopus.teraHire.service.JobService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +31,7 @@ public class JobController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HM')")
     @PostMapping("/new")
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Job> addNewJob(@RequestBody @Valid Job job){
+    public ResponseEntity addNewJob(@RequestBody @Valid Job job){
         return jobService.addNewJob(job);
     }
 

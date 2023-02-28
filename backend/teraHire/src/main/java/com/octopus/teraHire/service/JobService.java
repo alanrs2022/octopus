@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -25,6 +26,12 @@ public class JobService implements JobInterface{
                       UserRepository userRepository) {
         this.jobRepository = jobRepository;
     }
+
+    public LocalDateTime getDate(){
+        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return now;
+    }
     @Override
     public List<Job> getJobList(){
         return jobRepository.findAll();
@@ -32,7 +39,8 @@ public class JobService implements JobInterface{
     @Override
     @Transactional
     public ResponseEntity addNewJob(Job job){
-
+        job.setCreatedDate(getDate());
+        job.setModifiedDate(getDate());
         return new ResponseEntity<Job>(jobRepository.save(job), HttpStatus.OK);
     }
     @Override
