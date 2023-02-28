@@ -14,7 +14,7 @@
   min-height: 40vh;
 }
 .wrapper{
-  width: 450px;
+  width: max-content;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.12);
@@ -84,6 +84,11 @@ header .current-date{
 .calendar .days li.active{
   color: #fff;
 }
+
+
+.calendar .days li .EventEnd{
+  color: red;
+}
 .calendar .days li::before{
   position: absolute;
   content: "";
@@ -99,11 +104,13 @@ header .current-date{
   background: #78BE20;
 }
 .calendar .days  li.EventStart::before{
+  background: greenyellow;
+}
+
+.calendar .days  li.EventEnd::before{
   background: red;
 }
-.calendar .days  li.EventEnd::before{
-  background: yellow;
-}
+
 
 
 .calendar .days li:not(.active):hover::before{

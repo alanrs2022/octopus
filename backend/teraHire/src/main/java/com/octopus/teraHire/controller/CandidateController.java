@@ -15,8 +15,7 @@ import java.util.List;
 @RequestMapping("/api/candidate")
 @SecurityRequirement(name = "user-authenticate")
 public class CandidateController {
-
-     private CandidateService candidateService;
+    private CandidateService candidateService;
     public CandidateController(CandidateService candidateService){
         this.candidateService=candidateService;
     }

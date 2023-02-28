@@ -24,13 +24,7 @@ export class CalendarComponent implements OnInit {
     this.eventListener();
    
   }
-  eventClicked(): void{
-    this.dialog.open(EventGeneratorComponent,{ 
-      height:'70%',
-      width:'60%'
-    })
-  }
-
+ 
 
 
 // daysTag = document.querySelector(".days");
@@ -116,25 +110,27 @@ changeMonth(button:number){
     }
     
     this.liTag = [];
+    this.eventListener();
     this.renderCalendar(); // calling renderCalendar function
 }
 eventListener(){
-  this._eventService.getEventList().subscribe(data=>{this.eventList=data})
-  for(let event = 0;event<=this.eventList.length;event++){
-      let data1:calendar = {
-        date:this.eventList[event].start.getDate(),
-        className:"EventStart"
+  this._eventService.getEventList().subscribe(data=>{
+    this.eventList = data;
+    this.eventList.forEach(v=>{
+      console.log(new Date(v.start).getMonth()+1)
+
+      if(new Date(v.start).getMonth() == this.currMonth ){
+        this.liTag.forEach((v2,i)=>{
+          if(new Date(v.start).getDate() == v2.date && v2.className != "inactive"){
+            this.liTag[i].className = " EventStart";
+          }else if(new Date(v.end).getDate() == v2.date && v2.className != "inactive"){
+            this.liTag[i].className = " EventEnd";
+          }
+        })
       }
-      let data2:calendar={
-        date:this.eventList[event].end.getDate(),
-        className:"EventEnd"
-      }
-      this.eventStartTag.push(data1);
-      this.eventEndTag.push(data2);
-      console.log(this.eventStartTag,this.eventEndTag);
-      // console.log("Event Start & End date");
-      this.liTag.concat(this.eventStartTag,this.eventEndTag);
-    }
+    })
+  
+  })
 }
 
 }

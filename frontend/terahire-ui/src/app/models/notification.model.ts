@@ -3,7 +3,7 @@ export class Notification {
     body!:string;
     notificationType!:number;
     notificationStatus!:number;
-    createdDate:any;
-    modifiedDate:any;
+    createdDate!:string;
+    modifiedDate!:string;
     id!:number;
  }

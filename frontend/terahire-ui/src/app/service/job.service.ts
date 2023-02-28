@@ -18,7 +18,8 @@ export class JobService {
     return this.httpClient.get(this.baseURL+'/list',);
   }
   createJob(job:Job):Observable<any>{
-    return this.httpClient.post(this.baseURL+'/new',job);
+    
+    return this.httpClient.post(this.baseURL+'/new',job,{observe:'response'});
   }
   updateJob(job:Job):Observable<any>{
 

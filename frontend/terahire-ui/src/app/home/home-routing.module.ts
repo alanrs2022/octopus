@@ -4,6 +4,7 @@ import { AuthGuard } from '../_helpers/auth.guard';
 import { AdminComponent } from './admin/admin.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EventComponent } from './dashboard/event/event.component';
 import { HomeComponent } from './home.component';
 import { RecruitmentComponent } from './recruitment/recruitment.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -37,7 +38,7 @@ const routes: Routes = [
         }
       },{
         path:"calendar",
-        component: CalendarComponent
+        component: EventComponent
       }
       ,{
         path:"tasks",
