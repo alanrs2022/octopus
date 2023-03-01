@@ -1,12 +1,17 @@
 table {
 width: 100%;
-  overflow-x: scroll !important;
+  overflow-x: hidden !important; 
+}
+.mat-table {
+  overflow-x: hidden !important; 
 }
 .mat-elevation-z8{
-  overflow-x: scroll;
+  overflow-x: scroll !important;
+    width: 100%;
 }
 .mat-header-cell{
-  min-width: 130px !important;
+  min-width: 130px;
+  max-width: max-content;
 }
 .form-control{
   color: #000;

@@ -57,12 +57,20 @@ export class JobListComponent implements OnInit {
   onUpdateClicked(job:Job){
     this.dialog.open(JobEditComponent,{ 
       data:  job ,
-      height:'70%',
-      width:'60%'
+      width: '40%',
+      height: '70%',
     }).afterClosed().subscribe(result=>{
       this.getAllJobs();
     })
   }
-  
 
+  //Search box
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+
+  }
 }

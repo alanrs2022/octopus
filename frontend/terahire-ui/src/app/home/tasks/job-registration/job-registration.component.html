@@ -12,15 +12,7 @@
                             <div class="row">
                     
                             <div class="col">    <h3 >Job Registration</h3><br></div>
-                                <div class="col">
-                                    <div class="text-center">
-                                        <div class="mt-4 pt-2">
-                                            <input class="loginbtn" type="submit" value="Create Job" />
-                                        </div>
-                                    </div>
-
-                                    <br>
-                                </div>
+                                
                             </div>
                             <!-- Title  -->
 
@@ -79,7 +71,7 @@
                                             <option value="Inactive">Inactive</option>
                                         </select>
                                         <label for="floatingInput">Status</label>
-                                        <div *ngIf="submitted && f.status.errors" class="invalid-feedback"><br>
+                                        <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
                                             <div *ngIf="f.status.errors.required">*Required</div>
                                         </div>
                                     </div>
@@ -91,7 +83,7 @@
 
                                 <div class="col-md-6 mb-4">
                                     <div class="form-floating mb-3">
-                                        <input min=1 type="number" class="form-control" formControlName="vacancy"
+                                        <input type="number" class="form-control" formControlName="vacancy"
                                             placeholder="name@example.com"
                                             [ngClass]="{ 'is-invalid': submitted && f.vacancy.errors }">
                                         <label for="floatingInput">Vacancy</label>
@@ -152,13 +144,19 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-floating mb-3">
-                                        <input type="string" min="0" class="form-control" formControlName="teamID"
-                                            placeholder="teamID"
+                                        <select class="form-control" formControlName="teamID"
                                             [ngClass]="{ 'is-invalid': submitted && f.teamID.errors }">
+
+                                            <option value="0" selected="selected"></option>
+                                            <option value="Foster Moore">Fooster Moore</option>
+                                            <option value="CMS">CMS</option>
+                                            <option value="VAS">VAS</option>
+                                            <option value="Teranet IT">IT</option>
+
+                                        </select>
                                         <label for="floatingInput">Team ID</label>
                                         <div *ngIf="submitted && f.teamID.errors" class="invalid-feedback">
                                             <div *ngIf="f.teamID.errors.required">*Required</div>
-                                            <!-- <div *ngIf="f.teamID.errors">teamID is Invalid</div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +179,15 @@
 
 
                             <!-- Button -->
-                           
+                            <div class="col">
+                                <div class="text-center">
+                                    <div class="mt-4 pt-2">
+                                        <input class="loginbtn" type="submit" value="Create Job" />
+                                    </div>
+                                </div>
+
+                                <br>
+                            </div>
 
                         </form>
                     <!-- </div> -->

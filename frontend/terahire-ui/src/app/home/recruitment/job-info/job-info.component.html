@@ -1,0 +1,95 @@
+<h5 class="section-title h3">Job Progress</h5><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let item of getStatus(jobInfo,'Active')">
+            <div *ngIf="item.status=='Active'">
+
+                <div class="flip-card card p-3 mb-2">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="icon"><img src="../../../../assets/img/Teranet.png" width="90%"> <i
+                                            class="bx bxl-mailchimp"></i> </div>
+                                    <div class="ms-2 c-details">
+                                        <h6 class="mb-0">TeraHire</h6> <span>1 days ago</span>
+                                    </div>
+                                </div>
+                                <!-- <div class="badge"> <span>Design</span> </div> -->
+                            </div>
+                            <div class="mt-5">
+                                <h4 class="heading text-left">{{item.title}}</h4>
+
+                                <div class="mt-5">
+
+                                    <mat-progress-bar class="custom-progress-bar" mode="buffer"
+                                        [value]='getProgress(item.activeCandidates,item.vacancy)'></mat-progress-bar>
+
+
+                                    <div class="mt-3 text-left"> <span class="text1">{{item.activeCandidates}} Applied
+                                            <span class="text2">for
+                                                {{item.vacancy}} vacancy</span></span> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+
+                            <h3><b>Summary</b><br>
+                                {{item.summary}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="dropdown" #{{i}}>
+                jhnbjihbiujbinuhn
+            </div> -->
+        </div>
+
+        <!-- <div class="col-md-4" >
+            <div class="card p-3 mb-2">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="icon"> <img src="../../../../assets/img/Teranet.png" width="90%"><i class="bx bxl-dribbble"></i> </div>
+                        <div class="ms-2 c-details">
+                            <h6 class="mb-0">TeraHire</h6> <span>4 days ago</span>
+                        </div>
+                    </div> -->
+        <!-- <div class="badge"> <span>Product</span> </div> -->
+        <!-- </div>
+                <div class="mt-5">
+                    <h4 class="heading">Senior Quality Analyst</h4>
+                    <div class="mt-5">
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="mt-3"> <span class="text1">{{item.activeCandidates}} Applied <span class="text2">of {{item.vacancy}} capacity</span></span> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 mb-2">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="icon"><img src="../../../../assets/img/Teranet.png" width="90%"> <i class="bx bxl-reddit"></i> </div>
+                        <div class="ms-2 c-details">
+                            <h6 class="mb-0">TeraHire</h6> <span>2 days ago</span>
+                        </div>
+                    </div> -->
+        <!-- <div class="badge"> <span>Design</span> </div> -->
+        <!-- </div>
+                <div class="mt-5">
+                    <h4 class="heading">DevOps Engineer</h4>
+                    <div class="mt-5">
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="mt-3"> <span class="text1">{{item.activeCandidates}} Applied <span class="text2">of {{item.vacancy}}  capacity</span></span> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    </div>

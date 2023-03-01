@@ -1,0 +1,131 @@
+body {
+    background-color: #eee
+}
+
+.card {
+    border: none;
+    border-radius: 10px
+}
+
+.c-details span {
+    font-weight: 300;
+    font-size: 13px
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 39px
+}
+
+.badge span {
+    background-color: #fffbec;
+    width: 60px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    display: flex;
+    color: #fed85d;
+    justify-content: center;
+    align-items: center
+}
+
+.progress {
+    height: 10px;
+    border-radius: 10px
+}
+
+.progress div {
+    background-color: red
+}
+
+.text1 {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.text2 {
+    color: #a5aec0
+}
+
+::ng-deep .mat-progress-bar {
+    background-color: #f9fdfb;
+    height: 20px !important;
+}
+
+::ng-deep .mat-progress-bar .mat-progress-bar-background {
+    animation-direction: reverse !important;
+}
+
+.dropdown {
+    display: none;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 300px;
+    perspective: 1000px;
+    padding: 5px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+}
+
+.flip-card:focus {
+    outline: 0;
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card:focus .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.flip-card-front {
+    background-color: white;
+    color: black;
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+}
+
+.flip-card-back {
+    background-color: white;
+    color: white;
+    transform: rotateY(180deg);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h3 {
+    font-size: 20px;
+    font-family: Verdana, sans-serif;
+    
+    color: black;
+}
+
+.text-left {
+    text-align: left;
+}

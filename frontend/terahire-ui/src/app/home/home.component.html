@@ -101,8 +101,8 @@
                <b  style="color: #646363;">TERAHIRE</b>
         </a>
         <!-- Search form -->
-        <form class="d-none d-md-flex input-group w-auto my-auto">
-          <input
+        <!-- <form class="d-none d-md-flex input-group w-auto my-auto">
+          <input 
                  autocomplete="off"
                  type="search"
                  class="form-control rounded"
@@ -112,7 +112,7 @@
           <span class="input-group-text border-0"
                 ><i class="fas fa-search"></i
             ></span>
-        </form>
+        </form> -->
   
         <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">
@@ -128,7 +128,7 @@
                >
               <i class="fas fa-bell"></i>
               <span class="badge rounded-pill badge-notification bg-danger"
-                    >6</span
+                    >1</span
                 >
             </a>
             <ul
@@ -177,9 +177,10 @@
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="navbarDropdownMenuLink"
                 >
-              <li><a class="dropdown-item" href="#">My profile</a></li>
+              <li><a class="dropdown-item" href="#" routerLink="/home/MyProfile"
+                routerLinkActive="active">My profile</a></li>
               <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#" (click)="logOut()">Logout</a></li>
+              <li><a class="dropdown-item" href="#">Logout</a></li>
             </ul>
           </li>
         </ul>

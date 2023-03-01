@@ -19,13 +19,10 @@ $terahire-ui-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$terahire-ui-theme: mat.define-light-theme((
-  color: (
-    primary: $terahire-ui-primary,
-    accent: $terahire-ui-accent,
-    warn: $terahire-ui-warn,
-  )
-));
+$terahire-ui-theme: mat.define-light-theme((color: (primary: $terahire-ui-primary,
+        accent: $terahire-ui-accent,
+        warn: $terahire-ui-warn,
+      )));
 // table{
 //   overflow-x: scroll
 // }
@@ -36,17 +33,38 @@ $terahire-ui-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 $primary: #78BE20;
 $danger: red;
 
 @import "../node_modules/bootstrap";
 @import "../node_modules/mdb-ui-kit/css/mdb.min.css";
 $primary-color: #78BE20;
+
 .primary-color {
-    background-color: #78BE20!important;
+  background-color: #78BE20 !important;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-menu-panel {
+  max-height: 200px !important;
+
+}
+
+//job info progress bar
+.custom-progress-bar .mat-progress-bar-fill::after {
+  background-color: #039823 !important;
+
+}
+
+.custom-progress-bar {
+  width: 100% !important;
+}

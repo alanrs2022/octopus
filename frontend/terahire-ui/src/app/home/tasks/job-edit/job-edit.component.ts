@@ -27,6 +27,7 @@ export class JobEditComponent implements OnInit {
   UpdatedJobSummary!:string;
   UpdatedJobTeamID!:string;
   UpdatedJobScoreCard!:number;
+  UpdatedJobVacancy!:number;
   
   ngOnInit(){
     this.UpdatedJobTitle=this.EditJobData.title;
@@ -38,6 +39,7 @@ export class JobEditComponent implements OnInit {
     this.UpdatedJobSummary=this.EditJobData.summary;
     this.UpdatedJobTeamID=this.EditJobData.teamID;
     this.UpdatedJobScoreCard=this.EditJobData.scoreCard;
+    this.UpdatedJobVacancy=this.EditJobData.vacancy;
   }
   UpdateJobDetails(){
     if(this.UpdatedJobActiveCandidates>=this.UpdatedJobDroppedCandidates){
@@ -54,6 +56,7 @@ export class JobEditComponent implements OnInit {
       id:this.EditJobData.id,
       createdDate:null,
       modifiedDate:null,
+      vacancy:this.UpdatedJobVacancy
     }
     this.jobService.updateJob(UpdatedJobData).subscribe(data=>{
       console.log(data)

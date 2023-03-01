@@ -2,7 +2,8 @@
     float: right;
     top:-24px;
     right:-24px;
-    background-color: white;
+    background-color: transparent;
+    border-color: transparent;
   }
   
   .close-icon {
@@ -22,3 +23,4 @@
   ::ng-deep .icon-outside .mat-dialog-container {
    overflow: unset
   }
+ 
