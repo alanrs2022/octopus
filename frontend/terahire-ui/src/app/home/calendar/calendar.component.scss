@@ -78,7 +78,7 @@ header .current-date{
   margin-top: 30px;
 }
 
-.calendar .days li.inactive{
+.calendar .days li.inactive a{
   color: #ddd;
 }
 .calendar .days li.active{
@@ -99,6 +99,9 @@ header .current-date{
   z-index: -1;
   border-radius: 50%;
   transform: translate(-50%, -50%);
+}
+.calendar .days li a{
+  color: #333;
 }
 .calendar .days  li.active::before{
   background: #78BE20;

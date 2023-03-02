@@ -33,6 +33,9 @@ import { CandidateComponent } from './tasks/candidate/candidate.component';
 import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 import { BasicAuthInterceptor } from '../_helpers/basic-auth.interceptor';
 import { EventComponent } from './dashboard/event/event.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
+import { NotificationSideBarComponent } from './notification-side-bar/notification-side-bar.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -52,7 +55,8 @@ import { EventComponent } from './dashboard/event/event.component';
     CandidateUpdateComponent,
     DialogDeleteComponent,
     CalendarComponent,
-    EventComponent
+    EventComponent,
+    NotificationSideBarComponent
   ],
   imports: [
     CommonModule,
@@ -65,6 +69,9 @@ import { EventComponent } from './dashboard/event/event.component';
     MatSnackBarModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
+    MdbPopoverModule
+    
   ],
   providers:[
     UserService,

@@ -11,15 +11,15 @@
       class="form-control">
   </div>
   <br>
-  <mat-form-field appearance="fill">
+  <mat-form-field           class="form-control">
     <mat-label>Job</mat-label>
-    <mat-select [(ngModel)]="job">
+    <mat-select [(ngModel)]="job"  >
       <mat-option *ngFor="let job of jobList" [value]="job">{{job.title}}</mat-option>
     </mat-select>
   </mat-form-field>
   
   <br>
-  <mat-form-field appearance="fill">
+  <mat-form-field class="form-control">
     <mat-label>Type</mat-label>
     <mat-select [(ngModel)]="type">
       
@@ -33,21 +33,21 @@
 
 
 <br>
-    <mat-form-field appearance="fill">
+    <mat-form-field class="form-control">
       <mat-label>Team Members</mat-label>
       <mat-select [(ngModel)]="teamMembers" multiple>
         <mat-option *ngFor="let member of teamList" [value]="member">{{member.firstName}}</mat-option>
       </mat-select>
     </mat-form-field>
     <br>
-    <mat-form-field appearance="fill">
+    <mat-form-field class="form-control">
       <mat-label>Candidates</mat-label>
       <mat-select [(ngModel)]="candidates" multiple>
         <mat-option *ngFor="let candidate of candidatesList" [value]="candidate">{{candidate.fullName}}</mat-option>
       </mat-select>
     </mat-form-field>
     <br>
-   
+   <br>
     <div>
-      <button class="btn btn-primary" (click)="saveEventClick()">Update & Save</button> 
+      <button class="btn loginbtn"  (click)="saveEventClick()">Save</button> 
     </div>

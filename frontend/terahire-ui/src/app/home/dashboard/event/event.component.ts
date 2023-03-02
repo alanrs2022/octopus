@@ -18,7 +18,7 @@ export class EventComponent implements OnInit {
   eventClicked(): void{
     this.dialog.open(EventGeneratorComponent,{ 
       height:'70%',
-      width:'60%'
+      width:'30%'
     })
   }
 

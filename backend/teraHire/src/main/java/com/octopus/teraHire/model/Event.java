@@ -34,12 +34,18 @@ public class Event {
     @OneToOne(cascade = CascadeType.MERGE,targetEntity = Job.class)
     @JoinColumn(name="fk_job_id",referencedColumnName = "id")
     private Job job;
+
+    @OneToOne(cascade = CascadeType.ALL,targetEntity = Notification.class)
+    @JoinColumn(name="fk_notification_id",referencedColumnName = "id")
+    private Notification notification;
   /*  @Column(name = "job_id")*/
 /*    private long job_id;*/
 
-/*    @ManyToMany(mappedBy = "events",fetch = FetchType.LAZY)
-    @JsonBackReference
-    private Set<Candidate> candidates = new HashSet<>();*/
+
+
+    /*    @ManyToMany(mappedBy = "events",fetch = FetchType.LAZY)
+        @JsonBackReference
+        private Set<Candidate> candidates = new HashSet<>();*/
     @ManyToMany(cascade = CascadeType.MERGE,targetEntity = User.class)
     @JoinColumn(name = "fk_team_members",referencedColumnName = "id")
     private List<User> team_members = new ArrayList<>();
@@ -48,9 +54,12 @@ public class Event {
     @JoinColumn(name="fk_candidate_id",referencedColumnName = "id")
     private List<Candidate> candidates = new ArrayList<>();
 
+
+
     public Event(){}
 
-    public Event(long id, String start, String end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, List<Candidate> candidates, List<User> users) {
+
+    public Event(long id, String start, String end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, Notification notification, List<User> team_members, List<Candidate> candidates) {
         Id = id;
         this.start = start;
         this.end = end;
@@ -59,9 +68,9 @@ public class Event {
         this.type = type;
         this.organizer_id = organizer_id;
         this.job = job;
-        this.candidates=candidates;
-        this.team_members=users;
-
+        this.notification = notification;
+        this.team_members = team_members;
+        this.candidates = candidates;
     }
 
     public long getId() {
@@ -90,6 +99,22 @@ public class Event {
 
     public LocalDateTime getCreated() {
         return created;
+    }
+
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
+    }
+
+    public List<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(List<Candidate> candidates) {
+        this.candidates = candidates;
     }
 
     public void setCreated(LocalDateTime created) {

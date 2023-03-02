@@ -19,11 +19,18 @@
           <li>Fri</li>
           <li>Sat</li>
         </ul>
-        <ul class="days" #days >
+        <ul class="days" #days  >
 
-         <li *ngFor="let item of liTag" [innerHTML]="item.date" class="{{ item.className }}" ></li>
-
-      
+         <li
+         *ngFor="let item of liTag,index as i"
+         class="{{ item.className }}" 
+         >
+         <a *ngIf="item.data"
+         tabindex="0"
+         trigger="focus"
+         role="button"
+         mdbPopoverTitle="Events"
+         mdbPopover="{{ item.data }}">{{ item.date}}</a> <a *ngIf="!item.data">{{item.date}}</a></li>
 
         </ul>
       </div>

@@ -23,7 +23,7 @@ export class UserService {
     return this.httpClient.get(`${this.baseUrl}`+'list')
   }
 
-  updateUser(data:user){
+  updateUser(data:any){
     return this.httpClient.put(`${this.baseUrl}`+'update/'+data.id,data)
   }
   getUserByEmail(email:string):Observable<any>{

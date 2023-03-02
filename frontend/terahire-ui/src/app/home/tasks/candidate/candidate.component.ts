@@ -53,7 +53,7 @@ export class CandidateComponent implements OnInit {
     });
 
 
-    console.log(this.candidateForm)
+    //console.log(this.candidateForm)
 
 
 

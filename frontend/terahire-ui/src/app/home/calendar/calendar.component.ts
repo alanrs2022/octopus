@@ -34,8 +34,9 @@ export class CalendarComponent implements OnInit {
 
 @ViewChild('currentdate') currentDate!:ElementRef;
 
+isOpened = false;
 prevNextIcon = document.querySelectorAll(".icons span");
-
+aboveTemplate = `<div class="color-red">Top Template<button style="background: white; color: black">Press me</button></div>`;
 // getting new date, current year and month
 date:Date = new Date();
 currYear = this.date.getFullYear();
@@ -123,8 +124,10 @@ eventListener(){
         this.liTag.forEach((v2,i)=>{
           if(new Date(v.start).getDate() == v2.date && v2.className != "inactive"){
             this.liTag[i].className = " EventStart";
+            this.liTag[i].data = v.type
           }else if(new Date(v.end).getDate() == v2.date && v2.className != "inactive"){
             this.liTag[i].className = " EventEnd";
+            this.liTag[i].data = v.type
           }
         })
       }

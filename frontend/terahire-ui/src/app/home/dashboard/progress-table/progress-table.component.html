@@ -8,20 +8,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John Doe</td>
-        <td>UI Designner</td>
-        <td><span class="badge rounded-pill badge-primary">Tech interview</span></td>
+      <tr *ngFor="let event of eventList,index as i"  >
+        <td *ngIf="i<4">{{ event.candidate[0].fullName }}</td>
+        <td *ngIf="i<4">{{ event.job.title }}</td>
+        <td *ngIf="i<4"><span class="badge rounded-pill badge-primary">{{event.type}}</span></td>
       </tr>
-      <tr>
-        <td>Ella Clintion</td>
-        <td>Content Designer</td>
-        <td><span class="badge rounded-pill badge-primary">Task</span></td>
-      </tr>
-      <tr>
-        <td>Mike Tyler</td>
-        <td>Node.js Developer</td>
-        <td><span class="badge rounded-pill badge-primary">Resume review</span></td>
-      </tr>
+     
     </tbody>
   </table>
