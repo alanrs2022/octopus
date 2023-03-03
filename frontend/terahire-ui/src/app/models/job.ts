@@ -11,6 +11,6 @@ export class Job {
     createdDate:string|any;
     modifiedDate:string|any;
     id!: number;
-    vacancy?: number;
-    notification?:Notification;
+    vacancy!: number;
+    notifiction?:Notification;
 }

@@ -3,8 +3,11 @@ import { FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA,MatDialog, MatDialogRef, } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Candidate } from 'src/app/models/candidate';
-
+import { CountryService } from 'src/app/service/country.service';
 import { CandidateService } from 'src/app/service/candidate.service';
+import { SkillsetService } from 'src/app/service/skillset.service';
+import { JobService } from 'src/app/service/job.service';
+import { Job } from 'src/app/models/job';
 
 @Component({
   selector: 'app-candidate-update',
@@ -16,9 +19,12 @@ export class CandidateUpdateComponent implements OnInit {
   EditJobData: Candidate;
   name!: string;
   isAlert=false;
+  skill: any[] = [];
+  countries: any[] = [];
+  jobs: Job[] = [];
   // isDisabled = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Candidate, private candidateService: CandidateService,private snackBar:MatSnackBar) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Candidate,private jobService: JobService,private countryService: CountryService,private SkillsetService: SkillsetService, private candidateService: CandidateService,private snackBar:MatSnackBar) {
     this.EditJobData = data;
     // this.isDisabled = false;
   }
@@ -39,6 +45,7 @@ export class CandidateUpdateComponent implements OnInit {
   UpdatedStatus!: string
   UpdatedGender!:string
   UpdatedSocialLink!:string
+  UpdatedDesignation!:string
 
 
   ngOnInit(): void {
@@ -59,10 +66,14 @@ export class CandidateUpdateComponent implements OnInit {
     this.UpdatedStatus = this.EditJobData.status;
     this.UpdatedGender = this.EditJobData.gender;
     this.UpdatedSocialLink=this.EditJobData.sociaLink;
-
+    this.UpdatedDesignation=this.EditJobData.designation;
+    this.getSkills();
+    this.getCountries();
+    this.getJobs();
     // if(this.UpdatedYOE==0){
     //   update= true
     // }
+    console.log(this.UpdatedDesignation);
       
   }
   
@@ -89,10 +100,11 @@ export class CandidateUpdateComponent implements OnInit {
       expectedCTC: this.UpdatExpectedCTC,
       skills: this.UpdatedSkills,
       sociaLink: this.UpdatedSocialLink,
-      status: this.UpdatedStatus
+      status: this.UpdatedStatus,
+      designation:this.UpdatedDesignation
 
     }
-    console.log(this.UpdatedGender);
+   
     this.candidateService.updateCandidate(UpdatedCandidateData).subscribe(data => {
       console.log(data)
 
@@ -108,6 +120,27 @@ export class CandidateUpdateComponent implements OnInit {
     // alert("Updated");
     // window.location.reload();
 
+
+  }
+  getSkills() {
+    this.SkillsetService.getSkillSet().subscribe(data => {
+      this.skill = data;
+      console.log(data);
+    })
+  }
+  getCountries() {
+    this.countryService.getCountry().subscribe(data => {
+
+      this.countries = data;
+      this.countries.sort((a, b) => a.name.common > b.name.common ? 1 : -1)
+      console.log(data)
+    })
+  }
+  getJobs() {
+    this.jobService.getJobList().subscribe(data => {
+      this.jobs = data;
+      console.log(data)
+    })
 
   }
 

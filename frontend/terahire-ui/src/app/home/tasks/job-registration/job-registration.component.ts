@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JobService } from 'src/app/service/job.service';
-import { Notification } from 'src/app/models/notification.model';
+
 
 
 @Component({
@@ -48,11 +48,8 @@ export class JobComponent implements OnInit {
 
   get f() { return this.jobRegisterForm.controls; }
 
-  
-  
-    onSubmit() {
 
-      // notification:Notification={
+    onSubmit() {
       //   title:"Job Registration",
       //   body: "New job "+this.f.title.value+" was created by "+this.f.owner.value+".",
       //   notificationType: 0,
@@ -85,23 +82,13 @@ export class JobComponent implements OnInit {
           this.jobService.createJob(this.jobRegisterForm.value).subscribe(response=>{
             console.log(response);
             this.openSnackBar("Successfully created.")
-            this.jobRegisterForm.clearValidators();
             this.jobRegisterForm.reset();
             this.submitted = false;
           },error=>{
-            this.openSnackBar("Failed! Try again.")
-            console.log(error)
-          });
-        }
 
-        
+          })
      //window.location.reload()
        
     }
-
-    
-
-
-
-
+  }
 }

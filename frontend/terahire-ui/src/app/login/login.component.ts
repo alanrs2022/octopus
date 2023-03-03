@@ -1,8 +1,10 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Route, Router } from '@angular/router';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { AuthService } from '../service/auth.service';
 
 
@@ -19,8 +21,9 @@ export class LoginComponent {
     submitted = false;
     error:boolean = false;
     errMessage!:string;
+    fieldTextType!: boolean;
 
-    constructor(private formBuilder: FormBuilder,private authService:AuthService,private snackBar:MatSnackBar,private router:Router) { }
+    constructor(private formBuilder: FormBuilder,private authService:AuthService,private snackBar:MatSnackBar,private router:Router,private dialog: MatDialog) { }
 
     ngOnInit() {
 
@@ -37,6 +40,10 @@ export class LoginComponent {
     // convenience getter for easy access to form fields
     get f() { return this.registerForm.controls; }
 
+    //password view button trigger
+    toggleFieldTextType() {
+        this.fieldTextType = !this.fieldTextType;
+      }
     onSubmit() {
         this.submitted = true;
 
@@ -79,6 +86,12 @@ export class LoginComponent {
 
        
     }
+
+    //ForgetPassword  (Note-> imported MatDialog in appModule.ts)
+    handleForgotPasswordAction() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.width = "550px";
+        this.dialog.open(ForgotPasswordComponent, dialogConfig);
+    }
 }
   
-

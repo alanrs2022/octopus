@@ -1,50 +1,167 @@
 // .gradient-custom {
 //     /* fallback for old browsers */
 //     background: #f093fb;
-    
+
 //     /* Chrome 10-25, Safari 5.1-6 */
 //     background: -webkit-linear-gradient(to bottom right, rgb(121, 190, 32), rgb(121, 190, 32));
-    
+
 //     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 //     background: linear-gradient(to bottom right, rgb(121, 190, 32), rgb(121, 190, 32))
 //     }
-    
+
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
-    font-size: 1rem;
-    line-height: 2.15;
-    padding-left: .75em;
-    padding-right: .75em;
-    }
-.card-registration .select-arrow {
-    top: 13px;
-    }
-.lineformat{
-border: 1px solid black;
-float: left;
-margin: 0;
-padding: 0;
-border-top: 0px;
-border-left: 0px;
-border-right: 0px;
-
-  }
-  .loginbtn {
-    background-color: #79BE20; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 50px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    
-  }
-
-  
-  .error{
-    color: red;
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: .75em;
+  padding-right: .75em;
 }
+
+.card-registration .select-arrow {
+  top: 13px;
+}
+
+.lineformat {
+  border: 1px solid black;
+  float: left;
+  margin: 0;
+  padding: 0;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+
+}
+
+.loginbtn {
+  background-color: #79BE20;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+
+}
+
+
+.error {
+  color: red;
+}
+
 input:disabled {
-  background: #f9f7f7
-  ;
+  background: #f9f7f7;
+}
+
+p {
+  font-family: Lato;
+}
+
+.country-selector {
+  opacity: 1 !important;
+  bottom: 8px !important;
+}
+
+input:not(.country-search) {
+  bottom: 3px;
+  left: 10px;
+}
+
+.country-list-button {
+  font-size: 0.8rem !important;
+}
+
+.mat-menu-content:not(:empty) {
+  max-height: 250px;
+
+}
+
+.mat-form-field {
+  width: 300px;
+}
+
+.m-t-10 {
+  margin-top: 5px;
+}
+
+.mat-menu-panel {
+  max-height: 200px !important;
+  // max-width: 600px ;
+}
+
+.form-control {
+  width: 300px;
+}
+
+.row {
+  width: 700px;
+}
+
+
+
+.mat-input-element,
+.mat-form-field-infix,ngx-mat-intl-tel-input {
+
+  outline-color: #79BE20;
+  color: #000;
+}
+
+.ng-touched {
+  outline-color: #79BE20;
+  color: #000;
+}
+
+
+//matformfield css
+
+// mat-icon-stepper selected color change 
+::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color:  rgb(189,189,189)!important;
+  
+}
+
+//input outline color
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgb(189,189,189)!important;
+  width: 300px;
+  // opacity: 1!important;
+}
+
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: rgb(59,113,202)!important;
+}
+
+// mat-input error outline color (it changes once we click that field)
+.mat-form-field-appearance-outline.mat-form-field-invalid {
+  color:  rgb(189,189,189)!important;
+  opacity: 0.8!important;
+  
+}
+
+
+// mat-input carent color
+::ng-deep .mat-input-element {
+  caret-color: rgb(0, 30, 255)!important;
+}
+
+// mat-input error carent color
+::ng-deep .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+  caret-color: rgb(255, 0, 162)!important;
+}
+
+// mat-label normal state style (label color)
+::ng-deep .mat-form-field-label {
+  color: rgba(12, 12, 11, 0.6)!important;
+  // color: $mainColor!important;
+}
+
+// mat-label focused style(label popup color)
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: rgb(9, 9, 9)!important;
+}
+
+// mat-label error style
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color:  rgb(139, 34, 225)!important;
 }

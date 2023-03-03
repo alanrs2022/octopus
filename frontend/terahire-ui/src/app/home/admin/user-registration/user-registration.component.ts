@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { user } from 'src/app/models/user.model';
 import { UserService } from 'src/app/service/user.service';
 import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
+import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
+import { FloatLabelType } from '@angular/material/form-field';
 @Component({
   selector: 'app-user-registration',
   templateUrl: './user-registration.component.html',
@@ -11,8 +13,24 @@ import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 export class UserRegistrationComponent implements OnInit {
   userRegisterForm!: FormGroup;
   submitted = false;
- 
+
+  @ViewChild(NgxMatIntlTelInputComponent, { static: true })
+  phonenumber?: NgxMatIntlTelInputComponent;
+
+   //phone number country code
+   hideRequiredControl = new FormControl(false);
+   floatLabelControl = new FormControl('auto' as FloatLabelType);
+   options = this.formBuilder.group({
+     hideRequired: this.hideRequiredControl,
+     floatLabel: this.floatLabelControl,
+   });
+
+  //password eye
+  fieldTextType!: boolean;
   constructor(private formBuilder: FormBuilder,private userService:UserService,private _snackBar: MatSnackBar) { }
+  getFloatLabelValue(): FloatLabelType {
+    return this.floatLabelControl.value || 'auto';
+  }
 
  
 
@@ -23,12 +41,18 @@ export class UserRegistrationComponent implements OnInit {
       username:['',[Validators.required]],    
       email: ['', [Validators.required, Validators.email]],
       role:['',[Validators.required]],  
-      phonenumber: ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
+      phonenumber: ['',[Validators.required]],
       password:['', [Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),Validators.minLength(8)]]   
   });
   }
 
   get f() { return this.userRegisterForm.controls; }
+
+  //password eye symbol
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
+
 
 
   openSnackBar(message:string){
@@ -77,7 +101,14 @@ export class UserRegistrationComponent implements OnInit {
 
 
         }
-       
+        Object.keys(this.userRegisterForm.controls).forEach(key => {
+          const control = this.userRegisterForm.controls[key];
+          control.markAsUntouched();
+        });
+        this.userRegisterForm.reset();
+        this.phonenumber?.reset();
+        this.userRegisterForm.get('phonenumber')?.clearValidators();
+        this.submitted = false;
         
         
         

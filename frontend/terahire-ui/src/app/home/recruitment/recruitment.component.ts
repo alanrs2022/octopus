@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Job } from 'src/app/models/job';
+import { JobService } from 'src/app/service/job.service';
 
 @Component({
   selector: 'app-recruitment',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recruitment.component.scss']
 })
 export class RecruitmentComponent implements OnInit {
-  event!: Event;
+  
 
+ 
   constructor() { }
 
   ngOnInit(): void {
+  
   }
+  
+
 }

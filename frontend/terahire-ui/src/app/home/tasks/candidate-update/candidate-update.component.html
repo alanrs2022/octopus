@@ -1,134 +1,141 @@
-<button mat-icon-button class="close-button btn btn-sm" [mat-dialog-close]="true">
-    <mat-icon class="close-icon" color="warn">close</mat-icon>
-  </button>
-  <br>
-  &nbsp;
-  <div class="form-group">
-      <label for="title"><b>Full Name:</b></label>
-      <input type="text"  [(ngModel)]="UpdatedFullName" value="{{EditJobData.fullName}}"
-        class="form-control">
-    </div>
-  
-    <div class="form-group">
-        <label for="owner"><b>Email:</b></label>
-        <input type="text"  [(ngModel)]="UpdatedEmail" value="{{EditJobData.email}}"
-          class="form-control" placeholder="">
-      </div>
-  
-      <div class="form-group">
-        <label for="stage"><b>PhoneNumber:</b></label>
-        <input type="number" [(ngModel)]="UpdatedPhoneNumber" value="{{EditJobData.phoneNumber}}"
-          class="form-control" placeholder="">
-      </div>
-  
-      <b></b>
-      <div class="form-group"  >
-        <label for="stage"><b>Gender:</b></label>
-        <input class="form-check-input" [(ngModel)]="UpdatedGender"  type="radio" name="gender"
-       value="female"  />
-       <label class="form-check-label" for="femaleGender">Female</label>
-       <input class="form-check-input" [(ngModel)]="UpdatedGender" type="radio" name="gender"
-       value="male" />
-       <label class="form-check-label" for="maleGender">Male</label>
-       <input class="form-check-input" [(ngModel)]="UpdatedGender" type="radio"  name="gender"
-       value="other" />
-       <label class="form-check-label" for="otherGender">Other</label>
-      </div>
-  
-     <div class="form-group">
-        <label for="stage"><b>DOB:</b></label>
-        <input type="date" [(ngModel)]="UpdatedDOB" value="{{EditJobData.dob}}"
-          class="form-control" placeholder="">
-      </div>
-  
-     <div class="form-group">
-        <label for="stage"><b>Address:</b></label>
-        <textarea [(ngModel)]="UpdatedAddress" value="{{EditJobData.address}}"
-          class="form-control" placeholder="">{{EditJobData.address}}</textarea>
-      </div>
-  
-     <div class="form-group">
-        <label for="stage"><b>City:</b></label>
-        <input type="text" [(ngModel)]="UpdatedCity" value="{{EditJobData.city}}"
-          class="form-control" placeholder="">
-      </div>
-  
-    <div class="form-group">
-        <label for="stage"><b>Country:</b></label>
-        <input type="text" [(ngModel)]="UpdatedCountry" value="{{EditJobData.country}}"
-          class="form-control" placeholder="">
-      </div>
-  
-    <div class="form-group">
-        <label for="stage"><b>Nationality:</b></label>
-        <input type="text" [(ngModel)]="UpdatedNationality" value="{{EditJobData.nationality}}"
-          class="form-control" placeholder="">
-      </div>
-  
-      <div class="form-group">
-        <label for="stage"><b>Year Of Experience:</b></label>
-        <select type="text" [(ngModel)]="UpdatedYOE" value="{{EditJobData.yearOfExperience}}">
-            <option value="0" #YOE>0</option>
-                     <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-          </select>
-      </div>
-      <b></b>
-      <div class="form-group">
-        <label for="stage"><b>Current Comapny:</b></label>
-        <input type="text" [(ngModel)]="UpdatedCurrentCompany" value="{{EditJobData.currentCompany}}"
-          class="form-control" placeholder="" >
-      </div>
-    <div class="form-group">
-        <label for="stage"><b>Current Position:</b></label>
-        <input type="text" [(ngModel)]="UpdatedCurrentPosition" value="{{EditJobData.currentPosition}}"
-          class="form-control" placeholder="">
-      </div>
-  
-      <div class="form-group">
-        <label for="stage"><b>Current CTC:</b></label>
-        <input type="text" [(ngModel)]="UpdatedCurrentCTC" value="{{EditJobData.currentCTC}}"
-          class="form-control" placeholder="">
-      </div>
-  
-      <div class="form-group">
-        <label for="stage"><b>Expected CTC:</b></label>
-        <input type="text" [(ngModel)]="UpdatExpectedCTC" value="{{EditJobData.expectedCTC}}"
-          class="form-control" placeholder="">
-      </div><br>
-  
-      <div class="form-group">
-        <label for="stage"><b>Skills:</b></label>
-        <select type="text" [(ngModel)]="UpdatedSkills" value="{{EditJobData.skills}}">
-            <option value="java">Java</option>
-                      <option value="c#">C#</option>
-                      <option value="selenium">Selenium</option>
-          </select>
-      </div><br>
-  
-      <div class="form-group">
-        <label for="stage"><b>Status:</b></label>
-        <select type="text" [(ngModel)]="UpdatedStatus" value="{{EditJobData.status}}">
-            <option value="Active">Active</option>
-            <option value="Inactive">InActive</option>
-          </select>
-      </div><br>
-  
-      <div class="form-group">
-        <label for="stage"><b>Social Link:</b></label>
-        <input type="text" [(ngModel)]="UpdatedSocialLink" value="{{EditJobData.sociaLink}}"
-          class="form-control" placeholder="">
-      </div>
-  
-      <br>
-  
-      <div *ngIf="isAlert" class="alert alert-success">              
-        Updated Successfully!
-      </div>
-      <div>
-        <button class="btn btn-primary" (click)="UpdateJobDetails()">Update & Save</button> 
-      </div>
-  
-  
-  
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<br>
+&nbsp;
+<div class="form-group">
+  <label for="title"><b>Full Name:</b></label>
+  <input type="text" [(ngModel)]="UpdatedFullName" value="{{EditJobData.fullName}}" class="form-control">
+</div>
+
+<div class="form-group">
+  <label for="owner"><b>Email:</b></label>
+  <input type="text" [(ngModel)]="UpdatedEmail" value="{{EditJobData.email}}" class="form-control" placeholder="">
+</div>
+
+<div class="form-group">
+  <label for="stage"><b>PhoneNumber:</b></label>
+
+  <input type="text" [(ngModel)]="UpdatedPhoneNumber" value="{{EditJobData.phoneNumber}}" class="form-control"
+    placeholder="">
+</div>
+
+
+<div class="form-group">
+  <label for="stage"><b>Gender:</b></label>
+  <input class="form-check-input" [(ngModel)]="UpdatedGender" type="radio" name="gender" value="female" />
+  <label class="form-check-label" for="femaleGender">Female</label>
+  <input class="form-check-input" [(ngModel)]="UpdatedGender" type="radio" name="gender" value="male" />
+  <label class="form-check-label" for="maleGender">Male</label>
+  <input class="form-check-input" [(ngModel)]="UpdatedGender" type="radio" name="gender" value="other" />
+  <label class="form-check-label" for="otherGender">Other</label>
+</div>
+
+<div class="form-group">
+  <label for="stage"><b>DOB:</b></label>
+  <input type="date" [(ngModel)]="UpdatedDOB" value="{{EditJobData.dob}}" class="form-control" placeholder="">
+</div>
+
+<div class="form-group">
+  <label for="stage"><b>Address:</b></label>
+  <textarea [(ngModel)]="UpdatedAddress" value="{{EditJobData.address}}" class="form-control"
+    placeholder="">{{EditJobData.address}}</textarea>
+</div>
+
+<div class="form-group">
+  <label for="stage"><b>City:</b></label>
+  <input type="text" [(ngModel)]="UpdatedCity" value="{{EditJobData.city}}" class="form-control" placeholder="">
+</div>
+
+<div class="form-group">
+  <label for="stage"><b>Country:</b></label>
+  <mat-select type="text" [(ngModel)]="UpdatedCountry" value="{{EditJobData.country}}" class="form-control">
+    <mat-option *ngFor="let country of countries" [value]=country.name.common> {{ country.name.common }}
+    </mat-option>
+  </mat-select>
+</div>
+
+<div class="form-group">
+  <label for="stage"><b>Nationality:</b></label>
+  <input type="text" [(ngModel)]="UpdatedNationality" value="{{EditJobData.nationality}}" class="form-control"
+    placeholder="">
+</div>
+
+<div class="form-group">
+  <label for="stage"><b>Year Of Experience:</b></label>
+  <select type="text" [(ngModel)]="UpdatedYOE" value="{{EditJobData.yearOfExperience}}">
+    <option value="0" #YOE>0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+</div>
+<b></b>
+<div class="form-group">
+  <label for="stage"><b>Current Comapny:</b></label>
+  <input type="text" [(ngModel)]="UpdatedCurrentCompany" value="{{EditJobData.currentCompany}}" class="form-control"
+    placeholder="">
+</div>
+<div class="form-group">
+  <label for="stage"><b>Current Position:</b></label>
+  <input type="text" [(ngModel)]="UpdatedCurrentPosition" value="{{EditJobData.currentPosition}}" class="form-control"
+    placeholder="">
+</div>
+
+<div class="form-group">
+  <label for="stage"><b>Current CTC:</b></label>
+  <input type="text" [(ngModel)]="UpdatedCurrentCTC" value="{{EditJobData.currentCTC}}" class="form-control"
+    placeholder="">
+</div>
+
+<div class="form-group">
+  <label for="stage"><b>Expected CTC:</b></label>
+  <input type="text" [(ngModel)]="UpdatExpectedCTC" value="{{EditJobData.expectedCTC}}" class="form-control"
+    placeholder="">
+</div><br>
+
+<div class="form-group">
+  <label for="stage"><b>Skills:</b></label>
+  <mat-select type="text" [(ngModel)]="UpdatedSkills" value="{{EditJobData.skills}}" class="form-control" multiple>
+    <mat-option *ngFor="let item of skill" [value]=item.skill> {{ item.skill}}
+    </mat-option>
+  </mat-select>
+</div><br>
+
+<div class="form-group">
+  <label for="stage"><b>Designation:</b></label>
+  <mat-select type="text" [(ngModel)]="UpdatedDesignation" [value]="EditJobData.designation" class="form-control">
+    <mat-option [value]=EditJobData.designation> {{ EditJobData.designation}}
+    </mat-option>
+    <mat-option *ngFor="let item of jobs" [value]=item.title> {{ item.title}}
+    </mat-option>
+  </mat-select>
+</div><br>
+
+<div class="form-group">
+  <label for="stage"><b>Status:</b></label>
+  <select type="text" [(ngModel)]="UpdatedStatus" value="{{EditJobData.status}}">
+    <option value="Awaiting">Awaiting</option>
+    <option value="Resume review">Resume review</option>
+    <option value="Task">Task</option>
+    <option value="Tech Interview">Tech Interview</option>
+    <option value="Onboarding">Onboarding</option>
+    <option value="Active">Active</option>
+    <option value="Inactive">InActive</option>
+  </select>
+</div><br>
+
+<div class="form-group">
+  <label for="stage"><b>Social Link:</b></label>
+  <input type="text" [(ngModel)]="UpdatedSocialLink" value="{{EditJobData.sociaLink}}" class="form-control"
+    placeholder="">
+</div>
+
+<br>
+
+<div *ngIf="isAlert" class="alert alert-success">
+  Updated Successfully!
+</div>
+<div>
+  <button class="btn btn-primary" (click)="UpdateJobDetails()">Update & Save</button>
+</div>

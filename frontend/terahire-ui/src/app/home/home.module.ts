@@ -33,9 +33,17 @@ import { CandidateComponent } from './tasks/candidate/candidate.component';
 import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 import { BasicAuthInterceptor } from '../_helpers/basic-auth.interceptor';
 import { EventComponent } from './dashboard/event/event.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
-import { NotificationSideBarComponent } from './notification-side-bar/notification-side-bar.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
+import { MatSelectModule } from '@angular/material/select';
+import { CandidateInfoComponent } from './recruitment/candidate-info/candidate-info.component';
+import { JobInfoComponent } from './recruitment/job-info/job-info.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import { EventGeneratorComponent } from './dashboard/event/event-generator/event-generator.component';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -56,7 +64,11 @@ import { NotificationSideBarComponent } from './notification-side-bar/notificati
     DialogDeleteComponent,
     CalendarComponent,
     EventComponent,
-    NotificationSideBarComponent
+    CandidateInfoComponent,
+    JobInfoComponent,
+    MyProfileComponent,
+    EventGeneratorComponent
+   
   ],
   imports: [
     CommonModule,
@@ -68,10 +80,13 @@ import { NotificationSideBarComponent } from './notification-side-bar/notificati
     MatPaginatorModule,
     MatSnackBarModule,
     MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    NgxMatIntlTelInputComponent,
     MatProgressSpinnerModule,
-    MatTooltipModule,
-    MdbPopoverModule
-    
+    MatOptionModule,
+    MatSelectModule,
+    MatProgressBarModule
   ],
   providers:[
     UserService,

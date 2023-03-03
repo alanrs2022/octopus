@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../service/auth.service';
-import { UserService } from '../service/user.service';
+import { NotificationService } from '../service/notification.service';
+
 
 @Component({
   selector: 'app-home',
@@ -10,32 +10,22 @@ import { UserService } from '../service/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router:Router,private authService:AuthService,private userService:UserService) { }
+  constructor(private router:Router,private notificationService:NotificationService) { }
   
-  activeTab:string = "dashboard";
-  userRoles!:[];
-  currentUser:any;
+  activeTab:string = "dahboard";
+  nList!:Notification[];
   ngOnInit(): void {
     //console.log( this.router.url.split('/')[2])
-    this.activeTab =  this.router.url.split('/')[2];
-   // this.router.isActive("/home/dashboard",true)
-   this.getCurrentUser()
+    this.activeTab =  this.router.url.split('/')[2]
 
-
-  }
-
-  
-  getCurrentUser(){
-    
-    const authUser = JSON.parse(this.authService.currentUserValue())
-    //console.log(authUser.authorities)
-    this.userRoles = authUser.authorities
-
+    this.getNotifications();
   }
 
 
-  logOut(){
-    this.authService.logout();
+  getNotifications(){
+    this.notificationService.getNotifications().subscribe(data=>{
+      this.nList = data;
+    })
   }
-
+ 
 }

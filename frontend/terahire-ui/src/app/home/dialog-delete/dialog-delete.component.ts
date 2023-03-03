@@ -26,7 +26,7 @@ export class DialogDeleteComponent implements OnInit {
   }
   onYesClick(qn:number){
     if(qn == 1){
-      this.userService.deleteUser(this.data.id).subscribe(response=>{
+      this.userService.deleteUser(this.data.id).subscribe((response: { body: any; })=>{
         console.log(JSON.parse(JSON.stringify(response.body)).message)
         this.dialogRef.close()
         this.snackBar.open("Deleted!!",'',{
@@ -34,7 +34,7 @@ export class DialogDeleteComponent implements OnInit {
         })
       })
     }else if(qn == 2){
-      this.candidateService.deleteCandidate(this.data.id).subscribe(data => {
+      this.candidateService.deleteCandidate(this.data.id).subscribe((data: any) => {
         console.log(data);
         this.dialogRef.close()
         this.snackBar.open("Deleted!!",'',{
@@ -43,13 +43,13 @@ export class DialogDeleteComponent implements OnInit {
       })
     }else if(qn == 3){
       this.jobService.deleteJob(this.data.id).subscribe({
-        next:(data)=>{
+        next:(data: any)=>{
         //console.log(data)
         this.dialogRef.close()
         this.snackBar.open("Deleted!!",'',{
           duration:3000
         })
-      },error:(e)=>{
+      },error:(e: any)=>{
         console.log(e)
        
       }

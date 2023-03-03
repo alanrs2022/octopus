@@ -18,6 +18,7 @@ export class Candidate {
     sociaLink!:string;
     status!:string
     dob!:Date
+    designation!:string;
 
 
 

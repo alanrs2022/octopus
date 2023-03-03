@@ -17,5 +17,9 @@ public interface UserInterface {
     ResponseEntity getUserByEmail(String email);
 
     ResponseEntity authUser(String username,String password);
+    void updateResetPasswordToken(String token, String email);
+    public User getByResetPasswordToken(String token);
+
+    public void updatePassword(User user, String newPassword);
 
 }

@@ -3,10 +3,11 @@ import { Job } from 'src/app/models/job';
 import { JobService } from 'src/app/service/job.service';
 import{MatDialog} from '@angular/material/dialog'
 import { JobEditComponent } from '../job-edit/job-edit.component';
-import { Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material/table';
+
 import { MatPaginator } from '@angular/material/paginator';
 import { DialogDeleteComponent } from '../../dialog-delete/dialog-delete.component';
+import { MatTableDataSource } from 'node_modulessegd/@angular/material/table';
+import { Router } from 'node_modulessegd/@angular/router';
 
 @Component({
   selector: 'app-job-list',
@@ -31,7 +32,7 @@ export class JobListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   private getAllJobs(){ 
-     this.jobService.getJobList().subscribe(data=>{
+     this.jobService.getJobList().subscribe((data: Job[])=>{
       this.dataSource.data=data;
     });
   }
@@ -41,7 +42,7 @@ export class JobListComponent implements OnInit {
       data: {id: id, message: "Are you sure want to delete ",username:name,funId:3},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: string) => {
       console.log('The dialog was closed'+result);
 
      this.getAllJobs();
@@ -57,12 +58,20 @@ export class JobListComponent implements OnInit {
   onUpdateClicked(job:Job){
     this.dialog.open(JobEditComponent,{ 
       data:  job ,
-      height:'70%',
-      width:'60%'
-    }).afterClosed().subscribe(result=>{
+      width: '40%',
+      height: '70%',
+    }).afterClosed().subscribe((result: any)=>{
       this.getAllJobs();
     })
   }
-  
 
+  //Search box
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+
+  }
 }
