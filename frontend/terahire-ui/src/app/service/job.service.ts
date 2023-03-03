@@ -1,6 +1,8 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
+
 import { Job } from '../models/job';
 
 @Injectable({
@@ -23,7 +25,8 @@ export class JobService {
     return this.httpClient.get(this.baseURL+'/list',{headers:this.header});
   }
   createJob(job:Job):Observable<any>{
-    return this.httpClient.post(this.baseURL+'/new',job,{headers:this.header});
+    
+    return this.httpClient.post(this.baseURL+'/new',job,{observe:'response'});
   }
   updateJob(job:Job):Observable<any>{
 

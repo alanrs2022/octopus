@@ -6,7 +6,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { UserRegistrationComponent } from './admin/user-registration/user-registration.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from '../service/user.service';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -20,23 +20,30 @@ import { JobEditComponent } from './tasks/job-edit/job-edit.component';
 import { JobListComponent } from './tasks/job-list/job-list.component';
 import { JobComponent } from './tasks/job-registration/job-registration.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
+
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
+import {MatProgressSpinner, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 import { CandidateListComponent } from './tasks/candidate-list/candidate-list.component';
 import { CandidateUpdateComponent } from './tasks/candidate-update/candidate-update.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CandidateComponent } from './tasks/candidate/candidate.component';
 import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
-import { JobInfoComponent } from './recruitment/job-info/job-info.component';
-import { CandidateInfoComponent } from './recruitment/candidate-info/candidate-info.component';
-import { MatFormField, MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { BasicAuthInterceptor } from '../_helpers/basic-auth.interceptor';
+import { EventComponent } from './dashboard/event/event.component';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
+import { MatSelectModule } from '@angular/material/select';
+import { CandidateInfoComponent } from './recruitment/candidate-info/candidate-info.component';
+import { JobInfoComponent } from './recruitment/job-info/job-info.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { EventGeneratorComponent } from './dashboard/event/event-generator/event-generator.component';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -55,9 +62,13 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     CandidateListComponent,
     CandidateUpdateComponent,
     DialogDeleteComponent,
-    JobInfoComponent,
+    CalendarComponent,
+    EventComponent,
     CandidateInfoComponent,
-    MyProfileComponent
+    JobInfoComponent,
+    MyProfileComponent,
+    EventGeneratorComponent
+   
   ],
   imports: [
     CommonModule,
@@ -69,27 +80,16 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     MatPaginatorModule,
     MatSnackBarModule,
     MatIconModule,
-    NgxMatIntlTelInputComponent,
-    MatSelectModule,
-    MatOptionModule,
-    MatProgressBarModule,
+    MatInputModule,
     MatFormFieldModule,
-    MatInputModule
-
-    
-    
-   
-    
-
-    
-  
-    
-   
-    
-    
+    NgxMatIntlTelInputComponent,
+    MatProgressSpinnerModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatProgressBarModule
   ],
   providers:[
-    UserService
+    UserService,
   ]
  
 })

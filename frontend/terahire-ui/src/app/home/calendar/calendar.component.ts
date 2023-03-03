@@ -1,6 +1,6 @@
-import { Element } from '@angular/compiler';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { calendar } from 'src/app/models/calendar.model';
+import { EventService } from 'src/app/service/event.service';
 
 @Component({
   selector: 'app-calendar',
@@ -10,13 +10,18 @@ import { calendar } from 'src/app/models/calendar.model';
   
 })
 export class CalendarComponent implements OnInit {
+ 
+  eventList: any;
 
-  constructor() { }
+  constructor(private  _eventService:EventService) { }
 
   ngOnInit(): void {
-    this.renderCalendar()
+   
+    this.renderCalendar();
+    this.eventListener();
+   
   }
-
+ 
 
 
 // daysTag = document.querySelector(".days");
@@ -26,8 +31,9 @@ export class CalendarComponent implements OnInit {
 
 @ViewChild('currentdate') currentDate!:ElementRef;
 
+isOpened = false;
 prevNextIcon = document.querySelectorAll(".icons span");
-
+aboveTemplate = `<div class="color-red">Top Template<button style="background: white; color: black">Press me</button></div>`;
 // getting new date, current year and month
 date:Date = new Date();
 currYear = this.date.getFullYear();
@@ -93,7 +99,30 @@ changeMonth(button:number){
         this.date = new Date(); // pass the current date as date value
     }
     this.liTag = [];
-    this.renderCalendar(); // calling renderCalendar function
-}
 
+    this.renderCalendar();
+    this.eventListener();
+     // calling renderCalendar function
+}
+eventListener(){
+  this._eventService.getEventList().subscribe(data=>{
+    this.eventList = data;
+    this.eventList.forEach(v=>{
+      console.log(new Date(v.start).getMonth()+1)
+
+      if(new Date(v.start).getMonth() == this.currMonth ){
+        this.liTag.forEach((v2,i)=>{
+          if(new Date(v.start).getDate() == v2.date && v2.className != "inactive"){
+            this.liTag[i].className = " EventStart";
+            this.liTag[i].data = v.type
+          }else if(new Date(v.end).getDate() == v2.date && v2.className != "inactive"){
+            this.liTag[i].className = " EventEnd";
+            this.liTag[i].data = v.type
+          }
+        })
+      }
+    })
+  
+  })
+}
 }

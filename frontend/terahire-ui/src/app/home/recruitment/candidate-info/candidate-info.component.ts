@@ -11,11 +11,13 @@ import { CandidateService } from 'src/app/service/candidate.service';
 export class CandidateInfoComponent implements OnInit {
 
   candidateInfo!: Candidate[];
+  isLoaded:boolean = false;
   
   constructor(private candidateService: CandidateService) { }
 
   ngOnInit(): void {
     this.getCandidateInfo();
+    this.isLoaded = true;
    
   }
 //getting full candidate List  

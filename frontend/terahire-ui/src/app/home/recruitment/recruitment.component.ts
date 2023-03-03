@@ -10,6 +10,7 @@ import { JobService } from 'src/app/service/job.service';
 export class RecruitmentComponent implements OnInit {
   
 
+ 
   constructor() { }
 
   ngOnInit(): void {

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EventComponent } from './dashboard/event/event.component';
 import { HomeComponent } from './home.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { RecruitmentComponent } from './recruitment/recruitment.component';
@@ -28,7 +29,7 @@ const routes: Routes = [
         loadChildren:()=> import("./admin/admin.module").then(mod=>mod.AdminModule)
       },{
         path:"calendar",
-        component: CalendarComponent
+        component: EventComponent
       }
       ,{
         path:"tasks",

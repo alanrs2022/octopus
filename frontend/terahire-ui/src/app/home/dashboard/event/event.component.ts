@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EventGeneratorComponent } from 'src/app/event-generator/event-generator.component';
+import { EventGeneratorComponent } from 'src/app/home/dashboard/event/event-generator/event-generator.component';
 
 @Component({
   selector: 'app-event',
@@ -18,7 +18,7 @@ export class EventComponent implements OnInit {
   eventClicked(): void{
     this.dialog.open(EventGeneratorComponent,{ 
       height:'70%',
-      width:'60%'
+      width:'30%'
     })
   }
 

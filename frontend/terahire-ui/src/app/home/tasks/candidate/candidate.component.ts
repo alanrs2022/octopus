@@ -1,10 +1,13 @@
-import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
-import { ModuleTeardownOptions } from '@angular/core/testing';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+
 import { FloatLabelType } from '@angular/material/form-field';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
+import { Router } from 'node_modulessegd/@angular/router';
+import { NgxMatIntlTelInputComponent } from 'node_modulessegd/ngx-mat-intl-tel-input';
+
+// import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 import { Candidate } from 'src/app/models/candidate';
 import { CandidateService } from 'src/app/service/candidate.service';
 import { CountryService } from 'src/app/service/country.service';
@@ -79,7 +82,7 @@ export class CandidateComponent implements OnInit {
 
 
     console.log(this.candidateForm)
-    this.candidateForm.get('country')?.valueChanges.subscribe(x => {
+    this.candidateForm.get('country')?.valueChanges.subscribe((x: any) => {
       console.log(x)
     })
 
@@ -91,7 +94,7 @@ export class CandidateComponent implements OnInit {
       onlySelf: true,
       emitEvent: false,
     }
-    this.candidateForm.get('yearOfExperience')!.valueChanges.subscribe((x) => {
+    this.candidateForm.get('yearOfExperience')!.valueChanges.subscribe((x: string) => {
 
       if (x == '0') {
         this.candidateForm.get('currentCompany')!.disable(options);
@@ -223,7 +226,7 @@ export class CandidateComponent implements OnInit {
     this.candidateForm.reset();
   }
   getCountries() {
-    this.countryService.getCountry().subscribe(data => {
+    this.countryService.getCountry().subscribe((data: any[]) => {
 
       this.countries = data;
       this.countries.sort((a, b) => a.name.common > b.name.common ? 1 : -1)
@@ -233,14 +236,14 @@ export class CandidateComponent implements OnInit {
   }
 
   getJobs() {
-    this.jobService.getJobList().subscribe(data => {
+    this.jobService.getJobList().subscribe((data: any[]) => {
       this.jobs = data;
       // console.log(data)
     })
 
   }
   getSkills() {
-    this.SkillsetService.getSkillSet().subscribe(data => {
+    this.SkillsetService.getSkillSet().subscribe((data: any[]) => {
       this.skill = data;
       console.log(data);
     })

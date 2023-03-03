@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Candidate } from '../models/candidate';
-import { Job } from '../models/job';
-import { user } from '../models/user.model';
-import { Event } from '../models/event.model';
+import { Candidate } from '../../../../models/candidate';
+import { Job } from '../../../../models/job';
+import { user } from '../../../../models/user.model';
+import { Event } from '../../../../models/event.model';
 import { CandidateService } from 'src/app/service/candidate.service';
 import {UserService } from 'src/app/service/user.service';
-import { JobService } from '../service/job.service';
-import { EventService } from '../service/event.service';
+import { JobService } from '../../../../service/job.service';
+import { EventService } from '../../../../service/event.service';
 
 @Component({
   selector: 'app-event-generator',

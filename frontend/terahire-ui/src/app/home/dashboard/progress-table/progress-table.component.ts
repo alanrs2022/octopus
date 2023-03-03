@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'src/app/service/event.service';
 
 @Component({
   selector: 'app-progress-table',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProgressTableComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventService:EventService ) { }
 
+  eventList!:any;
   ngOnInit(): void {
+    this.getEvents()
+  }
+
+  getEvents(){
+    this.eventService.getEventList().subscribe(data=>{
+      this.eventList = data;
+    })
   }
 
 }

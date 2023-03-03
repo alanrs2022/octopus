@@ -54,11 +54,23 @@ $primary-color: #78BE20;
   background-color: #78BE20 !important;
 }
 
+html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+// @import '~@fortawesome/fontawesome-free/scss/solid.scss';
+// @import '~@fortawesome/fontawesome-free/scss/regular.scss';
+// @import '~@fortawesome/fontawesome-free/scss/brands.scss';
+ 
+// @import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
 .mat-menu-panel {
   max-height: 200px !important;
 
 }
-
+.spinner-loading{
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
 //job info progress bar
 .custom-progress-bar .mat-progress-bar-fill::after {
   background-color: #039823 !important;

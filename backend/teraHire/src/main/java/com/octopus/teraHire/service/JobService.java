@@ -41,6 +41,8 @@ public class JobService implements JobInterface{
     public ResponseEntity addNewJob(Job job){
         job.setCreatedDate(getDate());
         job.setModifiedDate(getDate());
+        job.getNotification().setCreatedDate(getDate());
+        job.getNotification().setModifiedDate(getDate());
         return new ResponseEntity<Job>(jobRepository.save(job), HttpStatus.OK);
     }
     @Override

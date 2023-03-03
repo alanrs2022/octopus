@@ -32,7 +32,7 @@ export class PasswordResetComponent implements OnInit {
     }
 
   ngOnInit() {
-    this._authService.validPasswordToken(this.router.url);
+    // this._authService.validPasswordToken(this.router.url);
   
 
   }

@@ -14,6 +14,7 @@ import { Element } from '@angular/compiler';
 export class JobInfoComponent implements OnInit {
 
   jobInfo!: Job[];
+  isLoaded:boolean =false;
   color: ThemePalette = 'accent';
   @ViewChild('dropdown') eldrop!: ElementRef
   selected!: string;
@@ -28,6 +29,7 @@ export class JobInfoComponent implements OnInit {
     this.jobService.getJobList().subscribe(data => {
       this.jobInfo = data;
       console.log(this.jobInfo);
+      this.isLoaded = true;
     })
   }
 

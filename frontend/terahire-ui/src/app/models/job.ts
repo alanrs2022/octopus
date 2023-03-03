@@ -10,7 +10,7 @@ export class Job {
     scoreCard!:number;
     createdDate:string|any;
     modifiedDate:string|any;
-    id: number|any;
+    id!: number;
     vacancy!: number;
-    // getTotalCandidate():number{ return this.activeCandidates+this.droppedCandidates;}
+    notifiction?:Notification;
 }
