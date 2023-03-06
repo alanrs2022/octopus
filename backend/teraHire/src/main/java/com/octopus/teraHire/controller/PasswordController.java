@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -22,18 +21,16 @@ public class PasswordController {
     private UserService userService;
     private EmailService emailService;
 
+    public PasswordController(UserService userService, EmailService emailService) {
+        this.userService = userService;
+        this.emailService = emailService;
+    }
 
     Object getJson(Object message, String status) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("message", message);
         map.put("status", status);
         return map;
-    }
-
-    public class TokenPassword {
-        private String token;
-        private String password;
-
     }
 
     @PostMapping("/forgot_password")
@@ -76,17 +73,18 @@ public class PasswordController {
 
 
     @PostMapping("/reset_password")
-    public ResponseEntity processResetPassword(@RequestBody TokenPassword tokenPassword) {
-        User user = userService.getByResetPasswordToken(tokenPassword.token);
+    public ResponseEntity processResetPassword(HttpServletRequest request,
+                                               @RequestParam("token") String token,@RequestParam("password") String newPassword) {
+        User user = userService.getByResetPasswordToken(token);
         if (user == null) {
             return new ResponseEntity<>(getJson("Invalid Reset Token", "Invalid"), HttpStatus.NOT_FOUND);
         } else {
-            userService.updatePassword(user, tokenPassword.password);
+            userService.updatePassword(user,newPassword);
             EmailDetails emailDetails = new EmailDetails();
             emailDetails.setRecipient(user.getEmail());
-            emailDetails.setSubject("Password Changes Successfully");
+            emailDetails.setSubject("Password Changed Successfully");
             emailDetails.setMsgBody("Hi,\n" +
-                    "The password to your account has been updated successfully." +
+                    "The password to your account has been updated successfully.\n" +
                     "Regards,\n" +
                     "Team TeraHire");
             String status = emailService.sendSimpleMail(emailDetails);
