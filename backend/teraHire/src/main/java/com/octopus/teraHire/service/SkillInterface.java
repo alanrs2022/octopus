@@ -1,3 +1,4 @@
+
 package com.octopus.teraHire.service;
 
 import com.octopus.teraHire.model.Candidate;
@@ -10,3 +11,4 @@ public interface SkillInterface {
     ResponseEntity<SkillSet> addSkill(SkillSet skillSet);
     List<SkillSet> getSkillList();
 }
+

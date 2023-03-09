@@ -1,3 +1,4 @@
+
 package com.octopus.teraHire.repository;
 
 import com.octopus.teraHire.model.Candidate;

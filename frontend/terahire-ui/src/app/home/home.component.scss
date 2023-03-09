@@ -39,3 +39,9 @@ body {
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   }
+  .seen{
+    color: grey;
+  }
+  .unseen{
+    color: #78BE20;
+  }

@@ -43,6 +43,7 @@ import { JobInfoComponent } from './recruitment/job-info/job-info.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { EventGeneratorComponent } from './dashboard/event/event-generator/event-generator.component';
+import { AppearanceComponent } from './settings/appearance/appearance.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,9 @@ import { EventGeneratorComponent } from './dashboard/event/event-generator/event
     CandidateInfoComponent,
     JobInfoComponent,
     MyProfileComponent,
-    EventGeneratorComponent
+    EventGeneratorComponent,
+    MyProfileComponent,
+    AppearanceComponent
    
   ],
   imports: [
@@ -86,7 +89,8 @@ import { EventGeneratorComponent } from './dashboard/event/event-generator/event
     MatProgressSpinnerModule,
     MatOptionModule,
     MatSelectModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    
   ],
   providers:[
     UserService,
