@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 import { user } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/service/auth.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -16,10 +18,10 @@ export class MyProfileComponent implements OnInit {
   edit: boolean = true;
   
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router,private authService:AuthService,private snackBar:MatSnackBar) { }
 
   ngOnInit() {
-    this.getUser();    
+     this.getCurrentUser()
   }
  
   
@@ -29,22 +31,26 @@ export class MyProfileComponent implements OnInit {
   //   this.userService.updateUser(this.user).subscribe((result:any)=>{})    
   //   window.location.reload();
   //   alert("updated")   
-  
   // }
 
-  //geting list of users
-  getUser():any {
-    this.userService.getUserList(this.user.id).subscribe((response: any) => {
-      // this.user = response;
-      console.log(response.body);
-      this.user= response.body;
+  getCurrentUser(){
+    
+    const authUser = JSON.parse(this.authService.currentUserValue())
+    this.userService.getUserByEmail(authUser.username).subscribe(data=>{
+      this.user =  data;   
     })
+
   }
+
   update():void{
     console.log(this.user)
-    this.userService.updateUserByID(this.user).subscribe((result:any)=>{})    
-    window.location.reload();
-    alert("updated")   
+    this.userService.updateUserByID(this.user).subscribe((result:any)=>{
+      this.snackBar.open("Successfully updated.")
+    },err=>{
+      this.snackBar.open("Update failed.")
+    })    
+   // window.location.reload();
+     
   
   }
 }

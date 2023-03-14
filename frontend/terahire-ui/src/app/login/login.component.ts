@@ -59,6 +59,7 @@ export class LoginComponent {
                 
                 data.message.password = this.registerForm.get('password')?.value;
                 localStorage.setItem("currentUser",JSON.stringify(data.message));
+                
                 console.log(localStorage.getItem("currentUser"))
                 this.error = false;
                

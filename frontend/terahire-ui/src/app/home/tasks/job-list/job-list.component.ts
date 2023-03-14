@@ -6,8 +6,10 @@ import { JobEditComponent } from '../job-edit/job-edit.component';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { DialogDeleteComponent } from '../../dialog-delete/dialog-delete.component';
-import { MatTableDataSource } from 'node_modulessegd/@angular/material/table';
-import { Router } from 'node_modulessegd/@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
+
 
 @Component({
   selector: 'app-job-list',
@@ -19,11 +21,14 @@ export class JobListComponent implements OnInit {
  
   @Input()JobData!:Job
   showJobEditComponent:boolean[]=[false];
-  constructor(private jobService:JobService, private router:Router,private dialog: MatDialog) { }
+  constructor(private authService:AuthService, private jobService:JobService, private router:Router,private dialog: MatDialog) { }
   displayedColumns: string[] = ['title','owner','stage','status','vacancy','activeCandidates','droppedCandidates','summary','teamID','scoreCard','actions']
   dataSource = new MatTableDataSource<Job>();
 
+  userType!:string;
+
   ngOnInit(): void {
+    this.userType = this.authService.getRoles();
     this.getAllJobs();
   }
   ngAfterViewInit() {

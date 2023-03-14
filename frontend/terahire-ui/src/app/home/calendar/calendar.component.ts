@@ -1,6 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { calendar } from 'src/app/models/calendar.model';
+import { user } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/service/auth.service';
 import { EventService } from 'src/app/service/event.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-calendar',
@@ -13,12 +16,13 @@ export class CalendarComponent implements OnInit {
  
   eventList: any;
 
-  constructor(private  _eventService:EventService) { }
+  constructor(private  _eventService:EventService,private userService:UserService,private authService:AuthService) { }
 
   ngOnInit(): void {
    
     this.renderCalendar();
     this.eventListener();
+    this.getCurrentUser()
    
   }
  
@@ -39,10 +43,23 @@ date:Date = new Date();
 currYear = this.date.getFullYear();
 currMonth = this.date.getMonth();
 liTag:calendar[]=[];
+currentUser!:user;
+
 // storing full name of all months in array
 months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
 
+
+  
+  getCurrentUser(){
+    
+    const authUser = JSON.parse(this.authService.currentUserValue())
+    this.userService.getUserByEmail(authUser.username).subscribe(data=>{
+      this.currentUser =  data;
+    })
+
+  }
+              
 renderCalendar()  {
     let firstDayofMonth = new Date(this.currYear, this.currMonth, 1).getDay(), // getting first day of month
     lastDateofMonth = new Date(this.currYear, this.currMonth + 1, 0).getDate(), // getting last date of month
@@ -73,7 +90,7 @@ renderCalendar()  {
                     this.liTag.push(data)
         // this.liTag.push(`<li class="${isToday}">${i}</li>`);
     }
-
+    
     for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
       let data:calendar = {
         date: i - lastDayofMonth + 1,
@@ -114,15 +131,27 @@ eventListener(){
         this.liTag.forEach((v2,i)=>{
           if(new Date(v.start).getDate() == v2.date && v2.className != "inactive"){
             this.liTag[i].className = " EventStart";
-            this.liTag[i].data = v.type
+            this.liTag[i].data = v;
+            console.log(v)
           }else if(new Date(v.end).getDate() == v2.date && v2.className != "inactive"){
             this.liTag[i].className = " EventEnd";
-            this.liTag[i].data = v.type
+            this.liTag[i].data = v;
           }
         })
       }
     })
   
   })
+}
+
+checkUser(eventData:[],userData){
+
+
+  console.log(eventData)
+  let isUser:boolean=false;
+  eventData.filter((v:any,i)=>{
+    isUser =  v.email == userData.email;
+  })
+  return isUser;
 }
 }

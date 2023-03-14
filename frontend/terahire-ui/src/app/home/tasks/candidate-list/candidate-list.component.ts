@@ -10,6 +10,7 @@ import { Candidate } from 'src/app/models/candidate';
 import { CandidateService } from 'src/app/service/candidate.service';
 import { CandidateUpdateComponent } from '../candidate-update/candidate-update.component';
 import { DialogDeleteComponent } from '../../dialog-delete/dialog-delete.component';
+import { AuthService } from 'src/app/service/auth.service';
 
 
 
@@ -25,11 +26,11 @@ export class CandidateListComponent implements OnInit {
   candidates!: Candidate
   showJobEditComponent: boolean[] = [false];
   updatingJob!: Candidate;
-
+  userType!:string;
 
   // candidateList:any;
 
-  constructor(private candidateService: CandidateService, private router: Router, public dialogRef: MatDialog, public dialog: MatDialog) { }
+  constructor(private authService:AuthService, private candidateService: CandidateService, private router: Router, public dialogRef: MatDialog, public dialog: MatDialog) { }
 
   displayedColumns: string[] = ['ID', 'fullName', 'email', 'PhoneNumber', 'gender', 'dob', 'address', 'country', 'city', 'nationality', 'yearOfExperience', 'currentCompany', 'currentPosition', 'currentCTC', 'expectedCTC', 'skills', 'designation', 'sociaLink', 'status', 'actions'];
   dataSource = new MatTableDataSource<Candidate>();
@@ -40,6 +41,7 @@ export class CandidateListComponent implements OnInit {
   ngOnInit(): void {
     // this.getCandidates();
     this.getAllUser();
+    this.userType = this.authService.getRoles();
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
