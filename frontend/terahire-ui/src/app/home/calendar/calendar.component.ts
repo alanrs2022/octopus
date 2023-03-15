@@ -127,12 +127,12 @@ eventListener(){
     this.eventList.forEach(v=>{
       console.log(new Date(v.start).getMonth()+1)
 
-      if(new Date(v.start).getMonth() == this.currMonth ){
+      if(new Date(v.start).getMonth() == this.currMonth && this.checkUser(v.team_members,this.currentUser)){
         this.liTag.forEach((v2,i)=>{
           if(new Date(v.start).getDate() == v2.date && v2.className != "inactive"){
             this.liTag[i].className = " EventStart";
             this.liTag[i].data = v;
-            console.log(v)
+            
           }else if(new Date(v.end).getDate() == v2.date && v2.className != "inactive"){
             this.liTag[i].className = " EventEnd";
             this.liTag[i].data = v;
@@ -144,14 +144,20 @@ eventListener(){
   })
 }
 
-checkUser(eventData:[],userData){
-
-
-  console.log(eventData)
-  let isUser:boolean=false;
+checkUser(eventData:[],userData):boolean{
+  let count:number= 0;
   eventData.filter((v:any,i)=>{
-    isUser =  v.email == userData.email;
+     console.log(v.email == userData.email)
+     if(v.email == userData.email){
+      count++;
+     }
   })
-  return isUser;
+ if(count >0){
+  return true;
+ }else{
+  return false;
+ }
 }
+
+
 }
