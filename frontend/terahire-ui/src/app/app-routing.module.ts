@@ -1,13 +1,11 @@
+import { ResourceNotFoundComponent } from './resource-not-found/resource-not-found.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './home/admin/admin.component';
-import { CalendarComponent } from './home/calendar/calendar.component';
-import { DashboardComponent } from './home/dashboard/dashboard.component';
-import { HomeComponent } from './home/home.component';
-import { MyProfileComponent } from './home/my-profile/my-profile.component';
-import { RecruitmentComponent } from './home/recruitment/recruitment.component';
-import { SettingsComponent } from './home/settings/settings.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
 import { LoginComponent } from './login/login.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+
 
 const routes: Routes = [
   {
@@ -19,8 +17,19 @@ const routes: Routes = [
     component: LoginComponent
   },
   
-  
-  
+  {
+    path:"resetpassword",
+    component:PasswordResetComponent
+  },
+  {
+    path:"forgotpassword",
+    component:ForgotPasswordComponent
+  },
+{
+   path: '**', pathMatch: 'full', 
+    component: ResourceNotFoundComponent ,
+}
+
 ];
 
 @NgModule({

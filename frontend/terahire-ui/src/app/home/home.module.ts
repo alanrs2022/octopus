@@ -20,7 +20,7 @@ import { JobEditComponent } from './tasks/job-edit/job-edit.component';
 import { JobListComponent } from './tasks/job-list/job-list.component';
 import { JobComponent } from './tasks/job-registration/job-registration.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-
+// import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -91,11 +91,7 @@ import { AppearanceComponent } from './settings/appearance/appearance.component'
     MatPaginatorModule,
     MatSnackBarModule,
     MatIconModule,
-    MatInputModule,
-    MatFormFieldModule,
-    NgxMatIntlTelInputComponent,
-    MatProgressSpinnerModule,
-    MatOptionModule,
+   
     MatSelectModule,
     MatProgressBarModule,
 

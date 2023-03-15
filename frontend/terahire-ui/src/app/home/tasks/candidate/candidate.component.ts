@@ -31,8 +31,8 @@ import { SkillsetService } from 'src/app/service/skillset.service';
   styleUrls: ['./candidate.component.scss']
 })
 export class CandidateComponent implements OnInit {
-  @ViewChild(NgxMatIntlTelInputComponent, { static: true })
-  phoneNumber?: NgxMatIntlTelInputComponent;
+  // @ViewChild(NgxMatIntlTelInputComponent, { static: true })
+  // phoneNumber?: NgxMatIntlTelInputComponent;
   candidate: Candidate = new Candidate();
   candidateForm!: FormGroup;
   submitted = false;
@@ -223,7 +223,7 @@ export class CandidateComponent implements OnInit {
       control.markAsUntouched();
     });
     this.candidateForm.reset();
-    this.phoneNumber?.reset();
+    // this.phoneNumber?.reset();
     this.candidateForm.get('phoneNumber')?.clearValidators();
     this.submitted = false;
 
