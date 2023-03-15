@@ -57,12 +57,16 @@ getUserTypes(){
       this.userType[4] = true;
       this.userType[5] = true;
     }else if(user == "ROLE_HR"){
+      this.userType[1] = true;
       this.userType[4] = true;
       this.userType[5] = true;
     }else if(user == "ROLE_HM"){
+      this.userType[1] = true;
       this.userType[4] = true;
       this.userType[5] = true;
     }else if(user == "ROLE_IN"){
+      this.userType[4] = true;
+      this.userType[1] = true;
       this.userType[5] = true;
     }else{
       this.userType[0] = true;

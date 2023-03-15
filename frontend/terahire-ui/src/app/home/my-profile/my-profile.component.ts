@@ -45,9 +45,10 @@ export class MyProfileComponent implements OnInit {
   update():void{
     console.log(this.user)
     this.userService.updateUserByID(this.user).subscribe((result:any)=>{
-      this.snackBar.open("Successfully updated.")
+      this.snackBar.open("Successfully updated.",'',{duration:3000});
     },err=>{
-      this.snackBar.open("Update failed.")
+      this.snackBar.open("Update failed.",'',{duration:3000});
+    
     })    
    // window.location.reload();
      

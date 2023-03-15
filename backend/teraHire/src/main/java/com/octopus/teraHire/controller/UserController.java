@@ -50,7 +50,7 @@ public class UserController {
 
     @CrossOrigin("http://localhost:4200/")
     @GetMapping(value = "/list")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR','ROLE_HM','ROLE_IN')")
     public List<User> getUserList(){
 
         return userService.getUserList();

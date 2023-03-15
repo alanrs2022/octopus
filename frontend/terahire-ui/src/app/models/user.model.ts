@@ -5,7 +5,7 @@ export class user {
     id!: number
     lastName!: string
     modifiedDate!: string
-    password!: string
+    // password!: string
     phoneNumber!: string
     statusId!: number
     userTypeId!:number 

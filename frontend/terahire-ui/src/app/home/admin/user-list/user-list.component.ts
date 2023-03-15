@@ -84,7 +84,7 @@ export class UserListComponent {
       modifiedDate:data.modifiedDate,
       createdDate:data.createdDate,
       email:data.email,
-      password:data.password,
+      // password:data.password,
       phoneNumber:this.phoneNumber.nativeElement.value
 
     }

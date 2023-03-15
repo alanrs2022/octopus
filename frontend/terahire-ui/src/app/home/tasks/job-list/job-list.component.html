@@ -77,7 +77,7 @@
                 <button  (click)="onUpdateClicked(element)" class="btn btn-success px-3"><i class="bi bi-pencil-square"
                         aria-hidden="true" title="edit"></i></button>&nbsp;
 
-                <button [disabled]="userType == 'ROLE_HR' || userType == 'ROLE_IN'" (click)="openDialog(element.id,element.fullName)" class="btn btn-danger px-3"><i
+                <button [disabled]="userType == 'ROLE_HR' || userType == 'ROLE_IN'" (click)="openDialog(element.id,element.title)" class="btn btn-danger px-3"><i
                         class="bi bi-trash-fill" aria-hidden="true" title="delete"></i></button>
 
 

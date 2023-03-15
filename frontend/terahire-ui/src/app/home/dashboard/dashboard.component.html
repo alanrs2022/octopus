@@ -2,7 +2,9 @@
   <div id="div-one" >
       <div class="card">
           <div class="card-body" id="welcome-card">
-            <h5 class="card-title">Welcome {{ currentUser.firstName +' '+ currentUser.lastName }}</h5>
+            <h5 class="card-title">Welcome 
+              {{ currentUser.firstName +' '+ currentUser.lastName }} <b>
+                {{ currentUser.userTypeId == 201 ? 'ADMIN': currentUser.userTypeId == 202 ? 'HR': currentUser.userTypeId == 203? 'HM': 'IN' }}</b> </h5>
             <p class="card-text">
               Welcome to the TeraHire hiring portal..</p>
            

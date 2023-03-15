@@ -2,6 +2,9 @@ package com.octopus.teraHire.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
@@ -12,6 +15,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "user_table")
+
+
 public class User {
 
     @Id
@@ -22,6 +27,8 @@ public class User {
     private String username;
     @Column(name = "email")
     private String email;
+
+    @JsonIgnore
     @Column(name = "password")
     private String password;
     @Column(name = "first_name")
@@ -40,6 +47,8 @@ public class User {
     private int userTypeId;
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
+
+    @JsonIgnore
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
 

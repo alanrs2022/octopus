@@ -1,7 +1,7 @@
 <!-- Tabs navs -->
 <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
    
-    <li class="nav-item" role="presentation" *ngIf="userType == 'ROLE_HM' || userType == 'ROLE_IN' || userType == 'ROLE_ADMIN'">
+    <li class="nav-item" role="presentation" *ngIf="userType == 'ROLE_HM' || userType == 'ROLE_ADMIN'">
       <a class="nav-link" id="ex-with-icons-tab-2" data-mdb-toggle="tab" href="#ex-with-icons-tabs-2" role="tab"
         aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="fas fa-solid fa-briefcase">&nbsp;</i>New Job</a>
     </li>
@@ -16,7 +16,7 @@
 
 
     
-    <li class="nav-item" role="presentation"*ngIf="userType == 'ROLE_HR' || userType =='ROLE_ADMIN' || userType == 'ROLE_HM'">
+    <li class="nav-item" role="presentation"*ngIf="userType == 'ROLE_HR' || userType =='ROLE_ADMIN' || userType == 'ROLE_HM' || userType == 'ROLE_IN'">
       <a class="nav-link" id="ex-with-icons-tab-4" data-mdb-toggle="tab" href="#ex-with-icons-tabs-4" role="tab"
         aria-controls="ex-with-icons-tabs-4" aria-selected="false"><i class="fas fa-solid fa-users">&nbsp;</i>Candidates</a>
     </li>
