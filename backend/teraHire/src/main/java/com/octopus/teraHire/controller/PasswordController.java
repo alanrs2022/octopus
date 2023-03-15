@@ -36,18 +36,18 @@ public class PasswordController {
     @PostMapping("/forgot_password")
     @CrossOrigin("http://localhost:4200/")
     public ResponseEntity processForgotPassword(HttpServletRequest request,
-                                                @RequestParam("email") String userEmail) {
+                                                @RequestBody String userEmail) {
         String token = UUID.randomUUID().toString();
         if(userService.isUserEmailExists(userEmail)){
             userService.updateResetPasswordToken(token, userEmail);
-            String resetPasswordLink = "/reset_password/token/" + token;
+            String resetPasswordLink = "/resetpassword?token=" + token;
             EmailDetails emailDetails = new EmailDetails();
             emailDetails.setRecipient(userEmail);
             emailDetails.setSubject("Forgot Password");
             emailDetails.setMsgBody("Hi,\n" +
                     "You have requested to reset your password.\n" +
                     "Click the link below to change your password:\n" +
-                    "http://localhost:4200/passwordreset" + resetPasswordLink +
+                    "http://localhost:4200" + resetPasswordLink +
                     "\n" +
                     "The link is valid only for 24 hours.\n" +
                     "Regards," +
@@ -73,6 +73,7 @@ public class PasswordController {
 
 
     @PostMapping("/reset_password")
+    @CrossOrigin("http://localhost:4200/")
     public ResponseEntity processResetPassword(HttpServletRequest request,
                                                @RequestParam("token") String token,@RequestParam("password") String newPassword) {
         User user = userService.getByResetPasswordToken(token);

@@ -2,7 +2,9 @@ package com.octopus.teraHire.controller;
 
 
 import com.octopus.teraHire.model.AuthUser;
+import com.octopus.teraHire.model.EmailDetails;
 import com.octopus.teraHire.model.User;
+import com.octopus.teraHire.service.EmailService;
 import com.octopus.teraHire.service.UserDetailsServiceImpl;
 import com.octopus.teraHire.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -28,17 +30,32 @@ public class UserController {
 
     private UserService userService;
     private UserDetailsServiceImpl userDetailsService;
+    private EmailService emailService;
     // private AuthenticationManager authenticationManager;
 
-    public UserController(UserService userService,UserDetailsServiceImpl userDetailsService){
+    public UserController(UserService userService,UserDetailsServiceImpl userDetailsService, EmailService emailService){
         this.userService = userService;
         this.userDetailsService = userDetailsService;
+        this.emailService = emailService;
     }
 
     @CrossOrigin("http://localhost:4200/")
     @PostMapping("/new")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> addNewUser(@RequestBody @Valid User user){
+        EmailDetails emailDetails = new EmailDetails();
+        emailDetails.setRecipient(user.getEmail());
+        emailDetails.setSubject("Welcome to TeraHire");
+        emailDetails.setMsgBody("Hi, " +user.getFirstName()+
+                "\nWelcome Aboard, an User was created with your email.\n" +
+                "Login Email:" +user.getEmail()+
+                "\nLogin at:" +
+                "http://localhost:4200/" +
+                "\n" +
+                "Regards,\n" +
+                "Team TeraHire");
+        String status = emailService.sendSimpleMail(emailDetails);
+        user.setResetPasswordToken(null);
         return userService.addNewUser(user);
     }
 

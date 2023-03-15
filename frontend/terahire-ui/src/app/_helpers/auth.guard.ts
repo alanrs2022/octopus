@@ -16,6 +16,7 @@ export class AuthGuard implements CanActivate {
         const authUser = JSON.parse(this.authenticationService.currentUserValue())
         const hasRoles = authUser.authorities.filter((value: { authority: string; })=> route.data.role.includes(value.authority))
         if (this.authenticationService.isLoggedIn() && authUser.username) {
+  
             // logged in so return true
             if(hasRoles.length? true : false){
                 return true;
@@ -27,7 +28,8 @@ export class AuthGuard implements CanActivate {
             }
            
         }else{
-             this.router.navigate(['']);
+          
+            this.router.navigate(['']);
             return false;
         }
 

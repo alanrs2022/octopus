@@ -1,8 +1,9 @@
+import { PasswordService } from './../service/password.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { UserService } from '../service/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,39 +13,38 @@ import { UserService } from '../service/user.service';
 export class ForgotPasswordComponent implements OnInit {
 
   forgotPasswordForm:any = FormGroup;
-  responseMessage:any
+  validEmail!:boolean;
 
-  constructor(private formBuilder:FormBuilder, private userService: UserService,
-    public dialogRef:MatDialogRef<ForgotPasswordComponent>,private ngxService: NgxUiLoaderService) { }
+  constructor(private formBuilder:FormBuilder, private _passwordService: PasswordService,
+    public dialogRef:MatDialogRef<ForgotPasswordComponent>,
+    private ngxService: NgxUiLoaderService,
+    private _snackBar:MatSnackBar
+    ) { }
 
   ngOnInit(): void {
     this.forgotPasswordForm = this.formBuilder.group({
-      email:[null,[Validators.required]]
+      email:[null,[Validators.required, Validators.email]],
     })
   }
   handleSubmit(){
     this.ngxService.start();
     var formData = this.forgotPasswordForm.value;
-    var data = {
-      email:formData.email
-    }
-    this.userService.forgotPassword(data).subscribe((response:any)=>{
-      this.ngxService.stop();
-      this.responseMessage = response?.message;
-      this.dialogRef.close();
-      console.log(this.responseMessage,"")
-    },(error)=>{
-
-      this.ngxService.stop();
-      if(error.error?.message){
-        this.responseMessage = error.error?.message
+    console.log(formData.email);
+    this._passwordService.forgotPassword(formData.email).subscribe((value:any)=>{
+      if (value.statusCode === 200) {
+        this.validEmail=true;
+        this._snackBar.open("Submitted Successfully, Check your Email",'',{duration:5000})
+        }
+    },(err)=>{
+      // console.log(err.status);
+      if(err.status){
+        this.validEmail=false;
+        this._snackBar.open("Invalid Email Entered",'',{duration:5000})
       }
       else{
-        this.responseMessage
       }
-    }
-    )
 
+    });
   }
 
 

@@ -9,28 +9,26 @@ export class PasswordService {
   private baseURL="http://localhost:8080/api/passwordcontroller";
   constructor(private httpClient:HttpClient) { }
   
-  resetPassword(token:string, newPassword:string):Observable<any>{
-    let httpParams = new HttpParams()
-    .set('token',token)
-    .set('password',newPassword);
-  //   let httpParams = {
-  //     params : {
-  //      'token' : token,
-  //      'password' : newPassword
-  //     }
-  //  }
-    return this.httpClient.post(this.baseURL+`/reset_password`,{params:httpParams});
+  resetPassword(validToken:string, newPassword:string):Observable<any>{
+    const params = new HttpParams({
+      fromObject: {
+        token: validToken,
+        password: newPassword,
+      }
+    });
+    return this.httpClient.post(`${this.baseURL}/reset_password`,null,{params: params});
   }
 
-  forgotPassword(mail:string):Observable<any>{
-    return this.httpClient.post(this.baseURL+`/forgot_password`,{params:mail});
+  forgotPassword(validEmail:string):Observable<any>{
+    // const params = new HttpParams({
+    //   fromObject:{
+    //     email:validEmail,
+    //   }
+    // })
+    return this.httpClient.post(`${this.baseURL}/forgot_password`,validEmail);
   }      
 
-  tokenChecker(tokenURL:string):Observable<any>{
-    let regex = /[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/i;
-    let token = regex.exec(tokenURL);
-    return this.httpClient.get(`${this.baseURL}`+`/token/`+token![0]);
+  tokenChecker(token:string):Observable<any>{
+    return this.httpClient.get(`${this.baseURL}`+`/reset_password/token/`+token);
   }
-
-                      
 }

@@ -57,7 +57,7 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/swagger-ui/**","/v3/api-docs/**","/api/auth/**").permitAll()
+                .antMatchers("/swagger-ui/**","/v3/api-docs/**","/api/auth/**","/api/passwordcontroller/**").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic().authenticationEntryPoint(authenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
