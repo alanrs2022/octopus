@@ -4,8 +4,13 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 import { FloatLabelType } from '@angular/material/form-field';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Router } from '@angular/router';
 import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
+
+
+import { Router } from 'node_modulessegd/@angular/router';
+import { NgxMatIntlTelInputComponent } from 'node_modulessegd/ngx-mat-intl-tel-input';
 
 
 // import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';

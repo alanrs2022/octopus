@@ -1,3 +1,4 @@
+
 package com.octopus.teraHire.model;
 
 
@@ -35,3 +36,4 @@ public class SkillSet {
         this.skill = skill;
     }
 }
+

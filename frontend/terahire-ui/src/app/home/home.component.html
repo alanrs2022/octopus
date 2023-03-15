@@ -62,7 +62,8 @@
              routerLink="/home/settings"
              routerLinkActive="active"
              onclick="changeTab(this.location.href)"
-            
+             href="/home/settings"
+
              class="list-group-item list-group-item-action py-2 ripple"
              ><i class="fas fa-gear fa-fw me-3"></i
             ><span>Settings</span></a
@@ -118,16 +119,28 @@
                >
               <i class="fas fa-bell"></i>
               <span class="badge rounded-pill badge-notification bg-danger"
-                    >1</span
+                    >{{notificationCount}}</span
                 >
             </a>
             <ul
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="navbarDropdownMenuLink"
                 >
+
               <li *ngFor="let item of nList"><a class="dropdown-item" >{{ item.title }}</a></li>
               
+
+              <li *ngFor="let item of nList">                              
+                   <a (click)="updateNotification(item.id)" 
+                   [ngClass]="{'seen':item.notificationType == 1,
+                            'unseen':item.notificationType == 0}"
+                   class="dropdown-item" routerLink="/home/JobList">
+                  {{ item.body }}
+                </a>              
+              </li>              
+
             </ul>
+
           </li>
   
           <!-- Icon -->
@@ -166,8 +179,13 @@
                 >
               <li><a class="dropdown-item" href="#" routerLink="/home/MyProfile"
                 routerLinkActive="active">My profile</a></li>
+
               <li><a class="dropdown-item" href="#">Settings</a></li>
               <li><a class="dropdown-item" href="#" (click)="logOut()">Logout</a></li>
+
+              <!-- <li><a class="dropdown-item" href="#">Settings</a></li> -->
+              <li><a class="dropdown-item" (click)="Logout()">Logout</a></li>
+
             </ul>
           </li>
         </ul>

@@ -6,10 +6,14 @@ import { JobEditComponent } from '../job-edit/job-edit.component';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { DialogDeleteComponent } from '../../dialog-delete/dialog-delete.component';
+
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 
+
+import { MatTableDataSource } from 'node_modulessegd/@angular/material/table';
+import { Router } from 'node_modulessegd/@angular/router';
 
 @Component({
   selector: 'app-job-list',

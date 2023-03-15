@@ -1,9 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { calendar } from 'src/app/models/calendar.model';
+
 import { user } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { EventService } from 'src/app/service/event.service';
 import { UserService } from 'src/app/service/user.service';
+import { EventService } from 'src/app/service/event.service';
+
 
 @Component({
   selector: 'app-calendar',
@@ -16,13 +19,19 @@ export class CalendarComponent implements OnInit {
  
   eventList: any;
 
+
   constructor(private  _eventService:EventService,private userService:UserService,private authService:AuthService) { }
+
+  constructor(private  _eventService:EventService) { }
+
 
   ngOnInit(): void {
    
     this.renderCalendar();
     this.eventListener();
+
     this.getCurrentUser()
+
    
   }
  
@@ -159,5 +168,33 @@ checkUser(eventData:[],userData):boolean{
  }
 }
 
+
+
+
+    this.renderCalendar();
+    this.eventListener();
+     // calling renderCalendar function
+}
+eventListener(){
+  this._eventService.getEventList().subscribe(data=>{
+    this.eventList = data;
+    this.eventList.forEach(v=>{
+      console.log(new Date(v.start).getMonth()+1)
+
+      if(new Date(v.start).getMonth() == this.currMonth ){
+        this.liTag.forEach((v2,i)=>{
+          if(new Date(v.start).getDate() == v2.date && v2.className != "inactive"){
+            this.liTag[i].className = " EventStart";
+            this.liTag[i].data = v.type
+          }else if(new Date(v.end).getDate() == v2.date && v2.className != "inactive"){
+            this.liTag[i].className = " EventEnd";
+            this.liTag[i].data = v.type
+          }
+        })
+      }
+    })
+  
+  })
+}
 
 }

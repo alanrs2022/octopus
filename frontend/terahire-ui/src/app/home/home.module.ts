@@ -43,7 +43,11 @@ import { JobInfoComponent } from './recruitment/job-info/job-info.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { EventGeneratorComponent } from './dashboard/event/event-generator/event-generator.component';
+
 import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { AppearanceComponent } from './settings/appearance/appearance.component';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +72,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     CandidateInfoComponent,
     JobInfoComponent,
     MyProfileComponent,
+
     EventGeneratorComponent
+
+    EventGeneratorComponent,
+    MyProfileComponent,
+    AppearanceComponent
+
    
   ],
   imports: [
@@ -88,7 +98,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatOptionModule,
     MatSelectModule,
     MatProgressBarModule,
+
     MatTooltipModule
+
+    
+
   ],
   providers:[
     UserService,

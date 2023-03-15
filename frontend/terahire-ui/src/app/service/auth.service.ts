@@ -14,7 +14,9 @@ export class AuthService {
     
   }
 
+
   userType:boolean[]=[];
+
   private baseURL="http://localhost:8080/api/auth/login";
 
 
@@ -42,6 +44,7 @@ isLoggedIn():boolean{
     return false;
   }
 }
+
 getRoles(){
   let user = JSON.parse(localStorage.getItem('currentUser')!).authorities[0].authority
   return user;
