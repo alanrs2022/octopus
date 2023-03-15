@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 import { AdminComponent } from './admin/admin.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -10,7 +11,11 @@ import { RecruitmentComponent } from './recruitment/recruitment.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TasksComponent } from './tasks/tasks.component';
 
+
+authService:AuthService;
 const routes: Routes = [
+
+
 
   {
     path:"",
@@ -33,7 +38,8 @@ const routes: Routes = [
       }
       ,{
         path:"tasks",
-        loadChildren:()=> import("./tasks/tasks.module").then(mod=>mod.TasksModule)
+        loadChildren:()=> import("./tasks/tasks.module").then(mod=>mod.TasksModule),
+        
       }
       ,{
         path:"settings",
@@ -45,7 +51,6 @@ const routes: Routes = [
       }
     ]
   },
- 
 ];
 
 @NgModule({

@@ -25,6 +25,16 @@
          *ngFor="let item of liTag,index as i"
          class="{{ item.className }}" 
          >
+
+         <a *ngIf="item.data"
+         mat-raised-button
+         matTooltip="Title: {{ item.data.type }}, End Date:  {{ item.data.end }}, Total Candidates: {{ item.data.candidates.length }} "
+         matTooltipClass="example-tooltip-red"
+         aria-label="Info about the events.">{{ item.date}}</a> 
+         
+         <a *ngIf="!item.data">{{item.date}}</a>
+         </li>
+
          <!-- <a *ngIf="item.data"
          tabindex="0"
          trigger="focus"

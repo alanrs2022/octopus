@@ -42,7 +42,7 @@ export class UserRegistrationComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       role:['',[Validators.required]],  
       phonenumber: ['',[Validators.required]],
-      password:['', [Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),Validators.minLength(8)]]   
+      // password:['', [Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),Validators.minLength(8)]]   
   });
   }
 
@@ -80,7 +80,7 @@ export class UserRegistrationComponent implements OnInit {
             modifiedDate:"",
             createdDate:"",
             email:this.userRegisterForm.get('email')?.value,
-            password:this.userRegisterForm.get('password')?.value,
+            // password:this.userRegisterForm.get('password')?.value,
             phoneNumber: this.userRegisterForm.get('phonenumber')?.value
       
           }

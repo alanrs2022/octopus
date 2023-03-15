@@ -58,7 +58,7 @@ public class CalendarController {
         return eventService.updateEvent(id,event);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR','ROLE_HM','ROLE_IN')")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Event>> getEventList(){
         return eventService.getAllEvent();

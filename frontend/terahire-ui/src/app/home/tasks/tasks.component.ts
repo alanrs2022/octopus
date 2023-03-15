@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-tasks',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TasksComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService:AuthService) { }
 
+  userType!:string;
+  
+  
   ngOnInit(): void {
+    this.userType = this.authService.getRoles();
   }
+  
+
 
 }

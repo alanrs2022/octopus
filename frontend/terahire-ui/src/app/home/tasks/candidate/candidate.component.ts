@@ -4,11 +4,19 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 import { FloatLabelType } from '@angular/material/form-field';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { Router } from '@angular/router';
+import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
+
+
 import { Router } from 'node_modulessegd/@angular/router';
 import { NgxMatIntlTelInputComponent } from 'node_modulessegd/ngx-mat-intl-tel-input';
 
+
 // import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 import { Candidate } from 'src/app/models/candidate';
+import { user } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/service/auth.service';
 import { CandidateService } from 'src/app/service/candidate.service';
 import { CountryService } from 'src/app/service/country.service';
 import { JobService } from 'src/app/service/job.service';
@@ -33,6 +41,7 @@ export class CandidateComponent implements OnInit {
   countries: any[] = [];
   jobs: any[] = [];
   skill: any[] = [];
+  
 
 
   //phone number country code
@@ -44,7 +53,7 @@ export class CandidateComponent implements OnInit {
   });
 
 
-  constructor(private countryService: CountryService, private jobService: JobService, private SkillsetService: SkillsetService, private formBuilder: FormBuilder, private candidateService: CandidateService, private router: Router, private snackBar: MatSnackBar) {
+  constructor(private authService:AuthService, private countryService: CountryService, private jobService: JobService, private SkillsetService: SkillsetService, private formBuilder: FormBuilder, private candidateService: CandidateService, private router: Router, private snackBar: MatSnackBar) {
 
   }
   getFloatLabelValue(): FloatLabelType {
@@ -54,6 +63,7 @@ export class CandidateComponent implements OnInit {
   ngOnInit() {
 
 
+   
     this.getCountries();
     this.getJobs();
     this.getSkills();

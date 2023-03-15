@@ -29,6 +29,7 @@
                             </div>
                         </div>
 
+                        <input type="file" style="display: none;" src="../../assets/img/userAvatar.jpg" formControlName="imageModel">
                         <!-- Last Name  -->
 
                         <div class="col-md-6 mb-4">
@@ -61,32 +62,6 @@
                         </div>
 
 
-                        <!-- Temporary Password -->
-                        <div class="col-md-6 mb-4">
-                            <div class="form-floating">
-                                <!-- Change input type to be able to accept dynamic data -->
-                                <span class="ab">
-                                    <i class="fa" [ngClass]="{
-                                                    'fa-eye-slash': !fieldTextType,
-                                                    'fa-eye': fieldTextType
-                                                  }" (click)="toggleFieldTextType()"></i>
-                                </span>
-                                <input [type]="fieldTextType ? 'text' : 'password'" class="form-control"
-                                    formControlName="password" placeholder="Password"
-                                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-
-                                <label for="floatingPassword">Temporary Password</label>
-                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                    <div *ngIf="f.password.errors.required">*Required</div>
-                                    <div *ngIf="f.password.errors && f.password.touched">Password is Invalid</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Email -->
-                    <div class="row">
-
                         <div class="col-md-6 mb-4">
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" style="text-transform: lowercase;"
@@ -99,6 +74,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="row">
+
+                       
 
                         <!-- Phone Number -->
 
@@ -115,11 +95,7 @@
                                     class="invalid-feedback">*Required </mat-error>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Role  -->
-
-                    <div class="row">                       
                         <div class="col-md-6 mb-4">
                             <div class="form-floating mb-3">
                                 <select class="form-control" formControlName="role"
@@ -136,6 +112,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Role  -->
+
+                    <div class="row">                       
+                     
                     </div>
 
 

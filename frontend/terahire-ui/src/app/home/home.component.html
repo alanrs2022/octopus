@@ -8,7 +8,7 @@
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4">
           <a
-           
+          *ngIf="userType[0]"
              class="list-group-item list-group-item-action py-2 ripple"
              aria-current="true"
              routerLink="/home/dashboard"
@@ -18,7 +18,7 @@
           </a>
           <a
              href="#"
-           
+             *ngIf="userType[1]"
              routerLink="/home/recruitment"
              routerLinkActive="active"
              class="list-group-item list-group-item-action py-2 ripple" routerLinkActive="active"
@@ -33,15 +33,16 @@
             > -->
 
             <a
-          
             routerLink="/home/administration"
             routerLinkActive="active"
+            *ngIf="userType[2]"
             href="#"
             class="list-group-item list-group-item-action py-2 ripple" 
             ><i class="fas fa-lock fa-fw me-3"></i><span>Administration</span></a
            >
 
           <a
+          *ngIf="userType[4]"
              href="#"
              routerLink="/home/tasks"
              routerLinkActive="active"
@@ -50,6 +51,7 @@
             ><span>Tasks</span></a>
         
           <a
+             *ngIf="userType[5]"
              href="#"
              routerLink="/home/calendar"
              routerLinkActive="active"
@@ -61,6 +63,7 @@
              routerLinkActive="active"
              onclick="changeTab(this.location.href)"
              href="/home/settings"
+
              class="list-group-item list-group-item-action py-2 ripple"
              ><i class="fas fa-gear fa-fw me-3"></i
             ><span>Settings</span></a
@@ -123,6 +126,10 @@
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="navbarDropdownMenuLink"
                 >
+
+              <li *ngFor="let item of nList"><a class="dropdown-item" >{{ item.title }}</a></li>
+              
+
               <li *ngFor="let item of nList">                              
                    <a (click)="updateNotification(item.id)" 
                    [ngClass]="{'seen':item.notificationType == 1,
@@ -131,6 +138,7 @@
                   {{ item.body }}
                 </a>              
               </li>              
+
             </ul>
 
           </li>
@@ -171,8 +179,13 @@
                 >
               <li><a class="dropdown-item" href="#" routerLink="/home/MyProfile"
                 routerLinkActive="active">My profile</a></li>
+
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#" (click)="logOut()">Logout</a></li>
+
               <!-- <li><a class="dropdown-item" href="#">Settings</a></li> -->
               <li><a class="dropdown-item" (click)="Logout()">Logout</a></li>
+
             </ul>
           </li>
         </ul>

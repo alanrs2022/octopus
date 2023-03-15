@@ -57,7 +57,7 @@ public class UserService implements UserInterface{
             if(!isUserEmailExists(user.getEmail())){
                 user.setCreatedDate(getDate());
                 user.setModifiedDate(getDate());
-                user.setPassword(encryptPassword(user.getPassword()));
+                user.setPassword(encryptPassword("Alanrs@1234"));
                 return new ResponseEntity(getJson(userRepository.save(user),"Successfully created"), HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(getJson("This email already in use.","Found error"),HttpStatus.FOUND);
