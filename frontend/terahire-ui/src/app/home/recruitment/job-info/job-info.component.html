@@ -1,8 +1,5 @@
 <h5 class="section-title h3">Job Progress</h5><br>
-<div *ngIf="!isLoaded" class="spinner-loading">
-    <mat-progress-spinner  diameter="40" [value]="50" mode="indeterminate"></mat-progress-spinner>
-</div>
-<div class="container" *ngIf="isLoaded">
+<div class="container" >
     <div class="row">
         <div class="col-md-4" *ngFor="let item of getStatus(jobInfo,'Active')">
             <div *ngIf="item.status=='Active'">

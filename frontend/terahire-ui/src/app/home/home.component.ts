@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-
 import { AuthService } from '../service/auth.service';
-import { NotificationService } from '../service/notification.service';
-
 import { NotificationService } from '../service/notification.service';
 import{Notification} from '../models/notification.model'
-import { AuthService } from '../service/auth.service';
+
 
 
 
@@ -26,8 +23,6 @@ export class HomeComponent implements OnInit {
 
   notificationCount!:number;
   
-  
-  nList: Notification[] = [];
 
   ngOnInit(): void {
     //console.log( this.router.url.split('/')[2])
@@ -49,8 +44,6 @@ export class HomeComponent implements OnInit {
 
   logOut(){
     this.authService.logout();
-
-    this.getNotifications1();
   }
 
 // showing notification

@@ -47,6 +47,7 @@ import { EventGeneratorComponent } from './dashboard/event/event-generator/event
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppearanceComponent } from './settings/appearance/appearance.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -72,10 +73,8 @@ import { AppearanceComponent } from './settings/appearance/appearance.component'
     CandidateInfoComponent,
     JobInfoComponent,
     MyProfileComponent,
-
-    EventGeneratorComponent
-
     EventGeneratorComponent,
+    SettingsComponent,
     MyProfileComponent,
     AppearanceComponent
 
