@@ -68,6 +68,7 @@ export class UserRegistrationComponent implements OnInit {
 
         // stop here if form is invalid
         if (this.userRegisterForm.invalid) {
+         
             return;
         }else{
           let userData:user ={
@@ -90,25 +91,26 @@ export class UserRegistrationComponent implements OnInit {
               this.openSnackBar("Successfully created!")
               this.userRegisterForm.clearValidators();
               this.userRegisterForm.reset();
+              this.userRegisterForm.get("phonenumber")?.clearValidators();
+              this.userRegisterForm.get("phonenumber")?.reset();
               this.submitted = false;
+
+              
               console.log(JSON.parse(JSON.stringify(data.body)).message)
               
             }
           },(e)=>{
             console.log(e)
-            this.openSnackBar(e.error.message)
+            this.openSnackBar(e.error.message+" Failed!!")
           })
 
 
         }
-        Object.keys(this.userRegisterForm.controls).forEach(key => {
-          const control = this.userRegisterForm.controls[key];
-          control.markAsUntouched();
-        });
-        this.userRegisterForm.reset();
-        // this.phonenumber?.reset();
-        this.userRegisterForm.get('phonenumber')?.clearValidators();
-        this.submitted = false;
+        // Object.keys(this.userRegisterForm.controls).forEach(key => {
+        //   const control = this.userRegisterForm.controls[key];
+        //   control.markAsUntouched();
+        // });
+       
         
         
         

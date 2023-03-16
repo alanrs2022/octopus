@@ -93,6 +93,9 @@ import { SettingsComponent } from './settings/settings.component';
     MatSelectModule,
     MatProgressBarModule,
     MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+  
     NgxMatIntlTelInputComponent
 
     

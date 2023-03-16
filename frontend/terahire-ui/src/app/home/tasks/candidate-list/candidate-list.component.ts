@@ -57,6 +57,7 @@ export class CandidateListComponent implements OnInit {
 
   getAllUser() {
     this.candidateService.getCandidateList().subscribe(data => {
+      console.log(data)
       this.dataSource.data = data;
     })
 

@@ -102,14 +102,10 @@
 
             <mat-form-field appearance="outline" style="width:100%;" [floatLabel]="getFloatLabelValue()">
               <mat-label>Phone Number</mat-label>
-              <!-- <ngx-mat-intl-tel-input [preferredCountries]="['in','us', 'ca']" [enablePlaceholder]="true"
+              <ngx-mat-intl-tel-input [preferredCountries]="['in','us', 'ca']" [enablePlaceholder]="true"
                 [enableSearch]="true" placeholder="Enter Number" formControlName="phoneNumber"
-                #phoneNumber></ngx-mat-intl-tel-input> -->
-              <!-- <mat-hint>e.g. {{phoneNumber.selectedCountry}}</mat-hint> -->
-              <!-- <mat-hint>e.g. {{phoneNumber.selectedCountry.placeHolder}}</mat-hint> -->
-
-              <!-- <mat-error *ngIf="f.form.controls['phone']?.errors?.required">Required Field</mat-error>
-              <mat-error *ngIf="f.submitted && f.form.controls['phone']?.errors?.validatePhoneNumber">Invalid Number</mat-error>-->
+                #phoneNumber></ngx-mat-intl-tel-input> 
+          
             </mat-form-field>
             <mat-error *ngIf="submitted && f.phoneNumber.hasError('required')" class="invalid-feedback">
 
@@ -123,50 +119,8 @@
 
           </div>
         </div>
-        <!-- Phone Number with contry code -->
-        <!-- <div class="col-md-6 mb-4 pb-2">
-          <div class="form-floating mb-3"> -->
-
-
-
-
-        <!-- <ngx-mat-intl-tel-input [preferredCountries]="['in','us', 'ca']" [enablePlaceholder]="true"
-              [enableSearch]="true" standalone="true"></ngx-mat-intl-tel-input>
-            <input type="number" class="form-control" formControlName="phoneNumber" placeholder="phoneNumber"
-              [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
-            <label for="floatingInput">Phone Number</label>
-            <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
-              <div *ngIf="f.phoneNumber.errors.required">*Required</div>
-
-            </div> -->
-        <!-- <mat-hint>e.g. {{phoneNumber.selectedCountry.placeHolder}}</mat-hint> -->
-
-        <!-- <mat-error *ngIf="f.form.controls['phone']?.errors?.required">Required Field</mat-error>
-              <mat-error *ngIf="f.submitted && f.form.controls['phone']?.errors?.validatePhoneNumber">Invalid Number</mat-error>-->
-
-
-
-        <!-- </div>
-        </div> -->
+      
       </div>
-
-      <!-- Phone Number -->
-
-      <!-- <div class="col-md-6 mb-4 pb-2">
-          <div class="form-floating mb-3">
-            <input type="number" class="form-control" formControlName="phoneNumber" placeholder="Phone Number"
-              [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }">
-            <label for="floatingInput">Phone Number</label>
-            <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
-              
-              <div *ngIf="f.phoneNumber.errors.required">*Required</div>
-              <div *ngIf="f.phoneNumber.errors.pattern">Please Enter 10 digit Mobile Number.</div>
-            </div> -->
-      <!-- <span *ngIf="candidateForm.get('phoneNumber').errors?.minlength">
-              The name must be at least three characters long.
-            </span> -->
-      <!-- </div>
-        </div> -->
 
 
       <!-- city -->

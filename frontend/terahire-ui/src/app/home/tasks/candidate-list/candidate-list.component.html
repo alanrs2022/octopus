@@ -64,12 +64,7 @@
             <td mat-cell *matCellDef="let element"> {{ element.city }}</td>
         </ng-container>
 
-        <!-- <ng-container matColumnDef="zipcode">
-            <th mat-header-cell *matHeaderCellDef> Zipcode </th>
-            <td mat-cell *matCellDef="let element"> {{element.zipcode}} </td>
-        </ng-container> -->
-
-
+       
         <ng-container matColumnDef="nationality">
             <th mat-header-cell *matHeaderCellDef> Nationality </th>
             <td mat-cell *matCellDef="let element"> {{ element.nationality }}</td>
@@ -123,17 +118,7 @@
             </td>
         </ng-container>
 
-        <!-- <h1 mat-dialog-title>Delete</h1>
-        <div mat-dialog-content>
-           
-            <mat-form-field>
-              <mat-label>Are you sure want to delete?</mat-label>              
-            </mat-form-field>
-          </div>
-          <div mat-dialog-actions>
-            <button mat-button >Cancel</button>
-            <button mat-button (click)="onNoClick()">Ok</button>
-          </div> -->
+       
 
 
 
@@ -200,68 +185,3 @@
 
 
 
-
-
-
-<!-- <h2 class="text-center" style="background-color: #79BE20;">Candidate List </h2>
-<table class="table table-striped">
-
-    <thead class="thead-dark">
-        <tr>
-
-            <th> Full Name </th>
-            <th> Email </th>
-            <th> PhoneNumber </th>
-            <th> Gender </th>
-            <th> DOB </th>
-            <th> Address </th>
-            <th> City </th>
-            <th> Country </th> -->
-<!-- <th> Pincode </th> -->
-<!-- <th> Nationality </th>
-            <th> Year Of Experience </th>
-            <th> current Company </th>
-            <th> current Position </th>
-            <th> current CTC </th>
-            <th> expected CTC </th>
-            <th> skills </th>
-            <th> Social Link </th>
-            <th> Status </th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of candidate">
-
-            <td>{{item.fullName}}</td>
-            <td>{{item.email}}</td>
-            <td>{{item.phoneNumber}}</td>
-            <td>{{item.gender}}</td>
-            <td>{{item.dob|date : 'dd/MM/yyyy'}}</td>
-            <td>{{item.address}}</td>
-            <td>{{item.city}}</td>
-            <td>{{item.country}}</td> -->
-<!-- <td>{{item.zipcode}}</td> -->
-<!-- <td>{{item.nationality}}</td>
-            <td>{{item.yearOfExperience}}</td>
-            <td>{{item.currentCompany}}</td>
-            <td>{{item.currentPosition}}</td>
-            <td>{{item.currentCTC}}</td>
-            <td>{{item.expectedCTC}}</td>
-            <td>{{item.skills}}</td>
-            <td>{{item.sociaLink}}</td>
-            <td>{{item.status}}</td>
-            <td><button type="button" class="btn btn-primary" data-toggle="`" data-target="#exampleModal"
-                (click)="onUpdateClicked(item)">Edit</button>
-              </td>
-            <td> -->
-<!-- <button (click)="updateCandidate(item.id)" class="btn btn-info">update</button>
-                <button (click)="deleteCandidate(item.id)" class="btn btn-danger" style="margin-right: 10px;">delete</button> -->
-<!-- <a href="candidateUpdate/{{item.id}}"class="btn btn-outline-success px-1 py-1 material-icons"data-toggle="modal"><span>📝</span></a> -->
-<!-- </td>
-
-        </tr>
-    </tbody>
-
-
-</table> -->

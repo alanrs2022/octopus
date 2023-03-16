@@ -78,8 +78,28 @@
                                 <p class="mb-0">Phone Number</p>
                             </div>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" [(ngModel)]="user.phoneNumber"
-                                [value]=user.phoneNumber>
+                                <!-- <input type="text" class="form-control" [(ngModel)]="user.phoneNumber"
+                                [value]=user.phoneNumber> -->
+
+
+                                <div class="col-md-6 mb-4 pb-2">
+                                    
+                                    <div class="form-floating mb-3">
+                          
+                                      <mat-form-field appearance="outline" style="width:100%;" >
+                                       
+                                        <ngx-mat-intl-tel-input [inputPlaceholder]="user.phoneNumber" [preferredCountries]="['in','us', 'ca']" [enablePlaceholder]="true"
+                                          [enableSearch]="true"  formControlName="phoneNumber" [placeholder]="user.phoneNumber"
+                                          #phoneNumber> </ngx-mat-intl-tel-input> 
+                                    
+                                      </mat-form-field>
+
+                          
+                                    </div>
+                                  </div>
+
+
+
                             </div>
                         </div>
 

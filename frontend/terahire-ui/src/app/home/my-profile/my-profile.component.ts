@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -16,6 +16,7 @@ export class MyProfileComponent implements OnInit {
 
   user!: user;
   edit: boolean = true;
+  @ViewChild('phoneNumber') phone!:ElementRef;
   
 
   constructor(private userService: UserService, private router: Router,private authService:AuthService,private snackBar:MatSnackBar) { }
@@ -37,7 +38,7 @@ export class MyProfileComponent implements OnInit {
     
     const authUser = JSON.parse(this.authService.currentUserValue())
     this.userService.getUserByEmail(authUser.username).subscribe(data=>{
-      this.user =  data;   
+      this.user =  data; 
     })
 
   }
