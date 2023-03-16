@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 
 
-import { Router } from 'node_modulessegd/@angular/router';
-import { NgxMatIntlTelInputComponent } from 'node_modulessegd/ngx-mat-intl-tel-input';
 
 
 // import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';

@@ -18,11 +18,11 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-import {MatFormFieldModule} from '@angular/material/form-field';
+
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 
@@ -49,7 +49,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         MatInputModule,
         MatButtonModule,
         MatSnackBarModule,
-        MatDialogModule
+        MatDialogModule,
+        MatIconModule,
+        MatToolbarModule
 
 
 

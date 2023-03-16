@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 
 
-import { MatTableDataSource } from 'node_modulessegd/@angular/material/table';
-import { Router } from 'node_modulessegd/@angular/router';
+
 
 @Component({
   selector: 'app-job-list',
