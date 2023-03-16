@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
 
 
     this.getNotifications();
+    this.getNotifications1()
     this.userType = this.authService.getUserTypes();
 
   }

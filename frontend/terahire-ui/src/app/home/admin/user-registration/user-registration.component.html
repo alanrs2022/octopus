@@ -87,9 +87,9 @@
                                 <mat-form-field appearance="outline" style="width:100%;height: 58px"
                                     [floatLabel]="getFloatLabelValue()">
                                     <mat-label>Phone Number</mat-label>
-                                    <!-- <ngx-mat-intl-tel-input [preferredCountries]="['in','us', 'ca']"
+                                    <ngx-mat-intl-tel-input [preferredCountries]="['in','us', 'ca']"
                                         [enablePlaceholder]="true" [enableSearch]="true" placeholder="Enter Number"
-                                        formControlName="phonenumber" #phonenumber></ngx-mat-intl-tel-input>                                     -->
+                                        formControlName="phonenumber" #phonenumber></ngx-mat-intl-tel-input>                                    
                                 </mat-form-field>
                                 <mat-error *ngIf="submitted && f.phonenumber.hasError('required')"
                                     class="invalid-feedback">*Required </mat-error>
