@@ -8,11 +8,8 @@ import java.util.List;
 public interface NotificationInterface {
 
     ResponseEntity createNotification(Notification notification);
-
-
     ResponseEntity<List<Notification>> getNotifications();
 
-    List<Notification> getNotifications();
 
     ResponseEntity updateNotifications(Long id);
 

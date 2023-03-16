@@ -14,7 +14,7 @@ export class NotificationService {
 
   constructor(private httpClient:HttpClient) { }
 
-  private baseURL="http://localhost:8081/api/notification";
+  private baseURL="http://localhost:8080/api/notification";
 
 
 
