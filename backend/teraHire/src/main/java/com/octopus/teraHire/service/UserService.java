@@ -162,6 +162,7 @@ public class UserService implements UserInterface{
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(newPassword);
         user.setPassword(encodedPassword);
+        user.setStatusId(102);
         user.setResetPasswordToken(null);
         userRepository.save(user);
     }

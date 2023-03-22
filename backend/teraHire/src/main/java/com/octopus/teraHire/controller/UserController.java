@@ -20,6 +20,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin("http://localhost:4200/")
@@ -43,19 +44,21 @@ public class UserController {
     @PostMapping("/new")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> addNewUser(@RequestBody @Valid User user){
+        String token = UUID.randomUUID().toString();
+        String resetPasswordLink = "/resetpassword?token=" + token;
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setRecipient(user.getEmail());
         emailDetails.setSubject("Welcome to TeraHire");
         emailDetails.setMsgBody("Hi, " +user.getFirstName()+
-                "\nWelcome Aboard, an User was created with your email.\n" +
-                "Login Email:" +user.getEmail()+
-                "\nLogin at:" +
-                "http://localhost:4200/" +
+                "\nWelcome Aboard, an User Profile was created with your email.\n" +
+                "Login Email: " +user.getEmail()+
+                "\nChange your Password at: " +
+                "http://localhost:4200/" + resetPasswordLink+
                 "\n" +
-                "Regards,\n" +
+                "Regards,\n\n" +
                 "Team TeraHire");
         String status = emailService.sendSimpleMail(emailDetails);
-        user.setResetPasswordToken(null);
+        user.setResetPasswordToken(token);
         return userService.addNewUser(user);
     }
 
