@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
 
 
     this.getNotifications();
+
     this.authService.getServerStatus();
     this.userType = this.authService.getUserTypes();
     console.log(this.userType)
@@ -40,7 +41,6 @@ export class HomeComponent implements OnInit {
   getNotifications(){
     this.notificationService.getNotifications().subscribe(data => {
       this.nList = data;
-     
       this.notificationCount=0;
       this.nList.forEach((obj)=>{
         if(obj.notificationType==0){
@@ -51,8 +51,18 @@ export class HomeComponent implements OnInit {
     
   }
 
+
+  // updating notificationStatustype to 1 by update API
+  updateNotification(id:number){
+    this.notificationService.updateNotificationStatus(id).subscribe((result:any)=>{
+      console.log(result);
+      this.getNotifications1()
+      //window.location.reload();
+    })
+
   logOut(){
     this.authService.logout();
+
   }
 
 

@@ -71,7 +71,9 @@ export class UserRegistrationComponent implements OnInit {
         this.userCreating = true;
         // stop here if form is invalid
         if (this.userRegisterForm.invalid) {
+
           this.userCreating = false;
+
             return;
         }else{
           let userData:user ={
@@ -96,16 +98,23 @@ export class UserRegistrationComponent implements OnInit {
               this.changeList.emit();
               this.userRegisterForm.clearValidators();
               this.userRegisterForm.reset();
+
+              this.userRegisterForm.get("phonenumber")?.clearValidators();
+              this.userRegisterForm.get("phonenumber")?.reset();
+              this.submitted = false;
               this.phonenumber?.reset();
               this.submitted = false;
               this.userService.getAllUsers();
+
               
               console.log(JSON.parse(JSON.stringify(data.body)).message)
               
             }
           },(e)=>{
             console.log(e)
+
             this.userCreating = false;
+
             this.openSnackBar(e.error.message+" Failed!!")
           })
 

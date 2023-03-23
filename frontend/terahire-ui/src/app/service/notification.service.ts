@@ -19,6 +19,7 @@ export class NotificationService {
 
 
 
+
   getNotifications(): Observable<any> {
     // return this.httpClient.get(this.baseURL+'/list',{headers:this.header})
     return this.httpClient.get(this.baseURL + '/list', {  });
