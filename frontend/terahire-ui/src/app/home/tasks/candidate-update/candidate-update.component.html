@@ -95,6 +95,12 @@
 </div><br>
 
 <div class="form-group">
+  <label for=""><b>Candidate Score: </b></label>
+  <input type="number" [(ngModel)]="score" value="{{EditJobData.score}}"  class="form-control"
+    placeholder="" >
+</div><br>
+
+<div class="form-group">
   <label for="stage"><b>Skills:</b></label>
   <mat-select type="text" [(ngModel)]="UpdatedSkills" value="{{EditJobData.skills}}" class="form-control" multiple>
     <mat-option *ngFor="let item of skill" [value]=item.skill> {{ item.skill}}
@@ -115,13 +121,16 @@
 <div class="form-group">
   <label for="stage"><b>Status:</b></label>
   <select type="text" [(ngModel)]="UpdatedStatus" value="{{EditJobData.status}}">
+
+   
     <option value="Awaiting">Awaiting</option>
     <option value="Resume review">Resume review</option>
     <option value="Task">Task</option>
-    <option value="Tech Interview">Tech Interview</option>
+    <option value="Tech Interview">Tech interview</option>
+    <option value="Assessment">Assessment</option>
     <option value="Onboarding">Onboarding</option>
-    <option value="Active">Active</option>
-    <option value="Inactive">InActive</option>
+    <option value="Completed">Completed</option>
+    <option value="Rejected">Rejected</option>
   </select>
 </div><br>
 

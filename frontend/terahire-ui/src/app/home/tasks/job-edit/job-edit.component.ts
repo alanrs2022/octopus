@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Job } from 'src/app/models/job';
 import {MatIconModule} from '@angular/material/icon';
 import { JobService } from 'src/app/service/job.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-job-edit',
@@ -13,7 +14,7 @@ export class JobEditComponent implements OnInit {
   
   EditJobData:Job;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data:Job, private jobService:JobService) 
+  constructor(@Inject(MAT_DIALOG_DATA) public data:Job, private jobService:JobService,private snackBar:MatSnackBar) 
     { 
     this.EditJobData=data;
   }
@@ -59,7 +60,9 @@ export class JobEditComponent implements OnInit {
       vacancy:this.UpdatedJobVacancy
     }
     this.jobService.updateJob(UpdatedJobData).subscribe(data=>{
+      this.snackBar.open("Successfully Updated!!",'',{duration:3000})
       console.log(data)
+      
     });
     
   }

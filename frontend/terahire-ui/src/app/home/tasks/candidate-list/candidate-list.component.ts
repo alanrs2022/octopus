@@ -27,6 +27,7 @@ export class CandidateListComponent implements OnInit {
   showJobEditComponent: boolean[] = [false];
   updatingJob!: Candidate;
   userType!:string;
+  isloaded:boolean = false;
 
   // candidateList:any;
 
@@ -40,7 +41,7 @@ export class CandidateListComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getCandidates();
-    this.getAllUser();
+    this.getAllCandidates();
     this.userType = this.authService.getRoles();
   }
 
@@ -55,10 +56,13 @@ export class CandidateListComponent implements OnInit {
 
 
 
-  getAllUser() {
+  getAllCandidates() {
     this.candidateService.getCandidateList().subscribe(data => {
-      console.log(data)
+    //  console.log(data)
       this.dataSource.data = data;
+      this.isloaded = true;
+    },error=>{
+      this.isloaded = true;
     })
 
   }
@@ -71,7 +75,7 @@ export class CandidateListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed' + result);
 
-      this.getAllUser()
+      this.getAllCandidates();
     });
   }
 
@@ -92,6 +96,8 @@ export class CandidateListComponent implements OnInit {
       height: '70%',
       data: candidates
 
+    }).afterClosed().subscribe(result=>{
+      this.getAllCandidates();
     })
 
   }

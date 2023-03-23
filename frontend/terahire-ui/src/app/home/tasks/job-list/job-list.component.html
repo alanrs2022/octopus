@@ -6,7 +6,7 @@
     <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
 </form>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" *ngIf="dataSource != null">
     <table mat-table [dataSource]="dataSource">
 
         <!-- Position Column -->
@@ -90,5 +90,10 @@
 
     </table>
 </div>
-<mat-paginator [pageSizeOptions]="[5,10,15,20]" showFirstLastButtons aria-label="Select page of periodic elements">
+<div *ngIf="dataSource == null">
+<p>No data!</p>
+</div>
+
+<mat-spinner [diameter]="40" class="text-center" *ngIf="!isloaded"></mat-spinner>
+<mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="10" showFirstLastButtons aria-label="Select page of periodic elements">
 </mat-paginator>

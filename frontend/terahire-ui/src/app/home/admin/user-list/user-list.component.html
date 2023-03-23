@@ -1,4 +1,4 @@
-<div >
+<div *ngIf="dataSource != null">
   
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
@@ -68,8 +68,14 @@
       <td mat-cell *matCellDef="let element,index as i">
         
         <div class="form-outline" *ngIf="editById[i]">
-          <input type="text"  class="form-control form-control-sm" [value]="element.phoneNumber" #phoneNumber />
-        </div> 
+          <input type="text" [maxLength]="13"  class="form-control form-control-sm" [value]="element.phoneNumber" #phoneNumber />
+        </div>
+
+
+          
+            <!-- <mat-error *ngIf="submitted && f.phoneNumber.hasError('is-invalid')" class="invalid-feedback">Invalid</mat-error> -->
+
+        
        <div *ngIf="!editById[i]">
         {{ element.phoneNumber }}
        </div>
@@ -147,10 +153,14 @@
  
   
 </div>
+
+</div>
 <mat-paginator [pageSizeOptions]="[5,10,15]"
-[showFirstLastButtons]="true" [pageSize]="pageSize" 
+[showFirstLastButtons]="true" [pageSize]="10"  
 aria-label="Select page of periodic elements" (page)="handlePage($event)">
 </mat-paginator>
+<div *ngIf="dataSource == null">
+  <p>No data!</p>
 </div>
 <!-- 
 <mat-spinner [mode]="'indeterminate'" value="50" ></mat-spinner> -->

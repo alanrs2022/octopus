@@ -5,7 +5,12 @@
     background-color: transparent;
     border-color: transparent;
   }
-  
+  input,mat-option,option,select,mat-select{
+    width: 100%;
+    box-shadow: 0px 2px 3px #ddd;
+    border: none;
+    padding: 10px 10px;
+  }
   .close-icon {
     transition: 1s ease-in-out;
   }

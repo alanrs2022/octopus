@@ -73,6 +73,8 @@
     </nav>
     <!-- Sidebar -->
   
+
+
     <!-- Navbar -->
     <nav
          id="main-navbar"
@@ -122,22 +124,18 @@
                     >{{notificationCount}}</span
                 >
             </a>
+
+            <app-notification-side-bar id="sideBarNotification"
+             class="dropdown-menu dropdown-menu-end" (changeEvent)="getNotifications()" ></app-notification-side-bar>
             <ul
-                class="dropdown-menu dropdown-menu-end"
+                
                 aria-labelledby="navbarDropdownMenuLink"
                 >
 
               <!-- <li *ngFor="let item of nList"><a class="dropdown-item" >{{ item.title }}</a></li> -->
               
 
-              <li *ngFor="let item of nList">                              
-                   <a (click)="updateNotification(item.id)" 
-                   [ngClass]="{'seen':item.notificationType == 1,
-                            'unseen':item.notificationType == 0}"
-                   class="dropdown-item" routerLink="/home/tasks">
-                  {{ item.body }}
-                </a>              
-              </li>              
+                      
 
             </ul>
 
@@ -166,7 +164,7 @@
                aria-expanded="false"
                >
               <img
-                   src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                   src="../../assets/img/person.jpg"
                    class="rounded-circle"
                    height="22"
                    alt=""
@@ -180,7 +178,8 @@
               <li><a class="dropdown-item" href="#" routerLink="/home/MyProfile"
                 routerLinkActive="active">My profile</a></li>
 
-              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#" routerLink="/home/settings"
+                routerLinkActive="active">Settings</a></li>
               <li><a class="dropdown-item" href="#" (click)="logOut()">Logout</a></li>
 
               <!-- <li><a class="dropdown-item" href="#">Settings</a></li> -->
@@ -198,6 +197,6 @@
   
   <!--Main layout-->
   <main style="margin-top: 58px">
-   <router-outlet></router-outlet>
+   <router-outlet ></router-outlet>
   </main>
   <!--Main layout-->

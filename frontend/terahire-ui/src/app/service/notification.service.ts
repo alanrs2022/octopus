@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 
 
 import { Observable } from 'rxjs';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ import { Observable } from 'rxjs';
 export class NotificationService {
 
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient,private sharedService:SharedService) { }
 
-  private baseURL="http://localhost:8080/api/notification";
+  private baseURL=  this.sharedService.getServerLink()+ "/api/notification";
 
 
 

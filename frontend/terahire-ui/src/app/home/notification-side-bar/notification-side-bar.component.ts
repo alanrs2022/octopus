@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
   selector: 'app-notification-side-bar',
@@ -7,9 +8,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificationSideBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private notificationService:NotificationService) { }
 
+  nList!:any[]
+  @Output() changeEvent = new EventEmitter();
+
+  dayList = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  
   ngOnInit(): void {
+    this.getNotifications()
   }
 
+  updateChange(){
+    this.getNotifications();
+  }
+
+  getNotifications(){
+    this.notificationService.getNotifications().subscribe(data=>{
+      this.nList = data;
+      console.log(data)
+    })
+    
+  }
+
+
+  
+
+  // updating notificationStatustype to 1 by update API
+  updateNotification(id:number){
+    this.notificationService.updateNotificationStatus(id).subscribe((result:any)=>{
+      console.log(result);
+      this.getNotifications()
+      this.changeEvent.emit();
+      //window.location.reload();
+    })
+  }
+  getDay(date){
+    return this.dayList[new Date(date).getDay()]
+  }
 }

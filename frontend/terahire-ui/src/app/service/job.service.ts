@@ -4,25 +4,21 @@ import { Observable } from 'rxjs';
 
 
 import { Job } from '../models/job';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobService {
-  private baseURL="http://localhost:8080/api/job";
+  private baseURL= this.sharedService.getServerLink()+"/api/job";
   
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient,private sharedService:SharedService) {}
 
-  header:HttpHeaders = new HttpHeaders(
-    {
-      'Content-Type': 'application/json',
-      'Authorization': `Basic ` + btoa('alanrs@gmail.com:alan@123'),
-    }
-  );
+
   
   getJobList():Observable<any>{
     
-    return this.httpClient.get(this.baseURL+'/list',{headers:this.header});
+    return this.httpClient.get(this.baseURL+'/list');
   }
   createJob(job:Job):Observable<any>{
     
@@ -31,10 +27,10 @@ export class JobService {
   updateJob(job:Job):Observable<any>{
 
     
-    return this.httpClient.put<any>(`${this.baseURL}/update/${job.id}`,job,{headers:this.header});
+    return this.httpClient.put<any>(`${this.baseURL}/update/${job.id}`,job);
   }
   deleteJob(id:number){
     console.log("Deleting with ID:"+id);
-    return this.httpClient.delete(this.baseURL+'/delete/'+id,{reportProgress:true,headers:this.header});
+    return this.httpClient.delete(this.baseURL+'/delete/'+id,{reportProgress:true})
   }
 }

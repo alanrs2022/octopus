@@ -3,12 +3,9 @@ package com.octopus.teraHire.service;
 import com.octopus.teraHire.exception.ResourceNotFoundException;
 import com.octopus.teraHire.exception.UserExistsException;
 import com.octopus.teraHire.model.Candidate;
-import com.octopus.teraHire.model.User;
 import com.octopus.teraHire.repository.CandidateRepository;
-import com.octopus.teraHire.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +30,7 @@ public class CandidateService implements CandidateInterface{
 
         } else {
 
-            return new ResponseEntity<>(new UserExistsException("User already exists").getLocalizedMessage(), HttpStatus.FOUND);
+            return new ResponseEntity<>(new UserExistsException("Candidate already exists with same email.").getLocalizedMessage(), HttpStatus.FOUND);
         }
     }
     @Override
@@ -48,6 +45,7 @@ public class CandidateService implements CandidateInterface{
             updateCandidate.setCurrentPosition((candidateDetails.getCurrentPosition()));
             updateCandidate.setDob((candidateDetails.getDob()));
             updateCandidate.setEmail((candidateDetails.getEmail()));
+            updateCandidate.setScore(candidateDetails.getScore());
             updateCandidate.setExpectedCTC((candidateDetails.getExpectedCTC()));
             updateCandidate.setFullName((candidateDetails.getFullName()));
             updateCandidate.setGender((candidateDetails.getGender()));
@@ -67,6 +65,10 @@ public class CandidateService implements CandidateInterface{
     @Override
     public List<Candidate> getCandidateList(){
         return candidateRepository.findAll();
+    }
+
+    public ResponseEntity<List<Candidate>> getCandidatesByStatus(String status){
+        return new ResponseEntity<>(candidateRepository.findByStatusLike(status),HttpStatus.OK);
     }
 
 

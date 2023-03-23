@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://172.31.217.58:4200/","http://localhost:4200/"})
 @RestController
 @RequestMapping("/api/candidate")
 @SecurityRequirement(name = "user-authenticate")
@@ -27,7 +27,7 @@ public class CandidateController {
         return candidateService.addCandidate(candidate);
     }
     //UpdateCandidate
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_IN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_IN','ROLE_HR')")
     @PutMapping("/update/{id}")
     public ResponseEntity<Candidate> updateCandidate(@PathVariable long id,@RequestBody Candidate candidateDetails){
         return candidateService.updateCandidate(id,candidateDetails);
@@ -37,6 +37,13 @@ public class CandidateController {
     @GetMapping(value = "/list")
     public List<Candidate> getCandidateList(){
         return candidateService.getCandidateList();
+    }
+
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HM','ROLE_IN','ROLE_HR')")
+    @GetMapping(value = "/{status}")
+    public ResponseEntity<List<Candidate>> getCandidateByStatus(@PathVariable String status){
+        return candidateService.getCandidatesByStatus(status);
     }
 
     @DeleteMapping (value="delete/{id}")

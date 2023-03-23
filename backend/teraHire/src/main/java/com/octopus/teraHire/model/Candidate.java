@@ -1,8 +1,6 @@
 package com.octopus.teraHire.model;
 
 import javax.persistence.*;
-import java.security.PrivateKey;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -24,6 +22,9 @@ public class Candidate {
 
     @Column(name = "gender")
     private String gender;
+
+    @Column(name = "score")
+    private String score;
 
     @Column(name = "dob")
     private String dob;
@@ -58,8 +59,9 @@ public class Candidate {
     @Column(name = "expected_ctc")
     private String expectedCTC;
 
+    @ElementCollection
     @Column(name = "skills")
-    private String skills;
+    private List<String> skills;
 
     @Column(name = "social_link")
     private String sociaLink;
@@ -67,14 +69,20 @@ public class Candidate {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "designation")
+    private String designation;
+
 
     protected Candidate(){}
-    public Candidate(long id, String fullName, String email, String phoneNumber, String gender, String dob, String address, String country, String city, int zipcode, String nationality, int yearOfExperience, String currentCompany, String currentPosition, String currentCTC, String expectedCTC, String skills, String sociaLink, String status) {
-        this.Id = id;
+
+
+    public Candidate(long id, String fullName, String email, String phoneNumber, String gender, String score, String dob, String address, String country, String city, int zipcode, String nationality, int yearOfExperience, String currentCompany, String currentPosition, String currentCTC, String expectedCTC, List<String> skills, String sociaLink, String status, String designation) {
+        Id = id;
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
+        this.score = score;
         this.dob = dob;
         this.address = address;
         this.country = country;
@@ -87,8 +95,25 @@ public class Candidate {
         this.currentCTC = currentCTC;
         this.expectedCTC = expectedCTC;
         this.skills = skills;
-        this.sociaLink=sociaLink;
-        this.status=status;
+        this.sociaLink = sociaLink;
+        this.status = status;
+        this.designation = designation;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
     public long getId() {
@@ -219,11 +244,11 @@ public class Candidate {
         this.expectedCTC = expectedCTC;
     }
 
-    public String getSkills() {
+    public List<String> getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
+    public void setSkills(List<String> skills) {
         this.skills = skills;
     }
 

@@ -21,11 +21,11 @@
   <div class="tab-content" id="ex-with-icons-content">
     
     <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
-      <app-user-registration></app-user-registration>
+      <app-user-registration (changeList)="getAllUser()"></app-user-registration>
     </div>
 
     <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
-      <app-user-list></app-user-list>
+      <app-user-list [dataSource]="userList"></app-user-list>
     </div>
     <!-- <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
       Tab 3 content

@@ -1,13 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PasswordService {
-  private baseURL="http://localhost:8080/api/passwordcontroller";
-  constructor(private httpClient:HttpClient) { }
+  private baseURL= this.sharedService.getServerLink()+ "/api/passwordcontroller";
+  constructor(private httpClient:HttpClient,private sharedService:SharedService) { }
   
   resetPassword(validToken:string, newPassword:string):Observable<any>{
     const params = new HttpParams({

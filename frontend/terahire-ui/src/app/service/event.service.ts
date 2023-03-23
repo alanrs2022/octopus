@@ -2,13 +2,14 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Event } from '../models/event.model';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  private baseURL="http://localhost:8080/api/calendar"
-  constructor(private httpClient: HttpClient) { }
+  private baseURL= this.sharedService.getServerLink()+ "/api/calendar"
+  constructor(private httpClient: HttpClient,private sharedService:SharedService) { }
 
   // getEventList(event:Event)
 

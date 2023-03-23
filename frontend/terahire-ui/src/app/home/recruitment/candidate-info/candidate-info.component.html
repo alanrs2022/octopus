@@ -1,137 +1,168 @@
 <h5 class="section-title h3">Candidate Progress</h5><br>
 
-<div class="row"  >
+<div id="candidateInfo">
     
     <div class="custom-column">
-        <div class="card-header fas badge square-pill badge-warning column-header">Awaiting Candidates</div>
-        <div class="card" style="height: 8rem" *ngFor="let item of getStatus(candidateInfo,'Awaiting')" matTooltip="Info about the action">
+        <div class="card-header fas badge square-pill badge-warning column-header">Awaiting candidates</div>
+        <div class="card" *ngFor="let item of getStatus(candidateInfo,'Awaiting')" >
            
-            <!-- <button mat-raised-button
-        matTooltip="Info about the action"
-        [matTooltipPosition]="position.value!"
-        aria-label="Button that displays a tooltip in various positions">
-  Action
-</button> -->
-            <div class="card-body" *ngIf="item.status== 'Awaiting'" >
-                <div class="row">
-                    <div class="col-sm-6" >
-                        <h5 class="card-title">{{item.fullName}}</h5>
-                        <p class="card-text">{{item.email}}</p>
+            <ul class="list-group list-group-light" *ngIf="item.status == 'Awaiting'">
+                <li class="list-group-item d-flex justify-content-between align-items-center"  >
+                  <div class="d-flex align-items-center" >
+                    <img src="../../assets/img/person.jpg" alt="" style="width: 45px; height: 45px;"
+                      class="rounded-circle" />
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">{{ item.fullName}}</p>
+                      <p class="text-muted mb-0">{{ item.email}}</p>
+
                     </div>
-                    <div class="col-sm-6 text-right">
-                        <img class="card-image" src="../../../../assets/img/user.png" alt="sans" >
-                    </div>
-                </div>
-            </div>
+                    <p>{{ item.skills }}</p>
+                  </div>
+    
+                </li>
+                
+            
+              </ul>
             
         </div>
     </div>
 
     
     <div class="custom-column">
-        <div class="card-header fas badge square-pill badge-primary column-header">Resume Review</div>
-        <div class="card" style="height: 8rem"  *ngFor="let item of getStatus(candidateInfo,'Resume review')">            
-            <div class="card-body" *ngIf="item.status== 'Resume review'">
-                <div class="row" >
-                    <div class="col-sm-6" >
-                        <h5 class="card-title">{{ item.fullName }}</h5>
-                        <p class="card-text">{{item.email}}</p>
-
+        <div class="card-header fas badge square-pill badge-primary column-header">Resume review</div>
+        <div class="card"   *ngFor="let item of getStatus(candidateInfo,'Resume review')">            
+            <ul class="list-group list-group-light" *ngIf="item.status == 'Resume review'">
+                <li class="list-group-item d-flex justify-content-between align-items-center"  >
+                  <div class="d-flex align-items-center" >
+                    <img src="../../assets/img/person.jpg" alt="" style="width: 45px; height: 45px;"
+                      class="rounded-circle" />
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">{{ item.fullName}}</p>
+                      <p class="text-muted mb-0">{{ item.email}}</p>
                     </div>
-                    <div class="col-sm-6 text-right">
-                        <img class="card-image" src="../../../../assets/img/user.png" alt="sans" width="50px">
-                    </div>
-                </div>
-            </div>
+                  </div>
+    
+                </li>
+                
+            
+              </ul>
         </div>
     </div>
     <div class="custom-column">
         <div class="card-header fas badge square-pill badge-primary column-header">Assesment</div>
-        <div class="card" style="height: 8rem" *ngFor="let item of getStatus(candidateInfo,'Task')">            
-            <div class="card-body" *ngIf="item.status== 'Task'">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h5 class="card-title">{{item.fullName}}</h5>
-                        <p class="card-text">{{item.email}}</p>
+        <div class="card"  *ngFor="let item of getStatus(candidateInfo,'Assesment')">            
+            <ul class="list-group list-group-light" *ngIf="item.status == 'Assessment'">
+                <li class="list-group-item d-flex justify-content-between align-items-center"  >
+                  <div class="d-flex align-items-center" >
+                    <img src="../../assets/img/person.jpg" alt="" style="width: 45px; height: 45px;"
+                      class="rounded-circle" />
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">{{ item.fullName}}</p>
+                      <p class="text-muted mb-0">{{ item.email}}</p>
 
                     </div>
-                    <div class="col-sm-6 text-right">
-                        <img class="card-image" src="../../../../assets/img/user.png" alt="sans" width="50px">
-                    </div>
-                </div>
-            </div>
+                    <p>{{ item.skills }}</p>
+                  </div>
+    
+                </li>
+                
+            
+              </ul>
         </div>
     </div>
     <div class="custom-column">
         <div class="card-header fas badge square-pill badge-primary column-header">Technical Interview</div>
-        <div class="card" style="height: 8rem" *ngFor="let item of getStatus(candidateInfo,'Tech Interview')">
+        <div class="card" *ngFor="let item of getStatus(candidateInfo,'Tech interview')">
             
-            <div class="card-body" *ngIf="item.status== 'Tech Interview'">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h5 class="card-title">{{item.fullName}}</h5>
-                        <p class="card-text">{{item.email}}</p>
+            <ul class="list-group list-group-light" *ngIf="item.status == 'Tech interview'">
+                <li class="list-group-item d-flex justify-content-between align-items-center"  >
+                  <div class="d-flex align-items-center" >
+                    <img src="../../assets/img/person.jpg" alt="" style="width: 45px; height: 45px;"
+                      class="rounded-circle" />
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">{{ item.fullName}}</p>
+                      <p class="text-muted mb-0">{{ item.email}}</p>
+                      <p>{{ item.skills }}</p>
+                    </div>
+                    
+                  </div>
+    
+                </li>
+                
+            
+              </ul>
 
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <img class="card-image" src="../../../../assets/img/user.png" alt="sans" width="50px">
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <div class="custom-column">
         <div class="card-header fas badge square-pill badge-primary column-header">OnBoarding</div>
-        <div class="card" style="height: 8rem" *ngFor="let item of getStatus(candidateInfo,'OnBoarding')">
+        <div class="card" style="height: 8rem" *ngFor="let item of getStatus(candidateInfo,'Onboarding')">
            
-            <div class="card-body" *ngIf="item.status== 'OnBoarding'">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h5 class="card-title">{{item.fullName}}</h5>
-                        <p class="card-text">{{item.email}}</p>
+            <ul class="list-group list-group-light" *ngIf="item.status == 'Onboarding'">
+                <li class="list-group-item d-flex justify-content-between align-items-center"  >
+                  <div class="d-flex align-items-center" >
+                    <img src="../../assets/img/person.jpg" alt="" style="width: 45px; height: 45px;"
+                      class="rounded-circle" />
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">{{ item.fullName}}</p>
+                      <p class="text-muted mb-0">{{ item.email}}</p>
+                      <p class="text-muted mb-0" >{{ item.skills }}</p>
+                    </div>
+                   
+                  </div>
+    
+                </li>
+                
+            
+              </ul>
 
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <img class="card-image" src="../../../../assets/img/user.png" alt="sans" width="50px">
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <div class="custom-column">
         <div class="card-header fas badge square-pill badge-success column-header">Completed</div>
-        <div class="card" style="height: 8rem" *ngFor="let item of getStatus(candidateInfo,'Active')">
+        <div class="card" style="height: 8rem" *ngFor="let item of getStatus(candidateInfo,'Completed')">
             
-            <div class="card-body" *ngIf="item.status== 'Active'">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h5 class="card-title">{{item.fullName}}</h5>
-                        <p class="card-text">{{item.email}}</p>
-
+            <ul class="list-group list-group-light" *ngIf="item.status == 'Completed'">
+                <li class="list-group-item d-flex justify-content-between align-items-center"  >
+                  <div class="d-flex align-items-center" >
+                    <img src="../../assets/img/person.jpg" alt="" style="width: 45px; height: 45px;"
+                      class="rounded-circle" />
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">{{ item.fullName}}</p>
+                      <p class="text-muted mb-0">{{ item.email}}</p>
+                      <p>{{ item.skills }}</p>
                     </div>
-                    <div class="col-sm-6 text-right">
-                        <img class="card-image" src="../../../../assets/img/user.png" alt="sans" width="50px">
-                    </div>
-                </div>
-            </div>
+                   
+                  </div>
+    
+                </li>
+                
+            
+              </ul>
         </div>
     </div>
     <div class="custom-column">
         <div class="card-header fas badge square-pill badge-danger column-header">Rejected</div>
-        <div class="card" style="height: 8rem" *ngFor="let item of getStatus(candidateInfo,'InActive')">
+        <div class="card"  *ngFor="let item of getStatus(candidateInfo,'Rejected')">
             
-            <div class="card-body" *ngIf="item.status== 'InActive'">
-                <div class="row">
-                    <div class="col-sm-6" >
-                        <h5 class="card-title">{{item.fullName}}</h5>
-                        <p class="card-text">{{item.email}}</p>
+            <ul class="list-group list-group-light" *ngIf="item.status == 'Rejected'">
+                <li class="list-group-item d-flex justify-content-between align-items-center"  >
+                  <div class="d-flex align-items-center" >
+                    <img src="../../assets/img/person.jpg" alt="" style="width: 45px; height: 45px;"
+                      class="rounded-circle" />
+                    <div class="ms-3">
+                      <p class="fw-bold mb-1">{{ item.fullName}}</p>
+                      <p class="text-muted mb-0">{{ item.email}}</p>
 
                     </div>
-                    <div class="col-sm-6 text-right">
-                        <img class="card-image" src="../../../../assets/img/user.png" alt="sans" width="50px">
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <p>{{ item.skills }}</p>
+                  </div>
+    
+                </li>
+                
+            
+              </ul>
     </div>
 </div>

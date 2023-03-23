@@ -6,7 +6,11 @@
   //   min-width: 130px;
   //   margin: 5px !important;
   // }
-  
+.mat-spinner{
+  ::ng-deep circle {
+    stroke: #78BE20;
+}
+}
   .mat-header-cell {
     min-width: 130px;
     max-width: max-content;
