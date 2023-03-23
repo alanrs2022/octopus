@@ -56,10 +56,10 @@ export class HomeComponent implements OnInit {
   updateNotification(id:number){
     this.notificationService.updateNotificationStatus(id).subscribe((result:any)=>{
       console.log(result);
-      this.getNotifications1()
+      this.getNotifications()
       //window.location.reload();
     })
-
+  }
   logOut(){
     this.authService.logout();
 
