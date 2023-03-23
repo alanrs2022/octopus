@@ -26,9 +26,10 @@ export class JobListComponent implements OnInit {
   showJobEditComponent:boolean[]=[false];
   constructor(private authService:AuthService, private jobService:JobService, private router:Router,private dialog: MatDialog) { }
   displayedColumns: string[] = ['title','owner','stage','status','vacancy','activeCandidates','droppedCandidates','summary','teamID','scoreCard','actions']
-  dataSource = new MatTableDataSource<Job>();
+  @Input() dataSource = new MatTableDataSource<Job>();
 
   userType!:string;
+  isloaded:boolean = false;
 
   ngOnInit(): void {
     this.userType = this.authService.getRoles();
@@ -42,6 +43,9 @@ export class JobListComponent implements OnInit {
   private getAllJobs(){ 
      this.jobService.getJobList().subscribe((data: Job[])=>{
       this.dataSource.data=data;
+      this.isloaded = true
+    },error=>{
+      this.isloaded = true;
     });
   }
 

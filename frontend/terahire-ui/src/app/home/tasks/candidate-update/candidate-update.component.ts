@@ -46,6 +46,7 @@ export class CandidateUpdateComponent implements OnInit {
   UpdatedGender!:string
   UpdatedSocialLink!:string
   UpdatedDesignation!:string
+  score!:string;
 
 
   ngOnInit(): void {
@@ -67,13 +68,14 @@ export class CandidateUpdateComponent implements OnInit {
     this.UpdatedGender = this.EditJobData.gender;
     this.UpdatedSocialLink=this.EditJobData.sociaLink;
     this.UpdatedDesignation=this.EditJobData.designation;
+    this.score = this.EditJobData.score;
     this.getSkills();
     this.getCountries();
     this.getJobs();
     // if(this.UpdatedYOE==0){
     //   update= true
     // }
-    console.log(this.UpdatedDesignation);
+   // console.log(this.UpdatedDesignation);
       
   }
   
@@ -101,12 +103,13 @@ export class CandidateUpdateComponent implements OnInit {
       skills: this.UpdatedSkills,
       sociaLink: this.UpdatedSocialLink,
       status: this.UpdatedStatus,
-      designation:this.UpdatedDesignation
+      designation:this.UpdatedDesignation,
+      score:this.score
 
     }
    
     this.candidateService.updateCandidate(UpdatedCandidateData).subscribe(data => {
-      console.log(data)
+     // console.log(data)
 
       this.snackBar.open("Successfully updated!!",'',{
         duration:3000
@@ -125,7 +128,7 @@ export class CandidateUpdateComponent implements OnInit {
   getSkills() {
     this.SkillsetService.getSkillSet().subscribe(data => {
       this.skill = data;
-      console.log(data);
+     // console.log(data);
     })
   }
   getCountries() {
@@ -133,13 +136,13 @@ export class CandidateUpdateComponent implements OnInit {
 
       this.countries = data;
       this.countries.sort((a, b) => a.name.common > b.name.common ? 1 : -1)
-      console.log(data)
+     // console.log(data)
     })
   }
   getJobs() {
     this.jobService.getJobList().subscribe(data => {
       this.jobs = data;
-      console.log(data)
+  //    console.log(data)
     })
 
   }

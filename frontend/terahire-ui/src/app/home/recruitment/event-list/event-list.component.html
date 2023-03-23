@@ -1,0 +1,68 @@
+<h5 class="section-title h3">Events </h5><br>
+<div *ngIf="eventList == null"> <p>No data!</p></div>
+<div id="candidateInfo"  *ngIf="eventList != null">
+    
+    <div class="custom-column" *ngFor="let item of eventList">
+        <div class="card-header fas badge square-pill badge-primary column-header"> {{ item.type}}</div>
+        <div class="card"   >
+           
+            
+            <div class="card-body" >
+                <div class="row">
+                    <div class="col" >
+                        <h5 class="card-title">{{ item.job.title }}</h5>
+                        <p class="card-text"> <b> Start date:</b> {{ item.start }} <br>
+                            <b> End date: </b>
+                            {{ item.end }} </p>
+                    </div>
+                </div>
+                    <!-- <div class="col-sm-6 text-right">
+                        <img class="card-image" src="../../../../assets/img/user.png" alt="sans" >
+                    </div> -->
+<hr>
+                    <b>Candidates</b>
+                    <div class="row">
+                        <ul class="list-group list-group-light" *ngFor="let can of item.candidates,index as i">
+                            <li class="list-group-item d-flex justify-content-between align-items-center"  *ngIf="i < 4" >
+                              <div class="d-flex align-items-center">
+                                <img src="../../assets/img/person.jpg" alt="" style="width: 45px; height: 45px;"
+                                  class="rounded-circle" />
+                                <div class="ms-3">
+                                  <p class="fw-bold mb-1">{{ can.fullName}}</p>
+                                  <p class="text-muted mb-0">{{ can.email}}</p>
+                                </div>
+                              </div>
+                              <span class="badge rounded-pill badge-info">{{ item.status }}</span>
+                            </li>
+                            
+                        
+                          </ul>
+                    </div>
+<hr>
+                    <b>Team members</b>
+                    <div class="row">
+                        <ul class="list-group list-group-light" *ngFor="let can of item.team_members,index as i">
+                            <li class="list-group-item d-flex justify-content-between align-items-center"  *ngIf="i < 4" >
+                              <div class="d-flex align-items-center">
+                                <img src="../../assets/img/person.jpg" alt="" style="width: 45px; height: 45px;"
+                                  class="rounded-circle" />
+                                <div class="ms-3">
+                                  <p class="fw-bold mb-1">{{ can.firstName }}</p>
+                                  <p class="text-muted mb-0">{{ can.email}}</p>
+                                </div>
+                              </div>
+                              <span class="badge rounded-pill badge-info">{{ item.status }}</span>
+                            </li>
+                            
+                        
+                          </ul>
+                    </div>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    
+    
+</div>

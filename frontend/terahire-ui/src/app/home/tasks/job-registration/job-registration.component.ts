@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JobService } from 'src/app/service/job.service';
-
-
 
 @Component({
   selector: 'app-job',
@@ -16,12 +14,17 @@ export class JobComponent implements OnInit {
   
   jobRegisterForm!: FormGroup;
   submitted:boolean = false;
-
+  @Output() jobEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private formBuilder: FormBuilder,private jobService: JobService,private _snackBar:MatSnackBar) { }
 
   
 
+  updateChange(){
+    this.jobEvent.emit(true);
+  }
   ngOnInit(): void {
+
+   
     this.jobRegisterForm = this.formBuilder.group({   
       title: ['',[Validators.required]],
       owner:['',[Validators.required]],   
@@ -36,7 +39,7 @@ export class JobComponent implements OnInit {
       notification: ['']
   });
    
-    console.log(this.jobRegisterForm)
+   // console.log(this.jobRegisterForm)
   }
 
   openSnackBar(message:string){
@@ -72,7 +75,7 @@ export class JobComponent implements OnInit {
       })
         this.submitted = true;
        // this.jobRegisterForm.get('notification')?.setValue(this.notification)
-        console.log(this.jobRegisterForm.value)
+       // console.log(this.jobRegisterForm.value)
         // stop here if form is invalid
         if (this.jobRegisterForm.invalid) {
           console.log("Error");

@@ -3,15 +3,16 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { Candidate } from '../models/candidate';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidateService {
 
-  private baseURL = "http://localhost:8080/api/candidate/";
+  private baseURL = this.sharedService.getServerLink()+ "/api/candidate/";
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,private sharedService:SharedService) { }
   header:HttpHeaders = new HttpHeaders(
     {
       'Content-Type': 'application/json',
@@ -32,6 +33,10 @@ export class CandidateService {
     return this.httpClient.post(`${this.baseURL}` + 'new', candidate,{headers:this.header});
   }
 
+
+  getCandidatesByStatus(status:string):Observable<any>{
+    return this.httpClient.get(`${this.baseURL}`+status)
+  }
   deleteCandidate(id: number): Observable<Object> {
     return this.httpClient.delete(`${this.baseURL}` + 'delete' + '/' + id,{headers:this.header});
   }

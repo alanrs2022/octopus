@@ -51,6 +51,7 @@ $danger: red;
 $primary-color: #78BE20;
 
 .primary-color {
+  color: #78BE20 !important ; 
   background-color: #78BE20 !important;
 }
 
@@ -66,6 +67,7 @@ html, body { height: 100%; }
   max-height: 200px !important;
 
 }
+
 .spinner-loading{
   display: flex;
   margin: auto;

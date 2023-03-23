@@ -109,7 +109,7 @@
 
                             </div>
 
-                            <!-- DOB  -->
+                            <!-- Dropped Candidates  -->
 
                             <div class="row">
                                 <div class="col-md-6 mb-4">
@@ -131,6 +131,15 @@
                                             placeholder="summary"
                                             [ngClass]="{ 'is-invalid': submitted && f.summary.errors }">
                                             </textarea>
+
+                                            <!-- <angular-editor class="form-control" formControlName="summary"
+                                            placeholder="summary"
+                                            [ngClass]="{ 'is-invalid': submitted && f.summary.errors }" >
+                                        </angular-editor> -->
+
+
+
+
                                         <label for="floatingInput">Summary</label>
                                         <div *ngIf="submitted && f.summary.errors" class="invalid-feedback">
                                             <div *ngIf="f.summary.errors.required">*Required</div>
@@ -182,7 +191,7 @@
                             <div class="col">
                                 <div class="text-center">
                                     <div class="mt-4 pt-2">
-                                        <input class="loginbtn" type="submit" value="Create Job" />
+                                        <input class="loginbtn" type="submit" value="Create Job" (click)="updateChange()" />
                                     </div>
                                 </div>
 

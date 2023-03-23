@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormGroupName, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
@@ -21,10 +21,11 @@ export class UserListComponent {
   formBuilder: any;
   public pageSize = 5;
   loaded:boolean = false;
+  
   constructor(private userService:UserService,public dialog:MatDialog,private snackBar:MatSnackBar){}
   displayedColumns: string[] = ['No','Id' ,'username' , 'firstName', 'lastName','phoneNumber', 'email','role','status','actions'];
   //ELEMENT_DATA:user[]=[]
-  dataSource = new MatTableDataSource<user>();
+  @Input() dataSource = new MatTableDataSource<user>();
   editById:boolean[]=[];
   userUpdateForm!: FormGroup;
  
@@ -90,7 +91,7 @@ export class UserListComponent {
     }
     // let basicInstance = mdb.Alert.getInstance(document.getElementById(this.alertsuccess.nativeElement));
     this.userService.updateUser(updateData).subscribe(result=>{
-      console.log(result);
+      //console.log(result);
      
       this.getAllUser();
       this.openSnackBar("Successfully Updated")
@@ -123,7 +124,11 @@ export class UserListComponent {
   getAllUser(){
    // this.openSnackBar("Updating...")
     this.userService.getAllUsers().subscribe(data =>{
-     this.dataSource.data = data;
+     if(data){
+      this.dataSource.data = data;
+     }else{
+      this.dataSource.data = [];
+     }
      this.loaded =true
     },error=>{
       this.openSnackBar("Something went wrong!!")

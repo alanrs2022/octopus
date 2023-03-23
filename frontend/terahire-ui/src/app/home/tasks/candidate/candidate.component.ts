@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { FloatLabelType } from '@angular/material/form-field';
@@ -29,8 +29,8 @@ import { SkillsetService } from 'src/app/service/skillset.service';
   styleUrls: ['./candidate.component.scss']
 })
 export class CandidateComponent implements OnInit {
-  // @ViewChild(NgxMatIntlTelInputComponent, { static: true })
-  // phoneNumber?: NgxMatIntlTelInputComponent;
+  @ViewChild(NgxMatIntlTelInputComponent, { static: true })
+  phoneNumber?: NgxMatIntlTelInputComponent;
   candidate: Candidate = new Candidate();
   candidateForm!: FormGroup;
   submitted = false;
@@ -39,6 +39,7 @@ export class CandidateComponent implements OnInit {
   countries: any[] = [];
   jobs: any[] = [];
   skill: any[] = [];
+  @Output() candidateChange = new EventEmitter();
   
 
 
@@ -61,6 +62,7 @@ export class CandidateComponent implements OnInit {
   ngOnInit() {
 
 
+    
    
     this.getCountries();
     this.getJobs();
@@ -86,12 +88,13 @@ export class CandidateComponent implements OnInit {
       sociaLink: new FormControl('', [Validators.required]),
       gender: new FormControl(['female']),
       designation: new FormControl('', [Validators.required]),
+      score: new FormControl()
     });
 
 
-    console.log(this.candidateForm)
+    //console.log(this.candidateForm)
     this.candidateForm.get('country')?.valueChanges.subscribe((x: any) => {
-      console.log(x)
+     // console.log(x)
     })
 
 
@@ -123,9 +126,7 @@ export class CandidateComponent implements OnInit {
   }
 
 
-  // ngOnChanges() {
-  //   console.log(this.candidateForm.get('phoneNumber'))
-  // }
+  
 
   OnClick() {
     console.log("testing");
@@ -139,14 +140,15 @@ export class CandidateComponent implements OnInit {
     //checking for frontend validation
     console.log(this.candidateForm.get('phoneNumber')!.errors);
     if (!this.candidateForm.valid) {
-      console.log("submit blocked")
+      console.log("Invalid form.")
     } else {
       this.candidateService.createCandidate(this.candidate).subscribe({
         next: (data: any) => {
-          console.log(data);
+          
           this.snackBar.open("Successfully created.", '', {
             duration: 3000
           })
+          this.candidateChange.emit();
           // this.goToCandidateList();
         },
         error: (e: any) => console.error(e)
@@ -155,42 +157,10 @@ export class CandidateComponent implements OnInit {
 
 
   }
-  //<--  Page navigation -->
-
-  // goToCandidateList() {
-  //   this.router.navigate(['/candidateList']);
-
-  // }
 
   onSubmit() {
     this.submitted = true;
     this.candidate = this.candidateForm.value;
-    console.log(this.candidateForm)
-    console.log(this.candidateForm.value);
-
-
-    // this.candidate.sociaLink = 'https://www.linkedin.com/in';
-    // this.candidate.fullName=this.candidateForm.get("fullName").value;
-    // this.candidate.email=this.candidateForm.get("email").value;
-    // this.candidate.phoneNumber=this.candidateForm.get("phoneNumber").value;
-    // this.candidate.gender=this.candidateForm.get("gender").value;
-    // this.candidate.dob=this.candidateForm.get("dob").value;
-    // this.candidate.address=this.candidateForm.get("address").value;
-    // this.candidate.zipcode=this.candidateForm.get("zipcode").value;
-    // this.candidate.country=this.candidateForm.get("country").value;
-    // this.candidate.city=this.candidateForm.get("city").value;
-    // this.candidate.nationality=this.candidateForm.get("nationality").value;
-    // this.candidate.yearOfExperience=this.candidateForm.get("yearOfExperience").value;
-    // this.candidate.currentCTC=this.candidateForm.get("currentCTC").value;
-    // this.candidate.expectedCTC=this.candidateForm.get("expectedCTC").value;
-    // this.candidate.currentCompany=this.candidateForm.get("currentCompanyc").value;
-    // this.candidate.currentPosition=this.candidateForm.get("currentPosition").value;
-    // this.candidate.skills=this.candidateForm.get("skills").value;
-    // this.candidate.sociaLink=this.candidateForm.get("sociaLink").value;
-    // this.candidate.status=this.candidateForm.get("status").value;
-
-
-
 
     if (this.candidateForm.invalid) {
 
@@ -221,16 +191,12 @@ export class CandidateComponent implements OnInit {
       control.markAsUntouched();
     });
     this.candidateForm.reset();
-    // this.phoneNumber?.reset();
+    this.phoneNumber?.reset();
     this.candidateForm.get('phoneNumber')?.clearValidators();
     this.submitted = false;
 
   }
   resetForm() {
-
-
-    console.log(this.candidateForm.get("phoneNumber")?.value);
-    console.log(this.candidateForm.get("phoneNumber"));
     this.candidateForm.reset();
   }
   getCountries() {
@@ -238,8 +204,8 @@ export class CandidateComponent implements OnInit {
 
       this.countries = data;
       this.countries.sort((a, b) => a.name.common > b.name.common ? 1 : -1)
-      console.log("countries", data)
-      console.log(this.countries[100].name.common)
+      //console.log("countries", data)
+      //console.log(this.countries[100].name.common)
     })
   }
 
@@ -253,7 +219,7 @@ export class CandidateComponent implements OnInit {
   getSkills() {
     this.SkillsetService.getSkillSet().subscribe((data: any[]) => {
       this.skill = data;
-      console.log(data);
+      //console.log(data);
     })
   }
 

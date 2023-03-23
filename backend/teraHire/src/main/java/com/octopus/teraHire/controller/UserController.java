@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin(origins = {"http://172.31.217.58:4200/","http://localhost:4200/"})
 @RequestMapping("/api/user")
 @SecurityRequirement(name = "user-authenticate")
 public class UserController {

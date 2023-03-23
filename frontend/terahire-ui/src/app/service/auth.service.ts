@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { auth } from '../models/auth.model';
+import { SharedService } from './shared.service';
 import { UserService } from './user.service';
 
 
@@ -12,14 +14,14 @@ import { UserService } from './user.service';
 export class AuthService {
 
   
-  constructor(private httpClient:HttpClient,private userService:UserService) { 
+  constructor(private httpClient:HttpClient,private userService:UserService,private router:Router,private sharedService:SharedService) { 
     
   }
 
 
   userType:boolean[]=[];
 
-  private baseURL="http://localhost:8080/api/auth/login";
+  private baseURL= this.sharedService.getServerLink()+ "/api/auth/login";
 
 
 
@@ -47,6 +49,14 @@ isLoggedIn():boolean{
   }
 }
 
+getServerStatus(){
+  this.httpClient.get("http://172.31.217.58:8080/api/auth/status").subscribe(data=>{
+    
+  },error=>{
+    this.logout()
+  })
+}
+
 getRoles(){
   let user = JSON.parse(localStorage.getItem('currentUser')!).authorities[0].authority
   return user;
@@ -63,14 +73,17 @@ getUserTypes(){
       this.userType[5] = true;
     }else if(user == "ROLE_HR"){
       this.userType[1] = true;
+      this.userType[2] = false;
       this.userType[4] = true;
       this.userType[5] = true;
     }else if(user == "ROLE_HM"){
       this.userType[1] = true;
+      this.userType[2] = false;
       this.userType[4] = true;
       this.userType[5] = true;
     }else if(user == "ROLE_IN"){
       this.userType[4] = true;
+      this.userType[2] = false;
       this.userType[1] = true;
       this.userType[5] = true;
     }else{
@@ -83,6 +96,7 @@ getUserTypes(){
 logout() {
   // remove user from local storage to log user out
   localStorage.removeItem('currentUser');
+  this.router.navigate(['']);
   
 }
 }

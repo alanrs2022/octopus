@@ -45,9 +45,11 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { EventGeneratorComponent } from './dashboard/event/event-generator/event-generator.component';
 
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+// import { AngularEditorModule } from 'node_modules/angular-editor';
 import { AppearanceComponent } from './settings/appearance/appearance.component';
 import { SettingsComponent } from './settings/settings.component';
+import { EventListComponent } from './recruitment/event-list/event-list.component';
+import { NotificationSideBarComponent } from './notification-side-bar/notification-side-bar.component';
 
 
 @NgModule({
@@ -76,7 +78,9 @@ import { SettingsComponent } from './settings/settings.component';
     EventGeneratorComponent,
     SettingsComponent,
     MyProfileComponent,
-    AppearanceComponent
+    AppearanceComponent,
+    EventListComponent,
+    NotificationSideBarComponent
 
    
   ],
@@ -95,7 +99,9 @@ import { SettingsComponent } from './settings/settings.component';
     MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxMatIntlTelInputComponent
+    NgxMatIntlTelInputComponent,
+    MatProgressSpinnerModule
+
 
     
 

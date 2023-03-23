@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/job")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://172.31.217.58:4200/","http://localhost:4200/"})
 @SecurityRequirement(name = "user-authenticate")
 public class JobController {
     private JobService jobService;
@@ -35,7 +35,7 @@ public class JobController {
         return jobService.addNewJob(job);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_IN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_IN','ROLE_HM')")
     @PutMapping("/update/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody Job job){

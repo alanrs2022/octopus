@@ -6,7 +6,7 @@
     <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
 </form>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" *ngIf="dataSource != null">
 
     <table mat-table [dataSource]="dataSource">
 
@@ -109,12 +109,11 @@
                 <span *ngIf="element.status == 'Awaiting'" class="fas badge rounded-pill badge-warning">Awaiting</span>
                 <span *ngIf="element.status == 'Resume review'" class="badge rounded-pill badge-primary">Resume
                     review</span>
-                <span *ngIf="element.status == 'Task'" class="badge rounded-pill badge-primary">Task</span>
-                <span *ngIf="element.status == 'Tech Interview'" class="badge rounded-pill badge-primary">Tech
-                    Interview</span>
-                <span *ngIf="element.status == 'Onboarding'" class="badge rounded-pill badge-primary">Onboarding</span>
-                <span *ngIf="element.status == 'Active'" class="badge rounded-pill badge-success">Active</span>
-                <span *ngIf="element.status == 'Inactive'" class="badge rounded-pill badge-danger">Inactive</span>
+                <span *ngIf="element.status == 'Assessment'" class="badge rounded-pill badge-primary">{{element.status}}</span>
+                <span *ngIf="element.status == 'Tech interview'" class="badge rounded-pill badge-primary">{{element.status}}</span>
+                <span *ngIf="element.status == 'Onboarding'" class="badge rounded-pill badge-primary">{{element.status}}</span>
+                <span *ngIf="element.status == 'Completed'" class="badge rounded-pill badge-success">{{element.status}}</span>
+                <span *ngIf="element.status == 'Rejected'" class="badge rounded-pill badge-danger">{{element.status}}</span>
             </td>
         </ng-container>
 
@@ -173,10 +172,15 @@
 
 
 </div>
-<mat-paginator [pageSizeOptions]="[5,10,15,20]" showFirstLastButtons aria-label="Select page of periodic elements">
+
+<div *ngIf="dataSource == null">
+    <p>No data!</p>
+</div>
+<mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="10" showFirstLastButtons aria-label="Select page of periodic elements">
 </mat-paginator>
 
 
+<mat-spinner [diameter]="40" *ngIf="!isloaded"></mat-spinner>
 
 
 

@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { user } from 'src/app/models/user.model';
 import { UserService } from 'src/app/service/user.service';
 import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 // import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 import { FloatLabelType } from '@angular/material/form-field';
+import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 @Component({
   selector: 'app-user-registration',
   templateUrl: './user-registration.component.html',
@@ -13,10 +14,12 @@ import { FloatLabelType } from '@angular/material/form-field';
 export class UserRegistrationComponent implements OnInit {
   userRegisterForm!: FormGroup;
   submitted = false;
+  @Output() changeList = new EventEmitter();
 
-  // @ViewChild(NgxMatIntlTelInputComponent, { static: true })
-  // phonenumber?: NgxMatIntlTelInputComponent;
+  @ViewChild(NgxMatIntlTelInputComponent, { static: true })
+  phonenumber?: NgxMatIntlTelInputComponent;
 
+  userCreating:boolean = false;
    //phone number country code
    hideRequiredControl = new FormControl(false);
    floatLabelControl = new FormControl('auto' as FloatLabelType);
@@ -65,10 +68,12 @@ export class UserRegistrationComponent implements OnInit {
   
     onSubmit() {
         this.submitted = true;
-
+        this.userCreating = true;
         // stop here if form is invalid
         if (this.userRegisterForm.invalid) {
-         
+
+          this.userCreating = false;
+
             return;
         }else{
           let userData:user ={
@@ -88,12 +93,18 @@ export class UserRegistrationComponent implements OnInit {
 
           this.userService.saveUser(userData).subscribe(data=>{
             if(data){
+              this.userCreating = false;
               this.openSnackBar("Successfully created!")
+              this.changeList.emit();
               this.userRegisterForm.clearValidators();
               this.userRegisterForm.reset();
+
               this.userRegisterForm.get("phonenumber")?.clearValidators();
               this.userRegisterForm.get("phonenumber")?.reset();
               this.submitted = false;
+              this.phonenumber?.reset();
+              this.submitted = false;
+              this.userService.getAllUsers();
 
               
               console.log(JSON.parse(JSON.stringify(data.body)).message)
@@ -101,6 +112,9 @@ export class UserRegistrationComponent implements OnInit {
             }
           },(e)=>{
             console.log(e)
+
+            this.userCreating = false;
+
             this.openSnackBar(e.error.message+" Failed!!")
           })
 

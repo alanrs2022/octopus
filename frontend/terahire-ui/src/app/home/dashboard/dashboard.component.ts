@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getJobs()
     this.getCandidates();
+    this.authService.getServerStatus();
     this.getCurrentUser();
   }
 

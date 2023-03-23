@@ -9,6 +9,11 @@
         <a class="nav-link" id="ex-with-icons-tab-2" data-mdb-toggle="tab" href="#ex-with-icons-tabs-2" role="tab"
             aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="fas fa-solid fa-user">&nbsp;</i>Candidate Info</a>
     </li>
+
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="ex-with-icons-tab-3" data-mdb-toggle="tab" href="#ex-with-icons-tabs-3" role="tab"
+            aria-controls="ex-with-icons-tabs-3" aria-selected="false"> <i class="fas fa-solid fa-calendar">&nbsp;</i>Event Info</a>
+    </li>
 </ul>
 <!-- Tabs content -->
 <div class="tab-content" id="ex-with-icons-content">
@@ -20,6 +25,15 @@
     <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
        <div style="overflow: scroll;"> <app-candidate-info></app-candidate-info></div>
     </div>
+
+
+    <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
+        <div style="overflow: scroll;">
+            
+            <app-event-list></app-event-list>
+        
+        </div>
+     </div>
     <!-- <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
 Tab 3 content
 </div> -->

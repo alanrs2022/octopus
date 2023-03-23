@@ -15,6 +15,7 @@ import { UserService } from 'src/app/service/user.service';
 export class MyProfileComponent implements OnInit {
 
   user!: user;
+  userType!:string;
   edit: boolean = true;
   @ViewChild('phoneNumber') phone!:ElementRef;
   

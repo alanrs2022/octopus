@@ -19,6 +19,7 @@ export class Candidate {
     status!:string
     dob!:Date
     designation!:string;
+    score!:string;
 
 
 

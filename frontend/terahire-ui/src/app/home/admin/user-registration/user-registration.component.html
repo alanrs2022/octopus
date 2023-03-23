@@ -1,5 +1,5 @@
 <title>User Registration</title>
-<section class="vh-100 gradient-custom">
+<section class="vh-100 gradient-custom" *ngIf="!userCreating">
 
     <div class="container">
         <div class="row justify-content-center align-items-center ">
@@ -135,5 +135,9 @@
                 </form>
             </div>
         </div>
-    </div>    
+    </div>   
+
 </section>
+<div class="spinner">
+    <mat-spinner [diameter]="40" *ngIf="userCreating" ></mat-spinner>
+</div>

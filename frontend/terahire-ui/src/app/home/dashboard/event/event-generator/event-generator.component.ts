@@ -23,7 +23,7 @@ export class EventGeneratorComponent implements OnInit {
   teamMembers!:user[];
   candidates!: Candidate[];
   job!:Job;
-  candidatesList!:Candidate[];
+  candidatesList:Candidate[]=[];
   teamList!:user[];
   jobList!:Job[];
 
@@ -34,7 +34,7 @@ export class EventGeneratorComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getAllMembers();
-    this.getAllCandidates();
+   // this.getAllCandidates();
     this.getAllJobs();
     this.organizerID=107;
     // Login-User's ID passed here
@@ -44,11 +44,13 @@ export class EventGeneratorComponent implements OnInit {
       this.teamList=data;
     })
   }
-  private getAllCandidates(){
-    this._candidateService.getCandidateList().subscribe(data=>{
-      this.candidatesList=data;
+
+  listCandidate($event){
+    this._candidateService.getCandidatesByStatus($event).subscribe(data=>{
+      this.candidatesList = data;
     })
   }
+  
   private getAllJobs(){
     this._jobService.getJobList().subscribe(data=>{
       this.jobList=data;

@@ -19,15 +19,15 @@
   </mat-form-field>
   
   <br>
-  <mat-form-field class="form-control">
+  <mat-form-field class="form-control" >
     <mat-label>Type</mat-label>
-    <mat-select [(ngModel)]="type">
+    <mat-select [(ngModel)]="type" (valueChange)="listCandidate($event)">
       
-      <mat-option value="Resume Review">Resume Review</mat-option>
-      <mat-option value="Interview-Tech">Interview-Tech</mat-option>
-      <mat-option value="Interview-HR">Interview-HR</mat-option>
-      <mat-option value="Onboarding">Onboarding</mat-option>
-      <mat-option value="Interview">Interview</mat-option>
+    <mat-option value="Resume review">Resume review</mat-option>
+    <mat-option value="Assessment">Assessment</mat-option>
+    <mat-option value="Tech Interview">Tech Interview</mat-option>
+    <mat-option value="Onboarding">Onboarding</mat-option>
+    
     </mat-select>
   </mat-form-field>
 
