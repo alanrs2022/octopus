@@ -92,8 +92,9 @@ public class PasswordController {
                     "The password to your account has been updated successfully.\n" +
                     "Regards,\n" +
                     "Team TeraHire");
-            String status = emailService.sendSimpleMail(emailDetails);
-            return new ResponseEntity<>(getJson("Successfully Changed Password "+status, "Success"), HttpStatus.OK);
+            Thread th = new EmailService(emailDetails,javaMailSender);
+            th.start();
+            return new ResponseEntity<>(getJson("Successfully Changed Password "+"Success", "Success"), HttpStatus.OK);
         }
     }
 
