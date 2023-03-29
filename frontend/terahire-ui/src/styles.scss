@@ -37,7 +37,23 @@ html,
 body {
   height: 100%;
 }
+*{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.badge{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.form-control ,.ng-touched,.ng-untouched,.ng-invalid,.form-floating{
+    
+  border-color: #79BE20 !important;
+  border-width: 1.5px;
+  outline: none;
 
+}
+.btn{
+  background-color: #78BE20;
+  color: white;
+}
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -75,10 +91,12 @@ html, body { height: 100%; }
 }
 //job info progress bar
 .custom-progress-bar .mat-progress-bar-fill::after {
-  background-color: #039823 !important;
+  background-color: #78BE20 !important;
+ 
 
 }
 
 .custom-progress-bar {
   width: 100% !important;
+  
 }

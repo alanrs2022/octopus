@@ -7,6 +7,7 @@ import { CandidateService } from 'src/app/service/candidate.service';
 import {UserService } from 'src/app/service/user.service';
 import { JobService } from '../../../../service/job.service';
 import { EventService } from '../../../../service/event.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-event-generator',
@@ -28,7 +29,7 @@ export class EventGeneratorComponent implements OnInit {
   jobList!:Job[];
 
  
-  constructor(private _candidateService: CandidateService,private _userService: UserService,private _jobService: JobService,private _eventService:EventService ) { 
+  constructor(private snackBar:MatSnackBar, private _candidateService: CandidateService,private _userService: UserService,private _jobService: JobService,private _eventService:EventService ) { 
     // this.teamList=[];
     // this.teamMembers=[];
   }
@@ -72,15 +73,15 @@ export class EventGeneratorComponent implements OnInit {
       team_members:this.teamMembers,
       candidate:this.candidates
     }
-    console.log(newEvent);
+    //console.log(newEvent);
     this._eventService.createEvent(newEvent).subscribe(response=>{
-      console.log(response)
+      this.snackBar.open("Successfully created!!",'',{duration:3000})
     })
     
 
   }
   else{
-    alert('Invalid Entry: Start date must come before End date');
+    this.snackBar.open('Invalid Entry: Start date must come before End date','',{duration:4000})
   }
 }
 

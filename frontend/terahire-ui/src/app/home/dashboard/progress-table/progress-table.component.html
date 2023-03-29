@@ -1,18 +1,23 @@
-<table class="table">
-    <caption><a href="#">See all</a></caption>
+<table class="table" *ngIf="eventList.length != 0">
+    <caption><a style="color: blue;cursor: pointer;" *ngIf="count != eventList.length" (click)="seeAll()">See all</a></caption>
+    <caption><a style="color: blue;cursor: pointer;" *ngIf="count == eventList.length"  (click)="seeLess()">See less</a></caption>
     <thead>
       <tr>
         <th scope="col">Full Name</th>
-        <th scope="col">Profession</th>
+        <th scope="col">Position</th>
         <th scope="col">Status</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="eventList != null">
       <tr *ngFor="let event of eventList,index as i"  >
-        <td *ngIf="i<4">{{ event.candidate[0].fullName }}</td>
-        <td *ngIf="i<4">{{ event.job.title }}</td>
-        <td *ngIf="i<4"><span class="badge rounded-pill badge-primary">{{event.type}}</span></td>
+        <td *ngIf="i<count">{{ event.candidate[0].fullName }}</td>
+        <td *ngIf="i<count">{{ event.job.title }}</td>
+        <td *ngIf="i<count"><span class="badge rounded-pill badge-primary">{{event.type}}</span></td>
       </tr>
      
     </tbody>
   </table>
+  
+  <div *ngIf="eventList.length == 0">
+    <p>No data!!</p>
+  </div>

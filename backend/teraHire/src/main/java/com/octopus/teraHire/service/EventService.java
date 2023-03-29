@@ -3,6 +3,7 @@ package com.octopus.teraHire.service;
 
 import com.octopus.teraHire.exception.ResourceNotFoundException;
 import com.octopus.teraHire.model.Event;
+import com.octopus.teraHire.model.Notification;
 import com.octopus.teraHire.repository.CandidateRepository;
 import com.octopus.teraHire.repository.EventRepository;
 import com.octopus.teraHire.repository.JobRepository;
@@ -31,7 +32,9 @@ public class EventService implements EventInterface{
   @Override
   @Transactional
     public ResponseEntity createEvent(Event event){
+
       event.setCreated(getDate());
+
       event.setModified(getDate());
       return new ResponseEntity<Event>(eventRepository.save(event),HttpStatus.OK);
   }

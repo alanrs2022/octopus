@@ -9,7 +9,14 @@
     background-color: #78BE20;
     color: white;
 }
-
+.text-primary2{
+    color: #78BE20;
+}
+.mat-spinner{
+    ::ng-deep circle {
+      stroke: #78BE20;
+  }
+  }
 .heading{
     padding: 5px;
 }

@@ -5,6 +5,8 @@
  
 </div>
 <div mat-dialog-actions>
-  <button class="btn" mat-button (click)="onNoClick()">No</button>&nbsp;
-  <button mat-button class="btn btn-danger" (click)="onYesClick(data.funId)" cdkFocusInitial>Yes</button>
+  <button mat-button class="btn" (click)="onYesClick(data.funId)" cdkFocusInitial>Yes</button>
+  &nbsp;
+  <button class="btn" mat-button (click)="onNoClick()">No</button>
+  
 </div>

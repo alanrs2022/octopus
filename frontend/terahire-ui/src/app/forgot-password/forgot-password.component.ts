@@ -17,29 +17,28 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder, private _passwordService: PasswordService,
     public dialogRef:MatDialogRef<ForgotPasswordComponent>,
-    private ngxService: NgxUiLoaderService,
+    
     private _snackBar:MatSnackBar
     ) { }
 
   ngOnInit(): void {
     this.forgotPasswordForm = this.formBuilder.group({
-      email:[null,[Validators.required, Validators.email]],
+      email:['',[Validators.required, Validators.email]],
     })
   }
   handleSubmit(){
-    this.ngxService.start();
+    
     var formData = this.forgotPasswordForm.value;
-    console.log(formData.email);
+   // console.log(formData.email);
     this._passwordService.forgotPassword(formData.email).subscribe((value:any)=>{
-      if (value.statusCode === 200) {
-        this.validEmail=true;
-        this._snackBar.open("Submitted Successfully, Check your Email",'',{duration:5000})
-        }
+      this.validEmail = true;
+        this._snackBar.open("Submitted successfully, Check your mailbox",'',{duration:3000})
+      
     },(err)=>{
       // console.log(err.status);
       if(err.status){
         this.validEmail=false;
-        this._snackBar.open("Invalid Email Entered",'',{duration:5000})
+        this._snackBar.open("Invalid email!",'',{duration:3000})
       }
       else{
       }

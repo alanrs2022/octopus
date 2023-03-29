@@ -188,6 +188,7 @@
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
+              <option value="5">5 and above</option>
             </select>
             <label for="floatingInput">Year Of Experience</label>
             <div *ngIf="submitted && f.yearOfExperience.errors" class="invalid-feedback">
@@ -277,11 +278,11 @@
               [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
               <option value="Awaiting">Awaiting</option>
               <option value="Resume review">Resume review</option>
-              <option value="Task">Assesment</option>
-              <option value="Tech Interview">Tech Interview</option>
+              <option value="Assessment">Assessment</option>
+              <option value="Tech interview">Tech Interview</option>
               <option value="Onboarding">Onboarding</option>
-              <option value="Active">Completed</option>
-              <option value="Inactive">Rejected</option>
+              <option value="Completed">Completed</option>
+              <option value="Rejected">Rejected</option>
             </select>
             <label for="floatingInput">Status</label>
             <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
@@ -299,7 +300,7 @@
               <mat-option *ngFor="let job of jobs" [value]=job.title> {{ job.title}}
               </mat-option>
             </mat-select>
-            <label for="country">Designation</label>
+            <label for="country">Position</label>
             <mat-error *ngIf="submitted && f.designation.hasError('required')" class="invalid-feedback"><br>
               *Required
             </mat-error>
@@ -315,7 +316,7 @@
 
             <!-- <input class="loginbtn" type="submit" value="Submit" /> -->
 
-            <button type="submit" class="loginbtn">Create Candidate</button>  
+            <button type="submit" class="loginbtn btn">Create Candidate</button>  
             <!-- <button type="reset" (click)="resetForm()" class="loginbtn">Reset</button>   -->
           </div>
         </div>

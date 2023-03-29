@@ -66,7 +66,7 @@ export class PasswordResetComponent implements OnInit {
       this.submitted = true;
       if(this.resetForm.valid && this.resetForm.get('newPassword')?.value ==this.resetForm.get('confirmPassword')?.value){
       
-        console.log(this.resetForm.value);
+        //console.log(this.resetForm.value);
         this.error=false;
         this._snackBar.open("Password has resetted successfully",'',{
           duration:5000

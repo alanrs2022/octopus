@@ -134,7 +134,7 @@ eventListener(){
   this._eventService.getEventList().subscribe(data=>{
     this.eventList = data;
     this.eventList.forEach(v=>{
-      console.log(new Date(v.start).getMonth()+1)
+     // console.log(new Date(v.start).getMonth()+1)
 
       if(new Date(v.start).getMonth() == this.currMonth && this.checkUser(v.team_members,this.currentUser)){
         this.liTag.forEach((v2,i)=>{
@@ -156,7 +156,7 @@ eventListener(){
 checkUser(eventData:[],userData):boolean{
   let count:number= 0;
   eventData.filter((v:any,i)=>{
-     console.log(v.email == userData.email)
+    // console.log(v.email == userData.email)
      if(v.email == userData.email){
       count++;
      }

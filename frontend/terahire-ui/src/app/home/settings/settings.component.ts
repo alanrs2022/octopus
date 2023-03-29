@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
+import { SharedService } from 'src/app/service/shared.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedService:SharedService,private authService:AuthService) {
+    
+   }
 
   ngOnInit(): void {
+    this.authService.getServerStatus();
   }
 
 }

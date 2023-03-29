@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/job")
-@CrossOrigin(origins = {"http://172.31.217.58:4200/","http://localhost:4200/"})
+@CrossOrigin(origins = {"*"})
 @SecurityRequirement(name = "user-authenticate")
 public class JobController {
     private JobService jobService;

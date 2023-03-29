@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://172.31.217.58:4200/","http://localhost:4200/"})
+@CrossOrigin(origins = {"*"})
 @RequestMapping("/api/calendar")
 @SecurityRequirement(name = "user-authenticate")
 public class CalendarController {
@@ -44,7 +44,7 @@ public class CalendarController {
         return eventRepository.findBetween(start, end);
     }*/
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
-    @CrossOrigin("http://localhost:4200/")
+    @CrossOrigin("*")
     @PostMapping("/new")
     public ResponseEntity<Event> addAnEvent(@RequestBody @Valid Event event){
         return eventService.createEvent(event);
@@ -64,8 +64,9 @@ public class CalendarController {
         return eventService.getAllEvent();
     }
     @DeleteMapping(value = "/delete/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR')")
-    public ResponseEntity<Event> deleteAnEvent(@RequestBody @Valid long id){
+    @CrossOrigin("*")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_HR','ROLE_IN')")
+    public ResponseEntity<Event> deleteAnEvent(@PathVariable(value = "id") @Valid long id){
         return eventService.deleteEvent(id);
     }
 

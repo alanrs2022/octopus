@@ -1,9 +1,16 @@
 <div *ngIf="dataSource != null">
   
-<div class="mat-elevation-z8">
+<div class="row">
+  <form class="input-group w-25" style="float: right;padding-bottom:10px">
+    <input search (keyup)="applyFilter($event)" autocomplete="off" type="search" class="form-control rounded"
+        placeholder='Search' style="min-width: 225px" />
+    
+</form>
   <table mat-table [dataSource]="dataSource">
  
     <!-- Position Column -->
+
+  
 
     <ng-container matColumnDef="No">
       <th mat-header-cell *matHeaderCellDef> No.</th>

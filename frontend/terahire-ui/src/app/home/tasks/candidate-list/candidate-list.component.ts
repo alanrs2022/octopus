@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Route, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -34,7 +34,7 @@ export class CandidateListComponent implements OnInit {
   constructor(private authService:AuthService, private candidateService: CandidateService, private router: Router, public dialogRef: MatDialog, public dialog: MatDialog) { }
 
   displayedColumns: string[] = ['ID', 'fullName', 'email', 'PhoneNumber', 'gender', 'dob', 'address', 'country', 'city', 'nationality', 'yearOfExperience', 'currentCompany', 'currentPosition', 'currentCTC', 'expectedCTC', 'skills', 'designation', 'sociaLink', 'status', 'actions'];
-  dataSource = new MatTableDataSource<Candidate>();
+  @Input() dataSource = new MatTableDataSource<Candidate>();
 
 
 
@@ -60,6 +60,7 @@ export class CandidateListComponent implements OnInit {
     this.candidateService.getCandidateList().subscribe(data => {
 
       this.dataSource.data = data;
+      
       this.isloaded = true;
     },error=>{
       this.isloaded = true;

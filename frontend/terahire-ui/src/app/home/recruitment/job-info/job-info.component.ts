@@ -28,7 +28,7 @@ export class JobInfoComponent implements OnInit {
   getJobInfo() {
     this.jobService.getJobList().subscribe(data => {
       this.jobInfo = data;
-      console.log(this.jobInfo);
+     
       this.isLoaded = true;
     })
   }
@@ -53,11 +53,20 @@ export class JobInfoComponent implements OnInit {
 
     });
   }
+
+  calculateDiff(dateSent){
+     let currentDate = new Date(); 
+     dateSent = new Date(dateSent);
+    return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
+   }
 //getting candidate status list
 getStatus(jobInfo:Job[],condition:string){
   return jobInfo.filter(c=>c.status==condition)
 
 }
+
+//date difference calculateDiff(dateSent){ let currentDate = new Date(); dateSent = new Date(dateSent); return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24)); }
+
   // openBox(i: number) {
   //   this.eldrop.nativeElement.style = "block"
   // }

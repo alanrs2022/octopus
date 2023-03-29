@@ -21,12 +21,16 @@ export class DashboardComponent implements OnInit {
   currentUser!:user;
 
   ngOnInit(): void {
-    this.getJobs()
+    this.getCurrentUser();
+    this.getJobs();
     this.getCandidates();
     this.authService.getServerStatus();
-    this.getCurrentUser();
+    
   }
 
+  getFlooredValue(v){
+    return Math.floor(v)
+  }
   getCurrentUser(){
     
     const authUser = JSON.parse(this.authService.currentUserValue())
@@ -45,7 +49,7 @@ export class DashboardComponent implements OnInit {
 
   getCandidates(){
     this.candidateService.getCandidateList().subscribe(data=>{
-      this.candidateList = data;
+      this.candidateList = data.reverse();
     })
   }
 

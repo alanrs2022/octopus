@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { NotificationService } from 'src/app/service/notification.service';
 })
 export class NotificationSideBarComponent implements OnInit {
 
-  constructor(private notificationService:NotificationService) { }
+  constructor(private notificationService:NotificationService,private route:Router) { }
 
   nList!:any[]
   @Output() changeEvent = new EventEmitter();
@@ -27,7 +28,7 @@ export class NotificationSideBarComponent implements OnInit {
   getNotifications(){
     this.notificationService.getNotifications().subscribe(data=>{
       this.nList = data;
-      console.log(data)
+     // console.log(data)
     })
     
   }
@@ -37,10 +38,12 @@ export class NotificationSideBarComponent implements OnInit {
 
   // updating notificationStatustype to 1 by update API
   updateNotification(id:number){
+    this.route.navigate(['home/tasks'])
     this.notificationService.updateNotificationStatus(id).subscribe((result:any)=>{
-      console.log(result);
+      //console.log(result);
       this.getNotifications()
       this.changeEvent.emit();
+      
       //window.location.reload();
     })
   }

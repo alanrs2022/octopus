@@ -13,9 +13,12 @@
 }
   .mat-header-cell {
     min-width: 130px;
+    color: #000;
     max-width: max-content;
   }
-  
+  .btn-success{
+    background-color: #78BE20;
+  }
   .mat-elevation-z8 {
     overflow-x: scroll !important;
     width: 100%;
