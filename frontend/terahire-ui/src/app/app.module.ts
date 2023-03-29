@@ -22,6 +22,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { AuthService } from './service/auth.service';
 
 
 
@@ -58,4 +59,10 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 
     ]
 })
-export class AppModule { }
+export class AppModule { 
+    constructor(private authService:AuthService){
+    // authService.getServerStatus().subscribe(data=>{
+
+    //     })
+    }
+}

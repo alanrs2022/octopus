@@ -4,11 +4,13 @@ package com.octopus.teraHire.service;
 import com.octopus.teraHire.exception.ResourceNotFoundException;
 import com.octopus.teraHire.exception.UserExistsException;
 import com.octopus.teraHire.exception.UserNotFound;
+import com.octopus.teraHire.model.EmailDetails;
 import com.octopus.teraHire.model.User;
 import com.octopus.teraHire.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
@@ -24,11 +26,15 @@ public class UserService implements UserInterface{
     int flag = 0;
     @Autowired
     private UserRepository userRepository;
+    private JavaMailSender javaMailSender;
     private UserDetailsServiceImpl userDetailsService;
     private UserExistsException userExistsException;
-    public UserService(UserRepository userRepository,UserDetailsServiceImpl userDetailsService){
+    private EmailService emailService;
+    public UserService(UserRepository userRepository, JavaMailSender javaMailSender, UserDetailsServiceImpl userDetailsService, EmailService emailService){
         this.userRepository = userRepository;
+        this.javaMailSender = javaMailSender;
         this.userDetailsService = userDetailsService;
+        this.emailService = emailService;
     }
 
 //    public UserService() throws SQLException{
@@ -52,13 +58,19 @@ public class UserService implements UserInterface{
 
 
     @Override
-    public ResponseEntity addNewUser(User user) {
+    public ResponseEntity addNewUser(User user, EmailDetails emailDetails) {
+        String uuid = UUID.randomUUID().toString();
 
             if(!isUserEmailExists(user.getEmail())){
                 user.setCreatedDate(getDate());
                 user.setModifiedDate(getDate());
+                user.setUsername(user.getUsername()+uuid.substring(1,3));
                 user.setPassword(encryptPassword("Alanrs@1234"));
-                return new ResponseEntity(getJson(userRepository.save(user),"Successfully created"), HttpStatus.OK);
+                user = userRepository.save(user);
+                Thread th = new EmailService(emailDetails,javaMailSender);
+                th.start();
+
+                return new ResponseEntity(getJson(user,"Successfully created"), HttpStatus.OK) ;
             }else{
                 return new ResponseEntity<>(getJson("This email already in use.","Found error"),HttpStatus.FOUND);
             }
@@ -151,7 +163,6 @@ public class UserService implements UserInterface{
         }
 
     }
-
     @Override
     public User getByResetPasswordToken(String token){
         return userRepository.findByResetPasswordToken(token);
@@ -162,7 +173,7 @@ public class UserService implements UserInterface{
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(newPassword);
         user.setPassword(encodedPassword);
-        user.setStatusId(102);
+        user.setStatusId(101);
         user.setResetPasswordToken(null);
         userRepository.save(user);
     }

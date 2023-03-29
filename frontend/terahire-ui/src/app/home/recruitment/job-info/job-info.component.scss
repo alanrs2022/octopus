@@ -54,10 +54,15 @@ body {
 }
 
 ::ng-deep .mat-progress-bar {
-    background-color: #f9fdfb;
+    background-color: #78BE20;
+    
     height: 20px !important;
 }
-
+.mat-spinner{
+    ::ng-deep circle {
+      stroke: #78BE20;
+  }
+  }
 ::ng-deep .mat-progress-bar .mat-progress-bar-background {
     animation-direction: reverse !important;
 }

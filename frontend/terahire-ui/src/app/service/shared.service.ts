@@ -9,7 +9,7 @@ export class SharedService {
 
   getServerLink():string{
 
-    return "http://localhost:8080";
+    return "http://172.31.218.123:8080";
   }
   updateChanges(){
     return 

@@ -1,9 +1,17 @@
+
+  <form class="input-group w-25" style="float: right;padding-bottom:10px">
+    <input search (keyup)="applyFilter($event)" autocomplete="off" type="search" class="form-control rounded"
+        placeholder='Search' style="min-width: 225px" />
+    
+</form>
 <div *ngIf="dataSource != null">
   
-<div class="mat-elevation-z8">
+
   <table mat-table [dataSource]="dataSource">
  
     <!-- Position Column -->
+
+  
 
     <ng-container matColumnDef="No">
       <th mat-header-cell *matHeaderCellDef> No.</th>
@@ -154,7 +162,7 @@
   
 </div>
 
-</div>
+
 <mat-paginator [pageSizeOptions]="[5,10,15]"
 [showFirstLastButtons]="true" [pageSize]="10"  
 aria-label="Select page of periodic elements" (page)="handlePage($event)">

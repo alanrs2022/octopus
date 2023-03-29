@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = {"http://172.31.217.58:4200/","http://localhost:4200/"})
+@CrossOrigin(origins = {"*"})
 @RequestMapping("/api/user")
 @SecurityRequirement(name = "user-authenticate")
 public class UserController {
@@ -34,10 +34,10 @@ public class UserController {
     private EmailService emailService;
     // private AuthenticationManager authenticationManager;
 
-    public UserController(UserService userService,UserDetailsServiceImpl userDetailsService, EmailService emailService){
+    public UserController(UserService userService,UserDetailsServiceImpl userDetailsService){
         this.userService = userService;
         this.userDetailsService = userDetailsService;
-        this.emailService = emailService;
+
     }
 
     @CrossOrigin("http://localhost:4200/")
@@ -45,7 +45,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> addNewUser(@RequestBody @Valid User user){
         String token = UUID.randomUUID().toString();
-        String resetPasswordLink = "/resetpassword?token=" + token;
+        String resetPasswordLink = "resetpassword?token=" + token;
         EmailDetails emailDetails = new EmailDetails();
         emailDetails.setRecipient(user.getEmail());
         emailDetails.setSubject("Welcome to TeraHire");
@@ -57,9 +57,9 @@ public class UserController {
                 "\n" +
                 "Regards,\n\n" +
                 "Team TeraHire");
-        String status = emailService.sendSimpleMail(emailDetails);
+
         user.setResetPasswordToken(token);
-        return userService.addNewUser(user);
+        return userService.addNewUser(user,emailDetails);
     }
 
     @PutMapping("/update/{id}")

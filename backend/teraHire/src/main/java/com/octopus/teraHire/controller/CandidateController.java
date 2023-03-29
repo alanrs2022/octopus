@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-@CrossOrigin(origins = {"http://172.31.217.58:4200/","http://localhost:4200/"})
+@CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api/candidate")
 @SecurityRequirement(name = "user-authenticate")

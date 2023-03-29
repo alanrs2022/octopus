@@ -30,6 +30,7 @@ export class LoginComponent {
         if(this.authService.isLoggedIn()){
             this.router.navigate(["/home/dashboard"])
         }
+        this.authService.getServerStatus();
         this.registerForm = this.formBuilder.group({
             
             email: ['', [Validators.required, Validators.email]],

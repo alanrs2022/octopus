@@ -21,7 +21,7 @@ export class EventService {
 
   }
   deleteEvent(id:number){
-    return this.httpClient.delete(this.baseURL+`/delete`+id,{reportProgress:true});
+    return this.httpClient.delete(this.baseURL+`/delete/`+id,{reportProgress:true});
   }
   updateEvent(event:Event):Observable<any>
   {

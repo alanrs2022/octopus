@@ -7,6 +7,7 @@ import com.octopus.teraHire.service.EmailService;
 import com.octopus.teraHire.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -14,16 +15,18 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = {"http://172.31.217.58:4200/","http://localhost:4200/"})
+@CrossOrigin(origins = {"*"})
 @RequestMapping("/api/passwordcontroller")
 public class PasswordController {
 
     private UserService userService;
     private EmailService emailService;
+    private JavaMailSender javaMailSender;
 
-    public PasswordController(UserService userService, EmailService emailService) {
+    public PasswordController(UserService userService, EmailService emailService, JavaMailSender javaMailSender) {
         this.userService = userService;
         this.emailService = emailService;
+        this.javaMailSender = javaMailSender;
     }
 
     Object getJson(Object message, String status) {
@@ -53,8 +56,9 @@ public class PasswordController {
                     "Regards," +
                     "\n" +
                     "Team TeraHire");
-            String status = emailService.sendSimpleMail(emailDetails);
-            return new ResponseEntity<>(getJson("A reset password link send to your email. Please check." + status, "Generated Token"), HttpStatus.OK);
+            Thread th = new EmailService(emailDetails,javaMailSender);
+            th.start();
+            return new ResponseEntity<>(getJson("A reset password link send to your email. Please check." + "Success", "Generated Token"), HttpStatus.OK);
         }
         else {
             return new ResponseEntity<>(getJson("Error while sending email, Not a Valid User", "Error"), HttpStatus.BAD_REQUEST);

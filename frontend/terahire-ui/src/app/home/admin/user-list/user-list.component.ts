@@ -22,6 +22,7 @@ export class UserListComponent {
   public pageSize = 5;
   loaded:boolean = false;
   
+  
   constructor(private userService:UserService,public dialog:MatDialog,private snackBar:MatSnackBar){}
   displayedColumns: string[] = ['No','Id' ,'username' , 'firstName', 'lastName','phoneNumber', 'email','role','status','actions'];
   //ELEMENT_DATA:user[]=[]
@@ -72,6 +73,15 @@ export class UserListComponent {
     }
   }
 
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+
+  }
   // update user
   updateChanges(id:number){
     let data = this.dataSource.data[id];

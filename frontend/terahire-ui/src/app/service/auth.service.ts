@@ -50,7 +50,7 @@ isLoggedIn():boolean{
 }
 
 getServerStatus(){
-  this.httpClient.get("http://172.31.217.58:8080/api/auth/status").subscribe(data=>{
+  this.httpClient.get(this.sharedService.getServerLink()+"/api/auth/status").subscribe(data=>{
     
   },error=>{
     this.logout()

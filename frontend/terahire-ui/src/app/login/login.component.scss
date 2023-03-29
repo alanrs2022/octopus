@@ -2,7 +2,9 @@
 .error{
     color: red;
 }
-
+*{
+  overflow: hidden;
+}
 .loginbtn {
     background-color: #79BE20; /* Green */
     border: none;
@@ -22,5 +24,12 @@
     top: 0;
     right: 0;
     padding-right: 20px;
+  }
+  .form-control ,.ng-touched,.ng-untouched,.ng-invalid,.form-floating{
+    
+      border-color: #79BE20 !important;
+      border-width: 1.5px;
+      outline: none;
+    
   }
   

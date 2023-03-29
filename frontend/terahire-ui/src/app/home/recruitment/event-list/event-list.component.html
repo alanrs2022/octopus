@@ -1,12 +1,12 @@
 <h5 class="section-title h3">Events </h5><br>
-<div *ngIf="eventList == null"> <p>No data!</p></div>
-<div id="candidateInfo"  *ngIf="eventList != null">
+<div *ngIf="eventList.length == 0"> <p>No data!</p></div>
+<div id="candidateInfo"  *ngIf="eventList.length != 0">
     
     <div class="custom-column" *ngFor="let item of eventList">
         <div class="card-header fas badge square-pill badge-primary column-header"> {{ item.type}}</div>
         <div class="card"   >
            
-            
+         
             <div class="card-body" >
                 <div class="row">
                     <div class="col" >
@@ -59,10 +59,13 @@
                     </div>
                 
             </div>
-            
+            <button class="btn btn-danger px-3"  (click)="openDialog(item.id,item.type)"><i
+              class="bi bi-trash-fill"  aria-hidden="true" title="delete"></i></button>
         </div>
-    </div>
 
+       
+    </div>
+    
     
     
 </div>

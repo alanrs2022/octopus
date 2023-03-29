@@ -15,7 +15,12 @@
   padding-left: .75em;
   padding-right: .75em;
 }
-
+.mat-pseudo-checkbox{
+  color: #79BE20 !important;
+}
+.not-empty-select.mat-selected {
+  color: green !important;
+}
 .card-registration .select-arrow {
   top: 13px;
 }

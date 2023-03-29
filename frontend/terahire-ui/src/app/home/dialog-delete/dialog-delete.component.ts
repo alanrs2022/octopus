@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogData } from 'src/app/models/dialog.model';
 import { CandidateService } from 'src/app/service/candidate.service';
+import { EventService } from 'src/app/service/event.service';
 import { JobService } from 'src/app/service/job.service';
 import { UserService } from 'src/app/service/user.service';
 
@@ -16,7 +17,7 @@ export class DialogDeleteComponent implements OnInit {
 
   
   constructor(public dialogRef: MatDialogRef<DialogDeleteComponent>,@Inject(MAT_DIALOG_DATA) public data: DialogData,
-  private userService:UserService,private snackBar:MatSnackBar,private candidateService:CandidateService,private jobService:JobService) {}
+  private userService:UserService,private eventService:EventService,private snackBar:MatSnackBar,private candidateService:CandidateService,private jobService:JobService) {}
 
   ngOnInit(): void {
   }
@@ -54,6 +55,16 @@ export class DialogDeleteComponent implements OnInit {
        
       }
     });
+    }else if(qn == 4){
+      this.eventService.deleteEvent(this.data.id).subscribe(data=>{
+        this.snackBar.open("Deleted!!",'',{duration:3000})
+        this.dialogRef.close();
+      },error=>{
+        this.snackBar.open("Delete failed!!",'',{duration:3000})
+        this.dialogRef.close();
+      })
+    }else{
+      this.snackBar.open("Something went wrong!",'',{duration:3000})
     }
   }
   
