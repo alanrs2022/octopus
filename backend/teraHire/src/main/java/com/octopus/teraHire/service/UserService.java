@@ -2,10 +2,11 @@ package com.octopus.teraHire.service;
 
 
 import com.octopus.teraHire.exception.ResourceNotFoundException;
-import com.octopus.teraHire.exception.UserExistsException;
 import com.octopus.teraHire.exception.UserNotFound;
 import com.octopus.teraHire.model.EmailDetails;
+import com.octopus.teraHire.model.TokenValidity;
 import com.octopus.teraHire.model.User;
+import com.octopus.teraHire.repository.TokenValidityRepository;
 import com.octopus.teraHire.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,28 +16,30 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 
-import java.sql.Connection;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
 
 @Service
 public class UserService implements UserInterface{
-    Connection connection;
-    int flag = 0;
     @Autowired
     private UserRepository userRepository;
     private JavaMailSender javaMailSender;
     private UserDetailsServiceImpl userDetailsService;
-    private UserExistsException userExistsException;
     private EmailService emailService;
-    public UserService(UserRepository userRepository, JavaMailSender javaMailSender, UserDetailsServiceImpl userDetailsService, EmailService emailService){
+
+    private TokenValidityRepository tokenValidityRepository;
+
+    public UserService(UserRepository userRepository, JavaMailSender javaMailSender, UserDetailsServiceImpl userDetailsService, EmailService emailService,TokenValidityRepository tokenValidityRepository) {
         this.userRepository = userRepository;
         this.javaMailSender = javaMailSender;
         this.userDetailsService = userDetailsService;
         this.emailService = emailService;
-    }
 
+        this.tokenValidityRepository = tokenValidityRepository;
+    }
 //    public UserService() throws SQLException{
 //
 //        connection = DBUtil.getConnection();
@@ -58,7 +61,7 @@ public class UserService implements UserInterface{
 
 
     @Override
-    public ResponseEntity addNewUser(User user, EmailDetails emailDetails) {
+    public ResponseEntity addNewUser(User user) {
         String uuid = UUID.randomUUID().toString();
 
             if(!isUserEmailExists(user.getEmail())){
@@ -67,6 +70,24 @@ public class UserService implements UserInterface{
                 user.setUsername(user.getUsername()+uuid.substring(1,3));
                 user.setPassword(encryptPassword("Alanrs@1234"));
                 user = userRepository.save(user);
+                String token = UUID.randomUUID().toString();
+                String resetPasswordLink = "resetpassword?id="+user.getId()+"&token=" + token;
+                EmailDetails emailDetails = new EmailDetails();
+                emailDetails.setRecipient(user.getEmail());
+                emailDetails.setSubject("Welcome to TeraHire");
+                emailDetails.setMsgBody("Hi, " +user.getFirstName()+
+                        "\nWelcome Aboard, an User Profile was created with your email.\n" +
+                        "Login Email: " +user.getEmail()+
+                        "\nChange your Password at: " +
+                        "http://localhost:4200/" + resetPasswordLink+
+                        "\n" +
+                        "Regards,\n\n" +
+                        "Team TeraHire");
+
+               // user.setResetPasswordToken(token);
+                addToken(user,token);
+
+
                 Thread th = new EmailService(emailDetails,javaMailSender);
                 th.start();
 
@@ -125,8 +146,8 @@ public class UserService implements UserInterface{
     }
 
     @Override
-    public ResponseEntity getUserById(long id){
-        return new ResponseEntity(userRepository.findById(id),HttpStatus.OK);
+    public Optional<User> getUserById(long id){
+        return userRepository.findById(id);
     }
 
 
@@ -153,30 +174,28 @@ public class UserService implements UserInterface{
     }
 
     @Override
-    public void updateResetPasswordToken(String token, String email) throws UserNotFound{
-        User user = userRepository.findByEmail(email).get();
-        if(user!=null){
-            user.setResetPasswordToken(token);
-            userRepository.save(user);
-        }else {
-            throw new UserNotFound("Could not find User for "+email);
-        }
-
-    }
-    @Override
-    public User getByResetPasswordToken(String token){
-        return userRepository.findByResetPasswordToken(token);
-    }
-
+     public  User getByUserEmail(String Email){return userRepository.findByEmail(Email).get();}
     @Override
     public void updatePassword(User user, String newPassword){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(newPassword);
         user.setPassword(encodedPassword);
         user.setStatusId(101);
-        user.setResetPasswordToken(null);
         userRepository.save(user);
     }
 
+    public LocalDate getDate2(){
+        LocalDate now = LocalDate.now();
+        return now;
+    }
+
+    @Override
+    public void addToken(User user, String token){
+        TokenValidity updatedTokenBody = new TokenValidity();
+        updatedTokenBody.setUser(user);
+        updatedTokenBody.setToken(token);
+        updatedTokenBody.setCreatedDate(getDate2());
+        tokenValidityRepository.save(updatedTokenBody);
+    }
 
 }

@@ -44,22 +44,8 @@ public class UserController {
     @PostMapping("/new")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<User> addNewUser(@RequestBody @Valid User user){
-        String token = UUID.randomUUID().toString();
-        String resetPasswordLink = "resetpassword?token=" + token;
-        EmailDetails emailDetails = new EmailDetails();
-        emailDetails.setRecipient(user.getEmail());
-        emailDetails.setSubject("Welcome to TeraHire");
-        emailDetails.setMsgBody("Hi, " +user.getFirstName()+
-                "\nWelcome Aboard, an User Profile was created with your email.\n" +
-                "Login Email: " +user.getEmail()+
-                "\nChange your Password at: " +
-                "http://localhost:4200/" + resetPasswordLink+
-                "\n" +
-                "Regards,\n\n" +
-                "Team TeraHire");
 
-        user.setResetPasswordToken(token);
-        return userService.addNewUser(user,emailDetails);
+        return userService.addNewUser(user);
     }
 
     @PutMapping("/update/{id}")
@@ -76,10 +62,10 @@ public class UserController {
         return userService.getUserList();
 
     }
-    @PreAuthorize("haAnyRole('ROLE_ADMIN','ROLE_USER')")
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable long id)
-    {return userService.getUserById(id);}
+    //@PreAuthorize("haAnyRole('ROLE_ADMIN','ROLE_USER')")
+    //@GetMapping(value = "/{id}")
+    //public ResponseEntity<User> getUserById(@PathVariable long id)
+    //{return userService.getUserById(id);}
 
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")

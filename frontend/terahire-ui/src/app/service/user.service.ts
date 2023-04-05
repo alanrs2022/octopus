@@ -45,9 +45,9 @@ export class UserService {
   }
 
 
-  getUserList(id: number): Observable<any>{
-    return this.httpClient.get(`${this.baseUrl}`+ id,{observe:'response'});
-  }
+  // getUserList(id: number): Observable<any>{
+  //   return this.httpClient.get(`${this.baseUrl}`+ id,{observe:'response'});
+  // }
   updateUserByID(user:user):Observable<Object>{
     return this.httpClient.put(`${this.baseUrl}` + 'update/' + user.id, user,{observe:'response'});
   }

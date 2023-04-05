@@ -10,9 +10,10 @@ export class PasswordService {
   private baseURL= this.sharedService.getServerLink()+ "/api/passwordcontroller";
   constructor(private httpClient:HttpClient,private sharedService:SharedService) { }
   
-  resetPassword(validToken:string, newPassword:string):Observable<any>{
+  resetPassword(ID:number,validToken:string, newPassword:string):Observable<any>{
     const params = new HttpParams({
       fromObject: {
+        id:ID,
         token: validToken,
         password: newPassword,
       }
@@ -29,7 +30,7 @@ export class PasswordService {
     return this.httpClient.post(`${this.baseURL}/forgot_password`,validEmail);
   }      
 
-  tokenChecker(token:string):Observable<any>{
-    return this.httpClient.get(`${this.baseURL}`+`/reset_password/token/`+token);
+  tokenChecker(id:number, token:string):Observable<any>{
+    return this.httpClient.get(`${this.baseURL}`+`/reset_password/`+id+`/`+token);
   }
 }
