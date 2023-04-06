@@ -120,8 +120,8 @@
                aria-expanded="false"
                >
               <i class="fas fa-bell"></i>
-              <span class="badge rounded-pill badge-notification bg-danger"
-                    >{{notificationCount}}</span
+              <span *ngIf="nList != null" class="badge rounded-pill badge-notification bg-danger"
+                    >{{( notificationCounts)}}</span
                 >
             </a>
 

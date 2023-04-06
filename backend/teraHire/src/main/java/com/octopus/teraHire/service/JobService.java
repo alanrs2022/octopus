@@ -68,7 +68,7 @@ public class JobService implements JobInterface{
             updatedJobDetails.setVacancy((job.getVacancy()));
             updatedJobDetails.setSummary((job.getSummary()));
             updatedJobDetails.setTeamID((job.getTeamID()));
-            updatedJobDetails.setScoreCard((job.getScoreCard()));
+            updatedJobDetails.setEndDate(job.getEndDate());
             return new ResponseEntity<>(jobRepository.save(updatedJobDetails),HttpStatus.OK);
         }
         else{

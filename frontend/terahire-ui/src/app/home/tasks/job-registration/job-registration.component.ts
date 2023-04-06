@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/service/auth.service';
 import { JobService } from 'src/app/service/job.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class JobComponent implements OnInit {
   jobRegisterForm!: FormGroup;
   submitted:boolean = false;
   @Output() jobEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor(private formBuilder: FormBuilder,private jobService: JobService,private _snackBar:MatSnackBar) { }
+  constructor(private authService: AuthService,private formBuilder: FormBuilder,private jobService: JobService,private _snackBar:MatSnackBar) { }
 
   
 
@@ -35,10 +36,12 @@ export class JobComponent implements OnInit {
       droppedCandidates:['',Validators.required],
       summary:['',Validators.required],
       teamID:['',Validators.required],
-      scoreCard:['',Validators.required],
+      endDate:['',Validators.required],
       notification: ['']
   });
+  
    
+  console.log(this.authService.currentUserValue())
    // console.log(this.jobRegisterForm)
   }
 
@@ -73,7 +76,7 @@ using the `openSnackBar()` method and resets the form. If there is an error, it 
         title:"Job Registration",
         body: "New job "+this.f.title.value+" was created by "+this.f.owner.value+".",
         notificationType: 0,
-        notificationStatus:102,
+        notificationStatus:[101,102],
         createdDate:"",
         modifiedDate:"",
         id:0,
@@ -87,14 +90,16 @@ using the `openSnackBar()` method and resets the form. If there is an error, it 
           console.log("Error");
             return;
         }else{
-          
+          console.log(this.jobRegisterForm.value)
           this.jobService.createJob(this.jobRegisterForm.value).subscribe(response=>{
-            console.log(response);
-            this.openSnackBar("Successfully created.")
+           // console.log(response);
+            this.openSnackBar("Successfully created.");
+            
             this.jobRegisterForm.reset();
             this.submitted = false;
+            this.updateChange();
           },error=>{
-
+            this.openSnackBar("Something went wrong!! Try again.")
           })
      //window.location.reload()
        

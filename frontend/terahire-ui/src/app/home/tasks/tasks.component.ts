@@ -20,14 +20,18 @@ export class TasksComponent implements OnInit {
   @Output() jobEvent:EventEmitter<boolean> = new EventEmitter();
   jobList = new MatTableDataSource<Job>()
   candidateList = new MatTableDataSource<Candidate>;
+
+  jobs!:Job[];
   
   ngOnInit(): void {
     this.authService.getServerStatus();
     this.userType = this.authService.getRoles();
+    this.updateChange();
   }
   
   updateChange(){
-    this.jobEvent.emit(true);
+    this.getAllJobs();
+    this.getAllCandidates();
   }
 
   getAllCandidates() {
@@ -41,8 +45,9 @@ export class TasksComponent implements OnInit {
   }
   private getAllJobs(){ 
     this.jobService.getJobList().subscribe((data: Job[])=>{
-     this.jobList.data = data
-    
+     this.jobList.data = data;
+    this.jobs = data;
+    console.log(data)
    },error=>{
     
    });

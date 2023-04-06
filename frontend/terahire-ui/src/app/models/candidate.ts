@@ -1,3 +1,5 @@
+import { Job } from "./job";
+
 export class Candidate {
     id!:number;
     fullName!: string;

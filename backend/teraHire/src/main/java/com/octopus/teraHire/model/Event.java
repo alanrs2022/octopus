@@ -35,31 +35,22 @@ public class Event {
     @JoinColumn(name="fk_job_id",referencedColumnName = "id")
     private Job job;
 
-    @OneToOne(cascade = CascadeType.ALL,targetEntity = Notification.class)
-    @JoinColumn(name="fk_notification_id",referencedColumnName = "id")
-    private Notification notification;
-  /*  @Column(name = "job_id")*/
-/*    private long job_id;*/
 
 
-
-    /*    @ManyToMany(mappedBy = "events",fetch = FetchType.LAZY)
-        @JsonBackReference
-        private Set<Candidate> candidates = new HashSet<>();*/
-    @ManyToMany(cascade = CascadeType.MERGE,targetEntity = User.class)
+    @ManyToMany(cascade = CascadeType.ALL,targetEntity = User.class)
     @JoinColumn(name = "fk_team_members",referencedColumnName = "id")
-    private List<User> team_members = new ArrayList<>();
+    private List<User> team_members;
 
     @ManyToMany(targetEntity = Candidate.class,cascade = CascadeType.MERGE)
     @JoinColumn(name="fk_candidate_id",referencedColumnName = "id")
-    private List<Candidate> candidates = new ArrayList<>();
+    private List<Candidate> candidates;
 
 
 
     public Event(){}
 
 
-    public Event(long id, String start, String end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, Notification notification, List<User> team_members, List<Candidate> candidates) {
+    public Event(long id, String start, String end, LocalDateTime created, LocalDateTime modified, String type, long organizer_id, Job job, List<User> team_members, List<Candidate> candidates) {
         Id = id;
         this.start = start;
         this.end = end;
@@ -68,7 +59,7 @@ public class Event {
         this.type = type;
         this.organizer_id = organizer_id;
         this.job = job;
-        this.notification = notification;
+
         this.team_members = team_members;
         this.candidates = candidates;
     }
@@ -101,13 +92,6 @@ public class Event {
         return created;
     }
 
-    public Notification getNotification() {
-        return notification;
-    }
-
-    public void setNotification(Notification notification) {
-        this.notification = notification;
-    }
 
     public List<Candidate> getCandidates() {
         return candidates;
