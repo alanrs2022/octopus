@@ -1,11 +1,10 @@
-
-  <form class="input-group w-25" style="float: right;padding-bottom:10px">
-    <input search (keyup)="applyFilter($event)" autocomplete="off" type="search" class="form-control rounded"
-        placeholder='Search' style="min-width: 225px" />
-    
+<form class="input-group w-25" style="float: right;padding-bottom:10px"  *ngIf="dataSource.data.length != 0">
+  <input search (keyup)="applyFilter($event)" autocomplete="off" type="search" class="form-control rounded"
+      placeholder='Search' style="min-width: 225px" />
+  <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
 </form>
-<div *ngIf="dataSource != null">
-  
+
+<div *ngIf="dataSource != null"> 
 
   <table mat-table [dataSource]="dataSource">
  

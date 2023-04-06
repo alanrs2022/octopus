@@ -4,6 +4,7 @@ import com.octopus.teraHire.exception.ResourceNotFoundException;
 import com.octopus.teraHire.exception.UserExistsException;
 import com.octopus.teraHire.model.Candidate;
 import com.octopus.teraHire.repository.CandidateRepository;
+import com.octopus.teraHire.repository.EventRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,12 @@ import java.util.List;
 public class CandidateService implements CandidateInterface{
     private CandidateRepository candidateRepository;
     UserExistsException userExistsException;
-    public CandidateService(CandidateRepository candidateRepository){
+    private final EventRepository eventRepository;
+
+    public CandidateService(CandidateRepository candidateRepository,
+                            EventRepository eventRepository){
         this.candidateRepository = candidateRepository;
+        this.eventRepository = eventRepository;
     }
 
     public boolean isUserEmailExists(String email){
@@ -74,12 +79,13 @@ public class CandidateService implements CandidateInterface{
 
 
     public ResponseEntity deleteCandidateById(long id){
-        if(candidateRepository.existsById(id)){
-            candidateRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+        if(candidateRepository.existsById(id) && eventRepository.existsByCandidates_Id(id)){
+
+            return new ResponseEntity<>(new ResourceNotFoundException("Warning! candidate already mapped to an event: " + id).getMessage(),HttpStatus.FORBIDDEN);
         }
         else {
-            return new ResponseEntity<>(new ResourceNotFoundException("user not exist with id: " + id).getMessage(),HttpStatus.NOT_FOUND);
+            candidateRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
 

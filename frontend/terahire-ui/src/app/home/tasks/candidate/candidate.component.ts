@@ -39,6 +39,7 @@ export class CandidateComponent implements OnInit {
   countries: any[] = [];
   jobs: any[] = [];
   skill: any[] = [];
+  
   @Output() candidateChange = new EventEmitter();
   
 
@@ -52,17 +53,15 @@ export class CandidateComponent implements OnInit {
   });
 
 
-  constructor(private authService:AuthService, private countryService: CountryService, private jobService: JobService, private SkillsetService: SkillsetService, private formBuilder: FormBuilder, private candidateService: CandidateService, private router: Router, private snackBar: MatSnackBar) {
-
+  constructor(private authService:AuthService, private countryService: CountryService, private jobService: JobService, private SkillsetService: SkillsetService, private formBuilder: FormBuilder, private candidateService: CandidateService, private router: Router, private snackBar: MatSnackBar, private fb: FormBuilder) {
+   
   }
+  
   getFloatLabelValue(): FloatLabelType {
     return this.floatLabelControl.value || 'auto';
   }
 
-  ngOnInit() {
-
-
-    
+  ngOnInit() {    
    
     this.getCountries();
     this.getJobs();
@@ -88,8 +87,32 @@ export class CandidateComponent implements OnInit {
       sociaLink: new FormControl('', [Validators.required]),
       gender: new FormControl(['female']),
       designation: new FormControl('', [Validators.required]),
-      score: new FormControl()
+      score: new FormControl()      
+      
     });
+
+  
+  
+  
+
+    // function validateDateOfBirth(control: FormControl): { [key: string]: any } | null {
+    //   const dateOfBirth = control.value;
+    //   const age = calculateAge(dateOfBirth);
+    
+    //   // check if date is valid and person is at least 18 years old
+    //   if (isNaN(dateOfBirth.getTime()) || age < 18) {
+    //     return { 'invalidDateOfBirth': true };
+    //   }
+    
+    //   return null;
+    // }
+    
+    //  function calculateAge(dob: Date) {
+    //   const ageDifMs = Date.now() - dob.getTime();
+    //   const ageDate = new Date(ageDifMs);
+    //   return Math.abs(ageDate.getUTCFullYear() - 1970);
+    //  }
+
 
 
     //console.log(this.candidateForm)
@@ -98,6 +121,7 @@ export class CandidateComponent implements OnInit {
     })
 
 
+  
 
 
     // for disabling input fields
@@ -125,8 +149,27 @@ export class CandidateComponent implements OnInit {
 
   }
 
+  //date of birth validation
+  age(e){
+    let year = new Date(e.target.value).getFullYear();
+    let today = new Date().getFullYear();
 
+    // console.log("Selected year"+year);
+    // console.log("Current year"+today)
+    // console.log(e.target.value)
+    if(!(year >= today) && today - year >= 18){
+      console.log("greater than 18")
+    }else {
+     console.log("less than")
+     this.candidateForm.get('dob')?.setErrors({ageNotValid:"Age must be greater than 18."})
+
+    }
+   
+   
+  }
   
+
+
 
   OnClick() {
     console.log("testing");

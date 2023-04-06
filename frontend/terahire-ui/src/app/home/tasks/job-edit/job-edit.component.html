@@ -16,14 +16,19 @@
 
       <div class="form-group">
         <label for="stage"><b>Stages:</b></label>
-        <input type="text" [(ngModel)]="UpdatedJobStage" value="{{EditJobData.stage}}"
-          class="form-control" placeholder="">
+        <mat-select type="text" [(ngModel)]="UpdatedJobStage" value="{{EditJobData.stage}}" class="form-control" multiple>
+          <mat-option value="Awaiting" class="mat-primary">Awaiting </mat-option>
+          <mat-option value='Resume review' class="mat-primary"> Resume review</mat-option>
+          <mat-option value="Tech interview" class="mat-primary">Tech interview </mat-option> 
+          <mat-option value="Onboarding" class="mat-primary">Onboarding </mat-option>         
+        </mat-select>
+        
       </div>
       
     
       <div class="form-group">
         <label for="stage"><b>Status:</b></label>
-        <select type="text" [(ngModel)]="UpdatedJobStatus" value="{{EditJobData.status}}">
+        <select type="text" [(ngModel)]="UpdatedJobStatus" value="{{EditJobData.status}}" >
             <option value="Active">ACTIVE</option>
             <option value="Inactive">INACTIVE</option>
           </select>

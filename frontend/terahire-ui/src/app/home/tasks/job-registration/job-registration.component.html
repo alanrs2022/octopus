@@ -50,13 +50,17 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <div class="form-floating mb-3">
-                                        <input type="number" min='1' class="form-control" formControlName="stage"
-                                            placeholder="name@example.com"
-                                            [ngClass]="{ 'is-invalid': submitted && f.stage.errors }">
-                                        <label for="floatingInput">Stage(s)</label>
-                                        <div *ngIf="submitted && f.stage.errors" class="invalid-feedback">
-                                            <div *ngIf="f.stage.errors.required">*Required</div>
-                                        </div>
+                                        <mat-select class="form-control" formControlName="stage" multiple>                                        
+                                        <mat-option value='Assessment' class="mat-primary"> Assessment</mat-option>
+                                        <mat-option value='Resume review' class="mat-primary"> Resume review</mat-option>
+                                        <mat-option value="Tech interview" class="mat-primary">Tech interview </mat-option>
+                                        <mat-option value='Onboarding' class="mat-primary"> Onboarding</mat-option>
+                                         
+                                      </mat-select>
+                                      <label for="floatingInput">Stages</label>
+                                      <mat-error *ngIf="submitted && f.stage.hasError('required')" class="invalid-feedback"><br>
+                                        *Required
+                                      </mat-error>
                                     </div>
                                 </div>
 
@@ -64,9 +68,7 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="form-floating mb-3">
                                         <select class="form-control" formControlName="status"
-                                            [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
-
-                                            <option value="0" selected="selected"></option>
+                                            [ngClass]="{ 'is-invalid': submitted && f.status.errors }">                                            
                                             <option value="Active">Active</option>
                                             <option value="Inactive">Inactive</option>
                                         </select>

@@ -100,3 +100,23 @@ html, body { height: 100%; }
   width: 100% !important;
   
 }
+
+
+.warning-snackbar::after {
+  font-family: "FontAwesome";
+  content: "\f071\ This candidate is mapped to an event!";
+  text-align: center
+   
+}
+.warning-snackbars{
+  background: #f54831;
+  color: white;     
+}
+.delete-snackbars{
+  background: #f54831;
+  color: white;
+}
+.delete-snackbar::after{
+  font-family: "FontAwesome";
+  content: "\f1f8\ Deleted";
+}

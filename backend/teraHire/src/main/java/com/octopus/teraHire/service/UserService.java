@@ -81,6 +81,7 @@ public class UserService implements UserInterface{
                         "\nChange your Password at: " +
                         "http://localhost:4200/" + resetPasswordLink+
                         "\n" +
+                        "The link is valid only for 24 hours.\n" +
                         "Regards,\n\n" +
                         "Team TeraHire");
 

@@ -4,6 +4,7 @@ import org.aspectj.weaver.ast.Not;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -16,8 +17,9 @@ public class Job {
     private String title;
     @Column(name="owner")
     private String owner;
+    @ElementCollection
     @Column(name="stage")
-    private String stage;
+    private List<String> stage;
     @Column(name="status")
     private String status;
     @Column(name="active_candidates")
@@ -47,7 +49,8 @@ public class Job {
 
     public Job() {
     }
-    public Job(long id, String title, String owner, String stage, String status, int activeCandidates, int droppedCandidates, int vacancy, String summary, String teamID, int scoreCard, LocalDateTime createdDate, LocalDateTime modifiedDate, Notification notification) {
+
+    public Job(long id, String title, String owner, List<String> stage, String status, int activeCandidates, int droppedCandidates, int vacancy, String summary, String teamID, int scoreCard, LocalDateTime createdDate, LocalDateTime modifiedDate, Notification notification) {
         Id = id;
         this.title = title;
         this.owner = owner;
@@ -112,11 +115,11 @@ public class Job {
         this.owner = owner;
     }
 
-    public String getStage() {
+    public List<String> getStage() {
         return stage;
     }
 
-    public void setStage(String stage) {
+    public void setStage(List<String> stage) {
         this.stage = stage;
     }
 

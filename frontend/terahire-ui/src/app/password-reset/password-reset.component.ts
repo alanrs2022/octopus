@@ -84,6 +84,9 @@ export class PasswordResetComponent implements OnInit {
         });
          this.router.navigate([''])
       }
+      else if(this.resetForm.get('newPassword')?.value=="" && this.resetForm.get('confirmPassword')?.value == ""){
+        console.log("blank")
+      }
       else{
         this._snackBar.open("Password does not match",'',{
           duration:5000
