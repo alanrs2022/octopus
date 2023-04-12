@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class SharedService {
 
   constructor() { }
+  notificationUpdate = new Subject();
 
   getServerLink():string{
 
@@ -13,5 +15,9 @@ export class SharedService {
   }
   updateChanges(){
     return 
+  }
+
+  updateNotification(){
+    this.notificationUpdate.next(true);
   }
 }

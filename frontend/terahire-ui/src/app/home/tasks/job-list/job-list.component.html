@@ -30,6 +30,7 @@
           <td mat-cell *matCellDef="let element,index as i">
               <span *ngIf="element.status == 'Active'" class="badge rounded-pill badge-success">Active</span>
               <span *ngIf="element.status == 'Inactive'" class="badge rounded-pill badge-danger">Inactive</span>
+              <span *ngIf="element.status == 'Expired'" class="badge rounded-pill badge-danger">Expired</span>
           </td>
       </ng-container>
 

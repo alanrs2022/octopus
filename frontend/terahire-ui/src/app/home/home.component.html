@@ -126,7 +126,7 @@
             </a>
 
             <app-notification-side-bar id="sideBarNotification"
-             class="dropdown-menu dropdown-menu-end" (changeEvent)="getNotifications()" ></app-notification-side-bar>
+             class="dropdown-menu dropdown-menu-end" [nList]="nList" (changeEvent)="getNotifications()" ></app-notification-side-bar>
             <ul
                 
                 aria-labelledby="navbarDropdownMenuLink"
@@ -195,6 +195,6 @@
   
   <!--Main layout-->
   <main style="margin-top: 58px">
-   <router-outlet ></router-outlet>
+   <router-outlet  ></router-outlet>
   </main>
   <!--Main layout-->

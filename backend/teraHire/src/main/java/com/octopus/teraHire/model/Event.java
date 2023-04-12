@@ -35,7 +35,6 @@ public class Event {
     @JoinColumn(name="fk_job_id",referencedColumnName = "id")
     private Job job;
 
-
     @ManyToMany(cascade = { CascadeType.MERGE},targetEntity = User.class)
     @JoinColumn(name = "fk_team_id",referencedColumnName = "id")
     private List<User> team_members = new ArrayList<>();

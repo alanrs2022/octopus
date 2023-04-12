@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { notification } from 'src/app/models/notification.model';
 import { user } from 'src/app/models/user.model';
@@ -15,7 +15,8 @@ export class NotificationSideBarComponent implements OnInit {
 
   constructor(private userService:UserService, private notificationService:NotificationService,private route:Router,private authService:AuthService) { }
 
-  nList:notification[]=[];
+  @Input() nList:notification[]=[];
+
 
   userId!:number;
   @Output() changeEvent = new EventEmitter();
@@ -24,7 +25,7 @@ export class NotificationSideBarComponent implements OnInit {
 
   
   ngOnInit(): void {
-    this.getNotifications();
+
     this.getUserId();
     
   }

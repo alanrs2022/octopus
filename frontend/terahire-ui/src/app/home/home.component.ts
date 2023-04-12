@@ -5,6 +5,9 @@ import { NotificationService } from '../service/notification.service';
 import{ notification} from '../models/notification.model'
 import { UserService } from '../service/user.service';
 
+import { SharedService } from '../service/shared.service';
+
+
 
 
 
@@ -15,7 +18,9 @@ import { UserService } from '../service/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router:Router,private notificationService:NotificationService,private authService:AuthService,private userService:UserService) { }
+
+  constructor(private router:Router,private notificationService:NotificationService,private authService:AuthService,private userService:UserService,private sharedService:SharedService) { }
+
   
   activeTab:string = "dahboard";
 
@@ -24,6 +29,7 @@ export class HomeComponent implements OnInit {
   userId!:number;
   notificationCount:any[]=[];
   notificationCounts:number=0;
+
  
   
 
@@ -33,8 +39,13 @@ export class HomeComponent implements OnInit {
     this.activeTab =  this.router.url.split('/')[2]
     this.authService.getServerStatus();
     this.userType = this.authService.getUserTypes();
-    
-    
+
+    this.sharedService.notificationUpdate.subscribe(val=>{
+      if(val){
+        this.getNotifications();
+      }
+    })
+
     
    // console.log(this.userType)
 
@@ -83,4 +94,7 @@ export class HomeComponent implements OnInit {
 
   }
  
+  ngOnDestroy(){
+    this.sharedService.notificationUpdate.unsubscribe()
+  }
 }

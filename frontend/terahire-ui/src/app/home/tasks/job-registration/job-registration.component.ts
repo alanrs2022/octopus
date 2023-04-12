@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/service/auth.service';
 import { JobService } from 'src/app/service/job.service';
+import { SharedService } from 'src/app/service/shared.service';
 
 @Component({
   selector: 'app-job',
@@ -16,7 +17,9 @@ export class JobComponent implements OnInit {
   jobRegisterForm!: FormGroup;
   submitted:boolean = false;
   @Output() jobEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor(private authService: AuthService,private formBuilder: FormBuilder,private jobService: JobService,private _snackBar:MatSnackBar) { }
+
+  constructor(private authService: AuthService,private sharedService:SharedService,private formBuilder: FormBuilder,private jobService: JobService,private _snackBar:MatSnackBar) { }
+
 
   
 
@@ -98,11 +101,30 @@ using the `openSnackBar()` method and resets the form. If there is an error, it 
             this.jobRegisterForm.reset();
             this.submitted = false;
             this.updateChange();
+
+            this.sharedService.updateNotification()
+
           },error=>{
             this.openSnackBar("Something went wrong!! Try again.")
           })
      //window.location.reload()
        
+    }
+  }
+
+  calculateDiff(dateSent){
+    let currentDate = new Date(); 
+    dateSent = new Date(dateSent);
+    //console.log(Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24)))
+   return Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
+  }
+  age(e){
+    if(this.calculateDiff(e.target.value) < 0){
+      
+    }else {
+     console.log("less than")
+     this.jobRegisterForm.get('endDate')?.setErrors({endDateUnderflow:"Must have atleast one day validity."})
+
     }
   }
 }

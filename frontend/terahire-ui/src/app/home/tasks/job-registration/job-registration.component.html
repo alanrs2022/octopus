@@ -175,11 +175,14 @@
                                 <div class="col-md-6 mb-4">
                                     <div class="form-floating mb-3">
                                         <input type="date" min="100" class="form-control" formControlName="endDate"
-                                            placeholder=""
-                                            [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }">
+
+                                            placeholder="End Date"
+                                            [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" (change)="age($event)">
                                         <label for="floatingInput">End date</label>
                                         <div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
                                             <div *ngIf="f.endDate.errors.required">*Required</div>
+                                            <div *ngIf="f.endDate.errors.endDateUnderflow">Must have atleast one day validity.</div>
+
                                             <!-- <div *ngIf="f.scoreCard.errors">scoreCard is Invalid</div> -->
                                         </div>
                                     </div>
